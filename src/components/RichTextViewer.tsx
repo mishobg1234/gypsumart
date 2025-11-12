@@ -24,7 +24,7 @@ export function RichTextViewer({ content }: RichTextViewerProps) {
       }),
       Image.configure({
         HTMLAttributes: {
-          class: "rounded-lg max-w-full h-auto",
+          class: "rounded-lg max-w-full h-auto pointer-events-none",
         },
       }),
       Underline,

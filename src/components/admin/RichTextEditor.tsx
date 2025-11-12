@@ -1,13 +1,14 @@
 "use client";
 
 import { useEditor, EditorContent } from "@tiptap/react";
+import { BubbleMenu } from "@tiptap/react/menus";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Link from "@tiptap/extension-link";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   Bold,
   Italic,
@@ -28,6 +29,8 @@ import {
   Link as LinkIcon,
   ImagePlus,
   Minus,
+  Trash2,
+  Maximize2,
 } from "lucide-react";
 import { UploadButton } from "@/lib/uploadthing";
 
@@ -42,6 +45,34 @@ export function RichTextEditor({
   onChange,
   placeholder = "Започнете да пишете...",
 }: RichTextEditorProps) {
+  const previousContentRef = useRef<string>(content);
+  
+  // Extract image URLs from HTML content
+  const extractImageUrls = (html: string): string[] => {
+    const imgRegex = /<img[^>]+src="([^">]+)"/g;
+    const urls: string[] = [];
+    let match;
+    while ((match = imgRegex.exec(html)) !== null) {
+      urls.push(match[1]);
+    }
+    return urls;
+  };
+
+  // Delete image from UploadThing if it's from utfs.io
+  const deleteImageFromUploadThing = async (url: string) => {
+    if (url.includes("utfs.io")) {
+      try {
+        await fetch("/api/uploadthing/delete", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ fileUrl: url }),
+        });
+      } catch (error) {
+        console.error("Error deleting image from UploadThing:", error);
+      }
+    }
+  };
+
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
@@ -52,8 +83,9 @@ export function RichTextEditor({
       }),
       Image.configure({
         HTMLAttributes: {
-          class: "rounded-lg max-w-full h-auto",
+          class: "rounded-lg max-w-full h-auto cursor-pointer",
         },
+        inline: false,
       }),
       Placeholder.configure({
         placeholder,
@@ -77,7 +109,21 @@ export function RichTextEditor({
       },
     },
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
+      const newContent = editor.getHTML();
+      
+      // Check for deleted images
+      const oldImages = extractImageUrls(previousContentRef.current);
+      const newImages = extractImageUrls(newContent);
+      
+      const deletedImages = oldImages.filter(url => !newImages.includes(url));
+      
+      // Delete removed images from UploadThing
+      deletedImages.forEach(url => {
+        deleteImageFromUploadThing(url);
+      });
+      
+      previousContentRef.current = newContent;
+      onChange(newContent);
     },
   });
 
@@ -350,6 +396,80 @@ export function RichTextEditor({
           <Redo className="h-4 w-4" />
         </button>
       </div>
+
+      {/* Bubble Menu for Images */}
+      {editor && (
+        <BubbleMenu
+          editor={editor}
+          shouldShow={({ state }) => {
+            const { selection } = state;
+            const { $from } = selection;
+            const node = $from.nodeAfter;
+            
+            // Show only when an image is in the selection
+            if (node && node.type.name === "image") {
+              return true;
+            }
+            
+            // Check if the selection is a NodeSelection with an image
+            return (state.selection as any).node?.type.name === "image";
+          }}
+          className="bg-white border border-gray-300 shadow-lg rounded-lg p-2 flex items-center gap-1"
+        >
+          <button
+            type="button"
+            onClick={() => {
+              const { selection } = editor.state;
+              const node = (selection as any).node;
+              
+              if (node && node.type.name === "image") {
+                const newSize = window.prompt(
+                  "Въведете ширина на изображението (напр. 300px, 50%, или 100%):",
+                  node.attrs.width || "100%"
+                );
+                
+                if (newSize) {
+                  const { from } = selection;
+                  editor.chain().focus().updateAttributes("image", {
+                    width: newSize,
+                    style: `width: ${newSize};`,
+                  }).run();
+                }
+              }
+            }}
+            className="flex items-center gap-2 p-2 rounded hover:bg-blue-50 text-blue-600 hover:text-blue-700 transition-colors"
+            title="Resize image"
+          >
+            <Maximize2 className="h-4 w-4" />
+            <span className="text-sm font-medium">Размер</span>
+          </button>
+          
+          <div className="w-px h-6 bg-gray-300" />
+          
+          <button
+            type="button"
+            onClick={() => {
+              const { selection } = editor.state;
+              const node = (selection as any).node;
+              
+              if (node && node.type.name === "image") {
+                const imageSrc = node.attrs.src;
+                
+                // Delete image from editor
+                editor.chain().focus().deleteSelection().run();
+                
+                // Delete from UploadThing
+                deleteImageFromUploadThing(imageSrc);
+              }
+            }}
+            className="flex items-center gap-2 p-2 rounded hover:bg-red-50 text-red-600 hover:text-red-700 transition-colors"
+            title="Delete image"
+          >
+            <Trash2 className="h-4 w-4" />
+            <span className="text-sm font-medium">Изтрий</span>
+          </button>
+        </BubbleMenu>
+      )}
 
       {/* Editor */}
       <EditorContent editor={editor} className="bg-white" />
