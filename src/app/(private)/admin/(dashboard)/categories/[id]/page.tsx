@@ -7,11 +7,12 @@ import { PageHeader, Breadcrumb } from "@/components/admin";
 export default async function EditCategoryPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
   const [category, categories] = await Promise.all([
     prisma.category.findUnique({
-      where: { id: params.id },
+      where: { id },
     }),
     getCategories(),
   ]);

@@ -11,9 +11,10 @@ import { ArrowLeft, Package } from "lucide-react";
 export default async function OrderDetailsPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const order = await getOrderById(params.id);
+  const { id } = await params;
+  const order = await getOrderById(id);
 
   if (!order) {
     notFound();

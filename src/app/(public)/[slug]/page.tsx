@@ -4,13 +4,14 @@ import type { Metadata } from "next";
 import { RichTextViewer } from "@/components/RichTextViewer";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const page = await getPageBySlug(params.slug);
+  const { slug } = await params;
+  const page = await getPageBySlug(slug);
 
   if (!page || !page.published) {
     return {
@@ -25,7 +26,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function DynamicPage({ params }: PageProps) {
-  const page = await getPageBySlug(params.slug);
+  const { slug } = await params;
+  const page = await getPageBySlug(slug);
 
   if (!page || !page.published) {
     notFound();
