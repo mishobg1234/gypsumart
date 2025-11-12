@@ -13,7 +13,7 @@ export const ourFileRouter = {
       maxFileCount: 5,
     },
   })
-    .middleware(async ({ req }) => {
+    .middleware(async () => {
       const session = await auth();
       const user = session?.user;
 
@@ -37,7 +37,7 @@ export const ourFileRouter = {
       maxFileCount: 1,
     },
   })
-    .middleware(async ({ req }) => {
+    .middleware(async () => {
       const session = await auth();
       const user = session?.user;
 

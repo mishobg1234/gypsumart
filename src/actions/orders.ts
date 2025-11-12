@@ -45,7 +45,7 @@ export async function createOrder(values: z.infer<typeof OrderSchema>) {
     revalidatePath("/admin/orders");
 
     return { success: "Поръчката е създадена!", order };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при създаване на поръчка!" };
   }
 }
@@ -112,7 +112,7 @@ export async function updateOrderStatus(id: string, status: OrderStatus, trackin
     revalidatePath("/admin/orders");
 
     return { success: "Статусът на поръчката е обновен!", order };
-  } catch (error) {
+  } catch (_error) {
     console.error("Error updating order status:", error);
     return { error: "Грешка при обновяване на поръчка!" };
   }
@@ -133,7 +133,7 @@ export async function deleteOrder(id: string) {
     revalidatePath("/admin/orders");
 
     return { success: "Поръчката е изтрита!" };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при изтриване на поръчка!" };
   }
 }
@@ -161,7 +161,7 @@ export async function getOrders() {
     });
 
     return orders;
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }
@@ -181,7 +181,7 @@ export async function getOrderById(id: string) {
     });
 
     return order;
-  } catch (error) {
+  } catch (_error) {
     return null;
   }
 }

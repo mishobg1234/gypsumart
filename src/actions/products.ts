@@ -29,7 +29,7 @@ export async function createProduct(values: z.infer<typeof ProductSchema>) {
     revalidatePath("/");
 
     return { success: "Продуктът е създаден!", product };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при създаване на продукт!" };
   }
 }
@@ -61,7 +61,7 @@ export async function updateProduct(
     revalidatePath("/");
 
     return { success: "Продуктът е обновен!", product };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при обновяване на продукт!" };
   }
 }
@@ -83,7 +83,7 @@ export async function deleteProduct(id: string) {
     revalidatePath("/");
 
     return { success: "Продуктът е изтрит!" };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при изтриване на продукт!" };
   }
 }
@@ -107,7 +107,7 @@ export async function getProducts(categoryId?: string) {
     });
 
     return products;
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }
@@ -126,7 +126,7 @@ export async function getProductBySlug(slug: string) {
     });
 
     return product;
-  } catch (error) {
+  } catch (_error) {
     return null;
   }
 }
@@ -151,7 +151,7 @@ export async function getFeaturedProducts() {
     });
 
     return products;
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }

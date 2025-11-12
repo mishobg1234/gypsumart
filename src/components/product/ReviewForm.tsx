@@ -46,7 +46,7 @@ export function ReviewForm({ productId, productName, onSuccess, onCancel }: Revi
           onSuccess?.();
         }, 2000);
       }
-    } catch (err) {
+    } catch (_err) {
       setError("Нещо се обърка. Моля, опитайте отново.");
     } finally {
       setLoading(false);

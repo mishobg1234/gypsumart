@@ -112,7 +112,7 @@ export function PageForm({ page }: PageFormProps) {
               />
             </div>
             <p className="mt-1 text-sm text-gray-500">
-              Това ще бъде URL адресът на страницата (напр. "about" за /about)
+              Това ще бъде URL адресът на страницата (напр. &quot;about&quot; за /about)
             </p>
           </div>
 

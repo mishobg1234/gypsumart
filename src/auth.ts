@@ -1,7 +1,5 @@
 import Credentials from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@auth/prisma-adapter";
 import { UserRole } from "@prisma/client";
-import { prisma } from "@/db/prisma";
 import NextAuth from "next-auth";
 import bcrypt from "bcrypt";
 import { LoginSchema } from "./schemas";

@@ -5,10 +5,35 @@ import { useParams } from "next/navigation";
 import { CheckCircle, Package, Mail, Phone, MapPin, Truck, Download, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
+interface OrderItem {
+  id: string;
+  quantity: number;
+  price: number;
+  product: {
+    name: string;
+  };
+}
+
+interface Order {
+  id: string;
+  customerEmail: string;
+  customerPhone: string;
+  totalAmount: number;
+  deliveryFee: number;
+  courier: string;
+  trackingNumber?: string;
+  deliveryMethod: string;
+  deliveryOffice?: string;
+  deliveryCity?: string;
+  deliveryAddress?: string;
+  deliveryPostalCode?: string;
+  items: OrderItem[];
+}
+
 export default function OrderConfirmationPage() {
   const params = useParams();
   const orderId = params.orderId as string;
-  const [order, setOrder] = useState<any>(null);
+  const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -107,7 +132,7 @@ export default function OrderConfirmationPage() {
             </div>
 
             <div className="space-y-4 mb-6">
-              {order.items.map((item: any) => (
+              {order.items.map((item) => (
                 <div key={item.id} className="flex items-center justify-between py-3 border-b last:border-b-0">
                   <div className="flex-1">
                     <p className="font-semibold text-gray-900">{item.product.name}</p>

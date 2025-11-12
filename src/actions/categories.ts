@@ -28,7 +28,7 @@ export async function createCategory(values: z.infer<typeof CategorySchema>) {
     revalidatePath("/shop");
 
     return { success: "Категорията е създадена!", category };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при създаване на категория!" };
   }
 }
@@ -59,7 +59,7 @@ export async function updateCategory(
     revalidatePath("/shop");
 
     return { success: "Категорията е обновена!", category };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при обновяване на категория!" };
   }
 }
@@ -80,7 +80,7 @@ export async function deleteCategory(id: string) {
     revalidatePath("/shop");
 
     return { success: "Категорията е изтрита!" };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при изтриване на категория!" };
   }
 }
@@ -101,7 +101,7 @@ export async function getCategories() {
     });
 
     return categories;
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }
@@ -120,7 +120,7 @@ export async function getCategoryBySlug(slug: string) {
     });
 
     return category;
-  } catch (error) {
+  } catch (_error) {
     return null;
   }
 }

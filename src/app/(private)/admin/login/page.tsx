@@ -26,7 +26,7 @@ export default function LoginPage() {
         router.push("/admin/dashboard");
         router.refresh();
       }
-    } catch (err) {
+    } catch (_err) {
       setError("Нещо се обърка!");
     } finally {
       setLoading(false);

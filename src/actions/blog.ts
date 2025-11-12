@@ -28,7 +28,7 @@ export async function createBlogPost(values: z.infer<typeof BlogPostSchema>) {
     revalidatePath("/blog");
 
     return { success: "Публикацията е създадена!", post };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при създаване на публикация!" };
   }
 }
@@ -59,7 +59,7 @@ export async function updateBlogPost(
     revalidatePath("/blog");
 
     return { success: "Публикацията е обновена!", post };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при обновяване на публикация!" };
   }
 }
@@ -80,7 +80,7 @@ export async function deleteBlogPost(id: string) {
     revalidatePath("/blog");
 
     return { success: "Публикацията е изтрита!" };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при изтриване на публикация!" };
   }
 }
@@ -95,7 +95,7 @@ export async function getBlogPosts(published?: boolean) {
     });
 
     return posts;
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }
@@ -107,7 +107,7 @@ export async function getBlogPostBySlug(slug: string) {
     });
 
     return post;
-  } catch (error) {
+  } catch (_error) {
     return null;
   }
 }

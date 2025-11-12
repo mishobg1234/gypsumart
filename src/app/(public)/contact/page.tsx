@@ -30,7 +30,7 @@ export default function ContactPage() {
         setSuccess(true);
         setFormData({ name: "", email: "", phone: "", message: "" });
       }
-    } catch (err) {
+    } catch (_err) {
       setError("Нещо се обърка!");
     } finally {
       setLoading(false);

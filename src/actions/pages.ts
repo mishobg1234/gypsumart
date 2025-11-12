@@ -28,7 +28,7 @@ export async function createPage(values: z.infer<typeof PageSchema>) {
     revalidatePath(`/${page.slug}`);
 
     return { success: "Страницата е създадена!", page };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при създаване на страница!" };
   }
 }
@@ -59,7 +59,7 @@ export async function updatePage(
     revalidatePath(`/${page.slug}`);
 
     return { success: "Страницата е обновена!", page };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при обновяване на страница!" };
   }
 }
@@ -80,7 +80,7 @@ export async function deletePage(id: string) {
     revalidatePath(`/${page.slug}`);
 
     return { success: "Страницата е изтрита!" };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при изтриване на страница!" };
   }
 }
@@ -95,7 +95,7 @@ export async function getPages(published?: boolean) {
     });
 
     return pages;
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }
@@ -107,7 +107,7 @@ export async function getPageBySlug(slug: string) {
     });
 
     return page;
-  } catch (error) {
+  } catch (_error) {
     return null;
   }
 }
@@ -129,7 +129,7 @@ export async function getNavbarPages() {
     });
 
     return pages;
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }
@@ -151,7 +151,7 @@ export async function getFooterPages() {
     });
 
     return pages;
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }

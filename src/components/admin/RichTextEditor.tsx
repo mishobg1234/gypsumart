@@ -8,7 +8,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Link from "@tiptap/extension-link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import {
   Bold,
   Italic,
@@ -353,7 +353,7 @@ export function RichTextEditor({
               allowedContent: "hidden",
             }}
             content={{
-              button: ({ ready, isUploading }) => (
+              button: ({ isUploading }) => (
                 <ImagePlus
                   className={`h-4 w-4 ${isUploading ? "animate-pulse" : ""}`}
                 />
@@ -412,6 +412,7 @@ export function RichTextEditor({
             }
             
             // Check if the selection is a NodeSelection with an image
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             return (state.selection as any).node?.type.name === "image";
           }}
           className="bg-white border border-gray-300 shadow-lg rounded-lg p-2 flex items-center gap-1"
@@ -429,7 +430,6 @@ export function RichTextEditor({
                 );
                 
                 if (newSize) {
-                  const { from } = selection;
                   editor.chain().focus().updateAttributes("image", {
                     width: newSize,
                     style: `width: ${newSize};`,
@@ -450,6 +450,7 @@ export function RichTextEditor({
             type="button"
             onClick={() => {
               const { selection } = editor.state;
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               const node = (selection as any).node;
               
               if (node && node.type.name === "image") {

@@ -30,7 +30,7 @@ export async function createGalleryImage(values: z.infer<typeof GalleryImageSche
     revalidatePath("/gallery");
 
     return { success: "Изображението е добавено!", image };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при добавяне на изображение!" };
   }
 }
@@ -51,7 +51,7 @@ export async function deleteGalleryImage(id: string) {
     revalidatePath("/gallery");
 
     return { success: "Изображението е изтрито!" };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при изтриване на изображение!" };
   }
 }
@@ -66,7 +66,7 @@ export async function getGalleryImages(category?: string) {
     });
 
     return images;
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }
@@ -104,7 +104,7 @@ export async function createReview(values: z.infer<typeof ReviewSchema>) {
     revalidatePath("/shop");
 
     return { success: "Отзивът е изпратен за одобрение!", review };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при създаване на отзив!" };
   }
 }
@@ -126,7 +126,7 @@ export async function approveReview(id: string) {
     revalidatePath("/shop");
 
     return { success: "Отзивът е одобрен!", review };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при одобряване на отзив!" };
   }
 }
@@ -147,7 +147,7 @@ export async function deleteReview(id: string) {
     revalidatePath("/shop");
 
     return { success: "Отзивът е изтрит!" };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при изтриване на отзив!" };
   }
 }
@@ -169,7 +169,7 @@ export async function getReviews(productId?: string, approved?: boolean) {
     });
 
     return reviews;
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }
@@ -196,7 +196,7 @@ export async function createContactMessage(values: z.infer<typeof ContactMessage
     );
 
     return { success: "Съобщението е изпратено!", message };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при изпращане на съобщение!" };
   }
 }
@@ -217,7 +217,7 @@ export async function markMessageAsRead(id: string) {
     revalidatePath("/admin/messages");
 
     return { success: "Съобщението е маркирано като прочетено!", message };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка!" };
   }
 }
@@ -237,7 +237,7 @@ export async function deleteContactMessage(id: string) {
     revalidatePath("/admin/messages");
 
     return { success: "Съобщението е изтрито!" };
-  } catch (error) {
+  } catch (_error) {
     return { error: "Грешка при изтриване на съобщение!" };
   }
 }
@@ -258,7 +258,7 @@ export async function getContactMessages(read?: boolean) {
     });
 
     return messages;
-  } catch (error) {
+  } catch (_error) {
     return [];
   }
 }

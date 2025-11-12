@@ -1,4 +1,4 @@
-import { Bell, Search, User } from "lucide-react";
+import { Search, User } from "lucide-react";
 import { auth } from "@/auth";
 import { NotificationDropdown } from "./NotificationDropdown";
 import { getNotifications, getUnreadNotificationsCount } from "@/actions/notifications";
