@@ -95,7 +95,7 @@ export function AdminSidebar() {
                 <span>{item.label}</span>
               </div>
               {badgeCount > 0 && (
-                <span className="bg-red-500 text-white text-xs font-bold rounded-full min-w-[20px] h-5 flex items-center justify-center px-2">
+                <span className="bg-red-500 text-white text-xs font-bold rounded-full min-w-5 h-5 flex items-center justify-center px-2">
                   {badgeCount > 99 ? "99+" : badgeCount}
                 </span>
               )}
