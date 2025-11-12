@@ -113,7 +113,7 @@ export async function updateOrderStatus(id: string, status: OrderStatus, trackin
 
     return { success: "Статусът на поръчката е обновен!", order };
   } catch (_error) {
-    console.error("Error updating order status:", error);
+    console.error("Error updating order status:", _error);
     return { error: "Грешка при обновяване на поръчка!" };
   }
 }
