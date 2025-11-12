@@ -7,6 +7,7 @@ import { Category, Product } from "@prisma/client";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { ProductImageUploader } from "./ProductImageUploader";
+import { RichTextEditor } from "./RichTextEditor";
 import { generateSlug } from "@/lib/slugify";
 
 interface ProductFormProps {
@@ -21,6 +22,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
   const [images, setImages] = useState<string[]>(
     product ? JSON.parse(product.images) : []
   );
+  const [description, setDescription] = useState(product?.description || "");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,7 +34,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
     const data = {
       name: formData.get("name") as string,
       slug: formData.get("slug") as string,
-      description: formData.get("description") as string,
+      description: description,
       price: parseFloat(formData.get("price") as string),
       compareAtPrice: formData.get("compareAtPrice")
         ? parseFloat(formData.get("compareAtPrice") as string)
@@ -108,11 +110,10 @@ export function ProductForm({ product, categories }: ProductFormProps) {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Описание
             </label>
-            <textarea
-              name="description"
-              rows={4}
-              defaultValue={product?.description || ""}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+            <RichTextEditor
+              content={description}
+              onChange={setDescription}
+              placeholder="Напишете описание на продукта..."
             />
           </div>
 

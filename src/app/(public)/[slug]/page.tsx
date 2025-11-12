@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getPageBySlug } from "@/actions/pages";
 import type { Metadata } from "next";
+import { RichTextViewer } from "@/components/RichTextViewer";
 
 interface PageProps {
   params: {
@@ -37,10 +38,7 @@ export default async function DynamicPage({ params }: PageProps) {
           {page.title}
         </h1>
         
-        <div 
-          className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-amber-600 hover:prose-a:text-amber-700"
-          dangerouslySetInnerHTML={{ __html: page.content }}
-        />
+        <RichTextViewer content={page.content} />
         
         <div className="mt-8 pt-8 border-t border-gray-200">
           <p className="text-sm text-gray-500">

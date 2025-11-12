@@ -1,6 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getBlogPosts } from "@/actions/blog";
-import { Calendar } from "lucide-react";
+import { Calendar, FileText } from "lucide-react";
 
 export default async function BlogPage() {
   const posts = await getBlogPosts(true);
@@ -38,7 +39,20 @@ export default async function BlogPage() {
                   href={`/blog/${post.slug}`}
                   className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition"
                 >
-                  <div className="aspect-video bg-gray-100"></div>
+                  {post.image ? (
+                    <div className="relative aspect-video bg-gray-100">
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  ) : (
+                    <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                      <FileText className="h-16 w-16 text-gray-400" />
+                    </div>
+                  )}
                   <div className="p-6">
                     <div className="flex items-center text-sm text-gray-600 mb-3">
                       <Calendar className="h-4 w-4 mr-2" />

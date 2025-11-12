@@ -7,6 +7,7 @@ import { BlogPost } from "@prisma/client";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { BlogImageUploader } from "./BlogImageUploader";
+import { RichTextEditor } from "./RichTextEditor";
 import { generateSlug } from "@/lib/slugify";
 
 interface BlogFormProps {
@@ -18,6 +19,7 @@ export function BlogForm({ post }: BlogFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [imageUrl, setImageUrl] = useState<string | null>(post?.image || null);
+  const [content, setContent] = useState(post?.content || "");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,7 +32,7 @@ export function BlogForm({ post }: BlogFormProps) {
       title: formData.get("title") as string,
       slug: formData.get("slug") as string,
       excerpt: (formData.get("excerpt") as string) || undefined,
-      content: formData.get("content") as string,
+      content: content,
       image: imageUrl || undefined,
       published: formData.get("published") === "on",
     };
@@ -111,12 +113,10 @@ export function BlogForm({ post }: BlogFormProps) {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Съдържание *
             </label>
-            <textarea
-              name="content"
-              rows={12}
-              required
-              defaultValue={post?.content}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+            <RichTextEditor
+              content={content}
+              onChange={setContent}
+              placeholder="Напишете съдържанието на публикацията..."
             />
           </div>
 

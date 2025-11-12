@@ -16,3 +16,4 @@ export { BlogImageUploader } from "./BlogImageUploader";
 export { GalleryForm } from "./GalleryForm";
 export { GalleryImageUploader } from "./GalleryImageUploader";
 export { PageForm } from "./PageForm";
+export { RichTextEditor } from "./RichTextEditor";

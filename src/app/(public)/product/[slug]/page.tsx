@@ -3,6 +3,7 @@ import { prisma } from "@/db/prisma";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { AddToCartButton, ProductImageGallery, ReviewsSection } from "@/components/product";
+import { RichTextViewer } from "@/components/RichTextViewer";
 
 export default async function ProductPage({
   params,
@@ -168,9 +169,7 @@ export default async function ProductPage({
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
               Описание
             </h2>
-            <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">
-              {product.description}
-            </p>
+            <RichTextViewer content={product.description} />
           </div>
         )}
         </div>

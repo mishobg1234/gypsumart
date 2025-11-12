@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { createPage, updatePage } from "@/actions/pages";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { RichTextEditor } from "./RichTextEditor";
 import { generateSlug } from "@/lib/slugify";
 
 interface Page {
@@ -29,6 +30,7 @@ export function PageForm({ page }: PageFormProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [content, setContent] = useState(page?.content || "");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,7 +42,7 @@ export function PageForm({ page }: PageFormProps) {
     const data = {
       title: formData.get("title") as string,
       slug: formData.get("slug") as string,
-      content: formData.get("content") as string,
+      content: content,
       metaTitle: (formData.get("metaTitle") as string) || undefined,
       metaDescription: (formData.get("metaDescription") as string) || undefined,
       published: formData.get("published") === "on",
@@ -118,17 +120,11 @@ export function PageForm({ page }: PageFormProps) {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Съдържание *
             </label>
-            <textarea
-              name="content"
-              rows={15}
-              required
-              defaultValue={page?.content}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono text-sm"
-              placeholder="HTML съдържание на страницата..."
+            <RichTextEditor
+              content={content}
+              onChange={setContent}
+              placeholder="Напишете съдържанието на страницата..."
             />
-            <p className="mt-1 text-sm text-gray-500">
-              Можете да използвате HTML тагове за форматиране
-            </p>
           </div>
 
           <div>
