@@ -4,6 +4,7 @@ import { useCart } from "@/contexts/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft } from "lucide-react";
+import { formatPriceHTML } from "@/lib/currency";
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, clearCart, totalPrice } = useCart();
@@ -83,7 +84,7 @@ export default function CartPage() {
                     {item.name}
                   </Link>
                   <p className="text-amber-600 font-bold mt-2">
-                    {item.price.toFixed(2)} лв
+                    {formatPriceHTML(item.price).full}
                   </p>
                 </div>
 
@@ -107,9 +108,9 @@ export default function CartPage() {
                 </div>
 
                 {/* Subtotal */}
-                <div className="text-right min-w-[100px]">
+                <div className="text-right min-w-[120px]">
                   <p className="text-lg font-bold text-gray-900">
-                    {(item.price * item.quantity).toFixed(2)} лв
+                    {formatPriceHTML(item.price * item.quantity).full}
                   </p>
                 </div>
 
@@ -132,12 +133,12 @@ export default function CartPage() {
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between text-gray-600">
                   <span>Продукти ({items.reduce((sum, item) => sum + item.quantity, 0)})</span>
-                  <span>{totalPrice.toFixed(2)} лв</span>
+                  <span className="font-semibold">{formatPriceHTML(totalPrice).full}</span>
                 </div>
                 <div className="border-t pt-4">
                   <div className="flex justify-between text-xl font-bold text-gray-900">
                     <span>Общо</span>
-                    <span className="text-amber-600">{totalPrice.toFixed(2)} лв</span>
+                    <span className="text-amber-600">{formatPriceHTML(totalPrice).full}</span>
                   </div>
                 </div>
               </div>

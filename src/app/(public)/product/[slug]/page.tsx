@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { AddToCartButton, ProductImageGallery, ReviewsSection } from "@/components/product";
 import { RichTextViewer } from "@/components/RichTextViewer";
+import { formatPriceHTML, euroToBgn } from "@/lib/currency";
 
 export default async function ProductPage({
   params,
@@ -104,11 +105,11 @@ export default async function ProductPage({
             <div className="mb-6">
               <div className="flex items-baseline space-x-4">
                 <p className="text-4xl font-bold text-amber-600">
-                  {product.price.toFixed(2)} лв
+                  {formatPriceHTML(product.price).full}
                 </p>
                 {product.compareAtPrice && (
                   <p className="text-2xl text-gray-500 line-through">
-                    {product.compareAtPrice.toFixed(2)} лв
+                    {formatPriceHTML(product.compareAtPrice).full}
                   </p>
                 )}
               </div>
@@ -116,7 +117,7 @@ export default async function ProductPage({
                 <div className="mt-2 inline-flex items-center gap-2 bg-green-50 text-green-700 px-3 py-1 rounded-lg">
                   <span className="text-lg">💰</span>
                   <span className="text-sm font-semibold">
-                    Спестявате {(product.compareAtPrice - product.price).toFixed(2)} лв
+                    Спестявате {formatPriceHTML(product.compareAtPrice - product.price).full}
                   </span>
                 </div>
               )}

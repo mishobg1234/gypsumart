@@ -5,6 +5,7 @@ import { getOrders } from "@/actions/orders";
 import { getContactMessages } from "@/actions/misc";
 import { PageHeader } from "@/components/admin/PageHeader";
 import { StatCard } from "@/components/admin/StatCard";
+import { formatPriceHTML } from "@/lib/currency";
 
 export default async function AdminDashboard() {
   const [products, orders, messages] = await Promise.all([
@@ -94,7 +95,7 @@ export default async function AdminDashboard() {
                     <p className="text-sm text-gray-600">{order.customerEmail}</p>
                   </div>
                   <div className="text-right mr-4">
-                    <p className="font-semibold text-gray-900">{order.totalAmount.toFixed(2)} лв</p>
+                    <p className="font-semibold text-gray-900">{formatPriceHTML(order.totalAmount).full}</p>
                     <p className="text-sm text-gray-600">{getStatusText(order.status)}</p>
                   </div>
                   <Link

@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="bg">
+    <html lang="bg" suppressHydrationWarning={true}>
       <body className={inter.className}>
         <CartProvider>
           <div className="flex flex-col min-h-screen">

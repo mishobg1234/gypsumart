@@ -120,7 +120,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Цена (лв) *
+                Цена (€) *
               </label>
               <input
                 type="number"
@@ -134,7 +134,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Сравнителна цена (лв)
+                Сравнителна цена (€)
               </label>
               <input
                 type="number"

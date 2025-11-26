@@ -61,7 +61,7 @@ export async function POST(request: Request) {
     await createNotification(
       "NEW_ORDER",
       "Нова поръчка",
-      `Получена е нова поръчка от ${fullName} на стойност ${total.toFixed(2)} лв`,
+      `Получена е нова поръчка от ${fullName} на стойност ${total.toFixed(2)} €`,
       `/admin/orders/${order.id}`
     );
 

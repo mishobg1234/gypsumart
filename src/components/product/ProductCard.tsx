@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Package } from "lucide-react";
+import { formatPriceHTML } from "@/lib/currency";
 
 interface ProductCardProps {
   product: {
@@ -107,11 +108,11 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-2xl font-bold text-amber-600">
-              {product.price.toFixed(2)} лв
+              {formatPriceHTML(product.price).full}
             </p>
             {product.compareAtPrice && (
               <p className="text-sm text-gray-500 line-through">
-                {product.compareAtPrice.toFixed(2)} лв
+                {formatPriceHTML(product.compareAtPrice).full}
               </p>
             )}
           </div>

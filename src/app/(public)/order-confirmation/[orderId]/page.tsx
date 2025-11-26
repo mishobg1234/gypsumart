@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { CheckCircle, Package, Mail, Phone, MapPin, Truck, Download, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import { formatPriceHTML } from "@/lib/currency";
 
 interface OrderItem {
   id: string;
@@ -137,11 +138,11 @@ export default function OrderConfirmationPage() {
                   <div className="flex-1">
                     <p className="font-semibold text-gray-900">{item.product.name}</p>
                     <p className="text-sm text-gray-600">
-                      {item.quantity} x {item.price.toFixed(2)} лв
+                      {item.quantity} x {formatPriceHTML(item.price).full}
                     </p>
                   </div>
-                  <p className="font-bold text-gray-900">
-                    {(item.quantity * item.price).toFixed(2)} лв
+                  <p className="font-semibold text-gray-900">
+                    {formatPriceHTML(item.quantity * item.price).full}
                   </p>
                 </div>
               ))}
@@ -150,18 +151,18 @@ export default function OrderConfirmationPage() {
             <div className="space-y-2 pt-4 border-t-2">
               <div className="flex justify-between text-gray-600">
                 <span>Продукти</span>
-                <span>{(order.totalAmount - order.deliveryFee).toFixed(2)} лв</span>
+                <span>{formatPriceHTML(order.totalAmount - order.deliveryFee).full}</span>
               </div>
               <div className="flex justify-between text-gray-600">
                 <span>Доставка</span>
                 <span className={order.deliveryFee === 0 ? "text-green-600 font-semibold" : ""}>
-                  {order.deliveryFee === 0 ? "Безплатна ✓" : `${order.deliveryFee.toFixed(2)} лв`}
+                  {order.deliveryFee === 0 ? "Безплатна ✓" : formatPriceHTML(order.deliveryFee).full}
                 </span>
               </div>
               <div className="flex justify-between text-2xl font-bold text-gray-900 pt-3 border-t">
                 <span>Обща сума</span>
                 <span className="bg-gradient-to-r from-amber-600 to-green-600 bg-clip-text text-transparent">
-                  {order.totalAmount.toFixed(2)} лв
+                  {formatPriceHTML(order.totalAmount).full}
                 </span>
               </div>
             </div>

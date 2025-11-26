@@ -5,6 +5,7 @@ import { useCart } from "@/contexts/CartContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Loader2 } from "lucide-react";
+import { formatPriceHTML } from "@/lib/currency";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -25,8 +26,8 @@ export default function CheckoutPage() {
   }, [isClient, items.length, router, processingOrder]);
 
   // Изчисление на доставката
-  const FREE_DELIVERY_THRESHOLD = 80; // Безплатна доставка над 80 лв
-  const DELIVERY_PRICE = 5; // Стандартна цена на доставка
+  const FREE_DELIVERY_THRESHOLD = 40; // Безплатна доставка над 80 €
+  const DELIVERY_PRICE = 3; // Стандартна цена на доставка
   const deliveryFee = totalPrice >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_PRICE;
   const finalTotal = totalPrice + deliveryFee;
 
@@ -403,11 +404,11 @@ export default function CheckoutPage() {
                     <div className="flex-1">
                       <p className="font-medium text-gray-900">{item.name}</p>
                       <p className="text-gray-600">
-                        {item.quantity} x {item.price.toFixed(2)} лв
+                        {item.quantity} x {formatPriceHTML(item.price).full}
                       </p>
                     </div>
                     <p className="font-semibold text-gray-900">
-                      {(item.quantity * item.price).toFixed(2)} лв
+                      {formatPriceHTML(item.quantity * item.price).full}
                     </p>
                   </div>
                 ))}
@@ -416,15 +417,15 @@ export default function CheckoutPage() {
               <div className="border-t pt-4 space-y-2">
                 <div className="flex justify-between text-gray-600">
                   <span>Продукти</span>
-                  <span>{totalPrice.toFixed(2)} лв</span>
+                  <span>{formatPriceHTML(totalPrice).full}</span>
                 </div>
                 <div className="flex justify-between text-gray-600">
                   <span>Доставка</span>
-                  <span>{deliveryFee === 0 ? "Безплатна" : `${deliveryFee.toFixed(2)} лв`}</span>
+                  <span>{deliveryFee === 0 ? "Безплатна" : formatPriceHTML(deliveryFee).full}</span>
                 </div>
-                <div className="flex justify-between text-xl font-bold text-gray-900 pt-2 border-t">
-                  <span>Общо</span>
-                  <span className="text-amber-600">{finalTotal.toFixed(2)} лв</span>
+                <div className="flex justify-between text-xl font-bold pt-2 border-t">
+                  <span>Обща сума</span>
+                  <span className="text-amber-600">{formatPriceHTML(finalTotal).full}</span>
                 </div>
               </div>
 
@@ -434,7 +435,7 @@ export default function CheckoutPage() {
                     ✓ Безплатна доставка
                   </p>
                   <p className="text-sm text-green-700">
-                    Поръчката ви е над {FREE_DELIVERY_THRESHOLD} лв и получавате безплатна доставка!
+                    Поръчката ви е над {formatPriceHTML(FREE_DELIVERY_THRESHOLD).bgn} и получавате безплатна доставка!
                   </p>
                 </div>
               ) : (
@@ -443,16 +444,16 @@ export default function CheckoutPage() {
                     <span className="font-semibold">ℹ️ Информация за доставка:</span>
                   </p>
                   <p className="text-sm text-gray-600">
-                    • Безплатна доставка за поръчки над {FREE_DELIVERY_THRESHOLD} лв
+                    • Безплатна доставка за поръчки над {formatPriceHTML(FREE_DELIVERY_THRESHOLD).full}
                   </p>
                   <p className="text-sm text-gray-600">
-                    • Стандартна цена: {DELIVERY_PRICE} лв (ориентировъчна)
+                    • Стандартна цена: {formatPriceHTML(DELIVERY_PRICE).full} (ориентировъчна)
                   </p>
                   <p className="text-sm text-gray-600 mt-2">
                     * Крайната цена на доставката може да варира в зависимост от куриера и местоназначението
                   </p>
                   <p className="text-sm text-green-600 mt-2 font-medium">
-                    💡 Добавете продукти за още {(FREE_DELIVERY_THRESHOLD - totalPrice).toFixed(2)} лв за безплатна доставка
+                    💡 Добавете продукти за още {formatPriceHTML(FREE_DELIVERY_THRESHOLD - totalPrice).full} за безплатна доставка
                   </p>
                 </div>
               )}

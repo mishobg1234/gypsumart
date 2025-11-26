@@ -7,6 +7,7 @@ import { bg } from "date-fns/locale";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Package } from "lucide-react";
+import { formatPriceHTML } from "@/lib/currency";
 
 export default async function OrderDetailsPage({
   params,
@@ -112,10 +113,10 @@ export default async function OrderDetailsPage({
                     </div>
                     <div className="text-right">
                       <p className="font-semibold text-gray-900">
-                        {(item.price * item.quantity).toFixed(2)} лв
+                        {formatPriceHTML(item.price * item.quantity).full}
                       </p>
                       <p className="text-sm text-gray-600">
-                        {item.price.toFixed(2)} лв / бр
+                        {formatPriceHTML(item.price).full} / бр
                       </p>
                     </div>
                   </div>
@@ -125,15 +126,15 @@ export default async function OrderDetailsPage({
             <div className="mt-4 pt-4 border-t space-y-2">
               <div className="flex justify-between text-gray-600">
                 <span>Продукти:</span>
-                <span>{(order.totalAmount - order.deliveryFee).toFixed(2)} лв</span>
+                <span>{formatPriceHTML(order.totalAmount - order.deliveryFee).full}</span>
               </div>
               <div className="flex justify-between text-gray-600">
                 <span>Доставка:</span>
-                <span>{order.deliveryFee === 0 ? "Безплатна" : `${order.deliveryFee.toFixed(2)} лв`}</span>
+                <span>{order.deliveryFee === 0 ? "Безплатна" : formatPriceHTML(order.deliveryFee).full}</span>
               </div>
               <div className="flex justify-between text-lg font-bold pt-2 border-t">
                 <span>Общо:</span>
-                <span>{order.totalAmount.toFixed(2)} лв</span>
+                <span>{formatPriceHTML(order.totalAmount).full}</span>
               </div>
             </div>
           </div>

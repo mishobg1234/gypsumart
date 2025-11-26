@@ -1,4 +1,5 @@
 import { resend, FROM_EMAIL } from "@/lib/resend";
+import { formatPriceHTML, euroToBgn } from "@/lib/currency";
 
 interface OrderItem {
   product: {
@@ -226,24 +227,24 @@ export async function sendOrderConfirmationEmail(orderData: OrderEmailData) {
                 <div class="item">
                   <div>
                     <div class="item-name">${item.product.name}</div>
-                    <div class="item-details">${item.quantity} x ${item.price.toFixed(2)} лв</div>
+                    <div class="item-details">${item.quantity} x ${formatPriceHTML(item.price).full}</div>
                   </div>
-                  <div class="item-price">${(item.quantity * item.price).toFixed(2)} лв</div>
+                  <div class="item-price">${formatPriceHTML(item.quantity * item.price).full}</div>
                 </div>
               `).join('')}
 
               <div class="total-section">
                 <div class="total-row">
                   <span>Продукти</span>
-                  <span>${itemsTotal.toFixed(2)} лв</span>
+                  <span>${formatPriceHTML(itemsTotal).full}</span>
                 </div>
                 <div class="total-row">
                   <span>Доставка</span>
-                  <span>${deliveryFee === 0 ? 'Безплатна ✓' : `${deliveryFee.toFixed(2)} лв`}</span>
+                  <span>${deliveryFee === 0 ? 'Безплатна ✓' : formatPriceHTML(deliveryFee).full}</span>
                 </div>
                 <div class="total-final">
                   <span>Обща сума</span>
-                  <span class="amount">${totalAmount.toFixed(2)} лв</span>
+                  <span class="amount">${formatPriceHTML(totalAmount).full}</span>
                 </div>
               </div>
             </div>

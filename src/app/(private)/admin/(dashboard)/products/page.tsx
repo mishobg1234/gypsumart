@@ -100,12 +100,12 @@ export default async function ProductsPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">
-                        {product.price.toFixed(2)} лв
+                      <div className="text-sm font-semibold text-gray-900">
+                        {formatPriceHTML(product.price).full}
                       </div>
                       {product.compareAtPrice && (
                         <div className="text-sm text-gray-500 line-through">
-                          {product.compareAtPrice.toFixed(2)} лв
+                          {formatPriceHTML(product.compareAtPrice).full}
                         </div>
                       )}
                     </td>

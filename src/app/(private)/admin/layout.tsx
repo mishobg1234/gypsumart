@@ -18,7 +18,7 @@ export default async function AdminLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="bg">
+        <html lang="bg" suppressHydrationWarning={true}>
             <body className={inter.className}>
                 <div className="flex flex-col min-h-screen">
                     <main className="flex-grow">{children}</main>
