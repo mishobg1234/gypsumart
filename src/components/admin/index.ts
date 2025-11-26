@@ -17,3 +17,7 @@ export { GalleryForm } from "./GalleryForm";
 export { GalleryImageUploader } from "./GalleryImageUploader";
 export { PageForm } from "./PageForm";
 export { RichTextEditor } from "./RichTextEditor";
+export { UserForm } from "./UserForm";
+export { UserActionsMenu } from "./UserActionsMenu";
+export { ChangePasswordForm } from "./ChangePasswordForm";
+export { UserProfileMenu } from "./UserProfileMenu";

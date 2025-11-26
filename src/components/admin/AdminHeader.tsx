@@ -2,6 +2,7 @@ import { Search, User } from "lucide-react";
 import { auth } from "@/auth";
 import { NotificationDropdown } from "./NotificationDropdown";
 import { getNotifications, getUnreadNotificationsCount } from "@/actions/notifications";
+import { UserProfileMenu } from "./UserProfileMenu";
 
 export async function AdminHeader() {
   const session = await auth();
@@ -30,27 +31,12 @@ export async function AdminHeader() {
             initialUnreadCount={unreadCount}
           />
 
-          <div className="flex items-center space-x-3 pl-4 border-l border-gray-200">
-            <div className="text-right">
-              <p className="text-sm font-medium text-gray-900">
-                {session?.user?.name || "Администратор"}
-              </p>
-              <p className="text-xs text-gray-500">
-                {session?.user?.email || "admin@gypsumart.bg"}
-              </p>
-            </div>
-            {session?.user?.image ? (
-              <img
-                src={session.user.image}
-                alt={session.user.name || "Admin"}
-                className="w-10 h-10 rounded-full"
-              />
-            ) : (
-              <div className="w-10 h-10 bg-amber-600 rounded-full flex items-center justify-center text-white font-semibold">
-                <User className="h-5 w-5" />
-              </div>
-            )}
-          </div>
+          <UserProfileMenu
+            userId={session?.user?.id || ""}
+            userName={session?.user?.name || "Администратор"}
+            userEmail={session?.user?.email || "admin@gypsumart.bg"}
+            userImage={session?.user?.image}
+          />
         </div>
       </div>
     </header>

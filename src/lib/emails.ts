@@ -525,8 +525,8 @@ export async function sendOrderStatusUpdateEmail(
           </div>
 
           <div class="footer">
-            <p><strong>Gypsumart</strong></p>
-            <p>Изделия от гипс за вашия дом</p>
+            <p><strong>${process.env.APP_NAME}</strong></p>
+            <p>${process.env.APP_DESCRIPTION}</p>
             <p style="margin-top: 15px;">
               <a href="${process.env.NEXT_PUBLIC_APP_URL}/contact">Контакти</a> • 
               <a href="${process.env.NEXT_PUBLIC_APP_URL}">Начало</a> • 

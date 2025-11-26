@@ -1,8 +1,11 @@
 import { Users, UserCheck } from "lucide-react";
 import { PageHeader } from "@/components/admin/PageHeader";
 import { prisma } from "@/db/prisma";
+import { auth } from "@/auth";
+import { UserActionsMenu } from "@/components/admin/UserActionsMenu";
 
 export default async function UsersPage() {
+  const session = await auth();
   const users = await prisma.user.findMany({
     orderBy: {
       createdAt: "desc",
@@ -35,7 +38,7 @@ export default async function UsersPage() {
           </p>
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="bg-white rounded-lg shadow">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
@@ -56,6 +59,9 @@ export default async function UsersPage() {
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Дата на регистрация
+                </th>
+                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Действия
                 </th>
               </tr>
             </thead>
@@ -106,6 +112,14 @@ export default async function UsersPage() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {new Date(user.createdAt).toLocaleDateString("bg-BG")}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <UserActionsMenu
+                      userId={user.id}
+                      userName={user.name || user.email}
+                      userRole={user.role}
+                      isCurrentUser={session?.user?.id === user.id}
+                    />
                   </td>
                 </tr>
               ))}
