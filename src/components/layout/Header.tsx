@@ -13,7 +13,7 @@ export async function Header() {
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
           <Link href="/" className="text-2xl font-bold text-gray-900">
-            Gypsum<span className="text-amber-600">Art</span>
+            <span className="text-amber-600">Art</span>BuildShop
           </Link>
 
           {/* Desktop Navigation */}

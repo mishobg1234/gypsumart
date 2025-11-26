@@ -12,7 +12,7 @@ export async function Footer() {
           {/* Company Info */}
           <div>
             <h3 className="text-white text-xl font-bold mb-4">
-              Gypsum<span className="text-amber-600">Art</span>
+              <span className="text-amber-600">Art</span>BuildShop
             </h3>
             <p className="text-sm mb-4">
               Елегантност и стил във всеки детайл – гипсови изделия за дом и индустрия

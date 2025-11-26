@@ -68,7 +68,7 @@ export function AdminSidebar() {
       <div className="mb-8">
         <Link href="/" className="block">
           <h2 className="text-2xl font-bold">
-            Gypsum<span className="text-amber-600">Art</span>
+            <span className="text-amber-600">Art</span>BuildShop
           </h2>
           <p className="text-gray-400 text-sm">Админ панел</p>
         </Link>
