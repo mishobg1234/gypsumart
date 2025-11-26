@@ -19,5 +19,6 @@ export { PageForm } from "./PageForm";
 export { RichTextEditor } from "./RichTextEditor";
 export { UserForm } from "./UserForm";
 export { UserActionsMenu } from "./UserActionsMenu";
+export { CreateUserForm } from "./CreateUserForm";
 export { ChangePasswordForm } from "./ChangePasswordForm";
 export { UserProfileMenu } from "./UserProfileMenu";

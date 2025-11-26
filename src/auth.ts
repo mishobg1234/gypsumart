@@ -47,17 +47,31 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         if (validatedFields.success) {
           const { email, password } = validatedFields.data;
 
+          console.log("Login attempt for:", email);
+
           const user = await getUserByEmail(email);
 
-          if (!user || !user.password) return null;
+          if (!user) {
+            console.log("User not found:", email);
+            return null;
+          }
 
+          if (!user.password) {
+            console.log("User has no password:", email);
+            return null;
+          }
+
+          console.log("Comparing passwords...");
           const isValid = await bcrypt.compare(password, user.password);
+
+          console.log("Password valid:", isValid);
 
           if (isValid) return user;
 
           return null;
         }
 
+        console.log("Validation failed");
         return null;
       },
     }),

@@ -182,3 +182,53 @@ export async function toggleUserRole(id: string) {
     return { error: "Грешка при промяна на роля!" };
   }
 }
+
+export async function createUser(data: {
+  name: string;
+  email: string;
+  password: string;
+  role: UserRole;
+}) {
+  const session = await auth();
+
+  if (!session || session.user.role !== "ADMIN") {
+    return { error: "Неоторизиран достъп!" };
+  }
+
+  try {
+    // Check if email already exists
+    const existingUser = await prisma.user.findUnique({
+      where: { email: data.email },
+    });
+
+    if (existingUser) {
+      return { error: "Потребител с този email вече съществува!" };
+    }
+
+    console.log("Creating user:", data.email);
+    console.log("Password length:", data.password.length);
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(data.password, 10);
+    
+    console.log("Password hashed successfully");
+
+    // Create user
+    const user = await prisma.user.create({
+      data: {
+        name: data.name,
+        email: data.email,
+        password: hashedPassword,
+        role: data.role,
+      },
+    });
+
+    console.log("User created successfully:", user.email);
+
+    revalidatePath("/admin/users");
+    return { success: "Потребителят е създаден успешно!", user };
+  } catch (error) {
+    console.error("Error creating user:", error);
+    return { error: "Грешка при създаване на потребител!" };
+  }
+}
