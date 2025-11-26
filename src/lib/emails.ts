@@ -280,7 +280,7 @@ export async function sendOrderConfirmationEmail(orderData: OrderEmailData) {
           </div>
 
           <div class="footer">
-            <p><strong>Gypsumart</strong></p>
+            <p><strong>ArtBuildShop</strong></p>
             <p>Изделия от гипс за вашия дом</p>
             <p style="margin-top: 15px;">
               <a href="${process.env.NEXT_PUBLIC_APP_URL}/contact">Контакти</a> • 
@@ -297,7 +297,7 @@ export async function sendOrderConfirmationEmail(orderData: OrderEmailData) {
     const { data, error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: [customerEmail],
-      subject: `Потвърждение на поръчка #${orderNumber} - Gypsumart`,
+      subject: `Потвърждение на поръчка #${orderNumber} - ArtBuildShop`,
       html,
     });
 

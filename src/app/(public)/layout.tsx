@@ -8,7 +8,7 @@ import { CartProvider } from "@/contexts/CartContext";
 const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
 export const metadata: Metadata = {
-  title: "GypsumArt - Гипсови изделия за дом и индустрия",
+  title: "ArtBuildShop - Гипсови изделия за дом и индустрия",
   description: "Елегантност и стил във всеки детайл – гипсови изделия за декорация и строителна промишленост",
 };
 

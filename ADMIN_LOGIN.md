@@ -4,7 +4,7 @@
 
 **URL:** http://localhost:3000/admin/login
 
-**Имейл:** admin@gypsumart.bg
+**Имейл:** admin@artbuildshop.bg
 **Парола:** admin123
 
 ⚠️ **ВАЖНО:** Сменете паролата след първия вход!

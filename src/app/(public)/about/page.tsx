@@ -23,7 +23,7 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Нашата мисия</h2>
             <p className="text-lg text-gray-600 mb-4">
-              В GypsumArt ние вярваме, че всеки детайл има значение. С години опит в производството 
+              В ArtBuildShop ние вярваме, че всеки детайл има значение. С години опит в производството 
               на гипсови изделия, ние се специализираме в създаването на продукти, които съчетават 
               традиционно занаятчийство с модерни технологии.
             </p>

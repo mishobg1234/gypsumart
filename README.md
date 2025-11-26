@@ -1,4 +1,4 @@
-# GypsumArt - Сайт за гипсови изделия
+# ArtBuildShop - Сайт за гипсови изделия
 
 Модерен уебсайт за продажба на гипсови изделия, изграден с NextJS 16, Prisma ORM, AuthJS, TailwindCSS и TypeScript.
 
@@ -69,7 +69,7 @@ npx prisma studio
 
 ```sql
 INSERT INTO User (id, name, email, password, role) 
-VALUES ('admin-id', 'Admin', 'admin@gypsumart.bg', 'hashed-password', 'ADMIN');
+VALUES ('admin-id', 'Admin', 'admin@artbuildshop.bg', 'hashed-password', 'ADMIN');
 ```
 
 6. **Стартирайте development сървъра**
@@ -221,4 +221,4 @@ Private project - All rights reserved
 
 ---
 
-**GypsumArt** - Елегантност и стил във всеки детайл 🏛️
+**ArtBuildShop** - Елегантност и стил във всеки детайл 🏛️

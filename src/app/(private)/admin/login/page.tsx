@@ -41,7 +41,7 @@ export default function LoginPage() {
             Вход в администрация
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Вход за администратори на GypsumArt
+            Вход за администратори на ArtBuildShop
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>

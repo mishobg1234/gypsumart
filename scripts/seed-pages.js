@@ -15,9 +15,9 @@ async function seedPages() {
       content: `
         <div class="space-y-6">
           <section>
-            <h2 class="text-2xl font-bold mb-4">Добре дошли в GypsumArt</h2>
+            <h2 class="text-2xl font-bold mb-4">Добре дошли в ArtBuildShop</h2>
             <p class="text-lg">
-              GypsumArt е водеща компания в областта на производството и монтажа на гипсови изделия.
+              ArtBuildShop е водеща компания в областта на производството и монтажа на гипсови изделия.
               С над 10 години опит, ние предлагаме висококачествени продукти и професионални услуги
               за вашия дом или офис.
             </p>
@@ -43,8 +43,8 @@ async function seedPages() {
           </section>
         </div>
       `,
-      metaTitle: "За нас - GypsumArt",
-      metaDescription: "Научете повече за GypsumArt - водещата компания за производство и монтаж на гипсови изделия.",
+      metaTitle: "За нас - ArtBuildShop",
+      metaDescription: "Научете повече за ArtBuildShop - водещата компания за производство и монтаж на гипсови изделия.",
       published: true,
     },
   });
@@ -62,7 +62,7 @@ async function seedPages() {
             <h2 class="text-2xl font-bold mb-4">Политика за поверителност</h2>
             <p class="text-sm text-gray-600 mb-4">Последна актуализация: ${new Date().toLocaleDateString("bg-BG")}</p>
             <p>
-              В GypsumArt зачитаме вашата поверителност и сме ангажирани с защитата на вашите
+              В ArtBuildShop зачитаме вашата поверителност и сме ангажирани с защитата на вашите
               лични данни. Тази политика за поверителност обяснява как събираме, използваме и
               защитаваме вашата информация.
             </p>
@@ -112,14 +112,14 @@ async function seedPages() {
             <h3 class="text-xl font-bold mb-3">Контакт</h3>
             <p>
               За въпроси относно тази политика за поверителност, моля свържете се с нас на:
-              <a href="mailto:privacy@gypsumart.bg" class="text-amber-600 hover:text-amber-700">
-                privacy@gypsumart.bg
+              <a href="mailto:privacy@artbuildshop.bg" class="text-amber-600 hover:text-amber-700">
+                privacy@artbuildshop.bg
               </a>
             </p>
           </section>
         </div>
       `,
-      metaTitle: "Политика за поверителност - GypsumArt",
+      metaTitle: "Политика за поверителност - ArtBuildShop",
       metaDescription: "Прочетете нашата политика за поверителност и как защитаваме вашите лични данни.",
       published: true,
     },
@@ -188,7 +188,7 @@ async function seedPages() {
             <h3 class="text-xl font-bold mb-3">6. Интелектуална собственост</h3>
             <p>
               Всичко съдържание на този уебсайт, включително текстове, изображения и лога,
-              е собственост на GypsumArt и е защитено от законите за авторско право.
+              е собственост на ArtBuildShop и е защитено от законите за авторско право.
             </p>
           </section>
 
@@ -196,14 +196,14 @@ async function seedPages() {
             <h3 class="text-xl font-bold mb-3">7. Контакт</h3>
             <p>
               За въпроси относно тези общи условия, моля свържете се с нас на:
-              <a href="mailto:info@gypsumart.bg" class="text-amber-600 hover:text-amber-700">
-                info@gypsumart.bg
+              <a href="mailto:info@artbuildshop.bg" class="text-amber-600 hover:text-amber-700">
+                info@artbuildshop.bg
               </a>
             </p>
           </section>
         </div>
       `,
-      metaTitle: "Общи условия - GypsumArt",
+      metaTitle: "Общи условия - ArtBuildShop",
       metaDescription: "Прочетете общите условия за ползване на нашия уебсайт и услуги.",
       published: true,
     },

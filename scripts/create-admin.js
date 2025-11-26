@@ -11,7 +11,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 async function createAdmin() {
-  const email = 'admin@gypsumart.bg';
+  const email = 'admin@artbuildshop.bg';
   const password = 'admin123'; // ПРОМЕНЕТЕ ТОВА!
   const name = 'Administrator';
 

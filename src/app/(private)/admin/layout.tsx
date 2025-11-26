@@ -5,7 +5,7 @@ import "@/app/globals.css";
 const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
 export const metadata: Metadata = {
-    title: "GypsumArt Admin",
+    title: "ArtBuildShop Admin",
     robots: {
         index: false,
         follow: false,

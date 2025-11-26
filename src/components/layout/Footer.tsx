@@ -92,14 +92,14 @@ export async function Footer() {
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="h-5 w-5 text-amber-600" />
-                <span>info@gypsumart.bg</span>
+                <span>info@artbuildshop.bg</span>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
-            <p>&copy; {new Date().getFullYear()} GypsumArt. Всички права запазени.</p>
+            <p>&copy; {new Date().getFullYear()} ArtBuildShop. Всички права запазени.</p>
         </div>
       </div>
     </footer>
