@@ -4,7 +4,7 @@
 
 **URL:** http://localhost:3000/admin/login
 
-**Имейл:** admin@artbuildshop.bg
+**Имейл:** admin@artbuildshop.com
 **Парола:** admin123
 
 ⚠️ **ВАЖНО:** Сменете паролата след първия вход!

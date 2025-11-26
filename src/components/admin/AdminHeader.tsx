@@ -34,7 +34,7 @@ export async function AdminHeader() {
           <UserProfileMenu
             userId={session?.user?.id || ""}
             userName={session?.user?.name || "Администратор"}
-            userEmail={session?.user?.email || "admin@artbuildshop.bg"}
+            userEmail={session?.user?.email || "admin@artbuildshop.com"}
             userImage={session?.user?.image}
           />
         </div>

@@ -112,8 +112,8 @@ async function seedPages() {
             <h3 class="text-xl font-bold mb-3">Контакт</h3>
             <p>
               За въпроси относно тази политика за поверителност, моля свържете се с нас на:
-              <a href="mailto:privacy@artbuildshop.bg" class="text-amber-600 hover:text-amber-700">
-                privacy@artbuildshop.bg
+              <a href="mailto:privacy@artbuildshop.com" class="text-amber-600 hover:text-amber-700">
+                privacy@artbuildshop.com
               </a>
             </p>
           </section>
@@ -196,8 +196,8 @@ async function seedPages() {
             <h3 class="text-xl font-bold mb-3">7. Контакт</h3>
             <p>
               За въпроси относно тези общи условия, моля свържете се с нас на:
-              <a href="mailto:info@artbuildshop.bg" class="text-amber-600 hover:text-amber-700">
-                info@artbuildshop.bg
+              <a href="mailto:info@artbuildshop.com" class="text-amber-600 hover:text-amber-700">
+                info@artbuildshop.com
               </a>
             </p>
           </section>

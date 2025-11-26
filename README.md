@@ -69,7 +69,7 @@ npx prisma studio
 
 ```sql
 INSERT INTO User (id, name, email, password, role) 
-VALUES ('admin-id', 'Admin', 'admin@artbuildshop.bg', 'hashed-password', 'ADMIN');
+VALUES ('admin-id', 'Admin', 'admin@artbuildshop.com', 'hashed-password', 'ADMIN');
 ```
 
 6. **Стартирайте development сървъра**

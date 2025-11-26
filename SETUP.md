@@ -81,7 +81,7 @@ npx prisma studio
 
 5. Попълнете:
    - `name`: Admin
-   - `email`: admin@artbuildshop.bg
+   - `email`: admin@artbuildshop.com
    - `password`: Използвайте bcrypt hash (вижте по-долу)
    - `role`: ADMIN
 
@@ -104,7 +104,7 @@ INSERT INTO User (id, name, email, password, role, createdAt, updatedAt)
 VALUES (
   'admin-id', 
   'Admin', 
-  'admin@artbuildshop.bg', 
+  'admin@artbuildshop.com', 
   '$2b$10$вашият-bcrypt-hash-тук',
   'ADMIN',
   NOW(),
