@@ -4,6 +4,7 @@ import { getProducts, deleteProduct } from "@/actions/products";
 import { PageHeader } from "@/components/admin/PageHeader";
 import { DeleteButton } from "@/components/admin/DeleteButton";
 import Image from "next/image";
+import { formatPriceHTML } from "@/lib/currency";
 
 export default async function ProductsPage() {
   const products = await getProducts();
