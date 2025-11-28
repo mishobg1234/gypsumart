@@ -12,7 +12,9 @@ interface HeaderClientProps {
 export function HeaderClient({ navbarPages }: HeaderClientProps) {
   const pathname = usePathname();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -27,27 +29,30 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
       }
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+        setIsMobileMenuOpen(false);
+      }
     }
 
-    if (isDropdownOpen) {
+    if (isDropdownOpen || isMobileMenuOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isDropdownOpen]);
+  }, [isDropdownOpen, isMobileMenuOpen]);
 
   return (
     <div className="py-3">
-      <div className="flex items-center gap-8">
+      <div className="flex items-center gap-4 md:gap-8">
         {/* ПРОДУКТИ бутон - винаги в ляво */}
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="bg-amber-600 text-white px-6 py-2 rounded hover:bg-amber-700 transition inline-flex items-center gap-2 font-medium"
+            className="bg-amber-600 text-white px-4 md:px-6 py-2 rounded hover:bg-amber-700 transition inline-flex items-center gap-2 font-medium text-sm md:text-base"
           >
-            <Menu className="h-5 w-5" />
+            <Menu className="h-4 w-4 md:h-5 md:w-5" />
             ПРОДУКТИ
           </button>
           {isDropdownOpen && (
@@ -79,7 +84,93 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
           )}
         </div>
 
-        {/* НАВИГАЦИОННИ МЕНЮТА */}
+        {/* МОБИЛНО МЕНЮ - дясно */}
+        <div className="relative md:hidden ml-auto" ref={mobileMenuRef}>
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="bg-amber-600 text-white px-4 py-2 rounded hover:bg-amber-700 transition inline-flex items-center gap-2 font-medium text-sm"
+          >
+            МЕНЮ
+            <Menu className="h-4 w-4" />
+          </button>
+          {isMobileMenuOpen && (
+            <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg z-10">
+              <div className="py-2">
+                <Link
+                  href="/"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block px-4 py-2 font-medium ${
+                    isActive("/") && pathname === "/"
+                      ? "bg-amber-600 text-white"
+                      : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
+                  }`}
+                >
+                  Начало
+                </Link>
+                <Link
+                  href="/about"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block px-4 py-2 font-medium ${
+                    isActive("/about")
+                      ? "bg-amber-600 text-white"
+                      : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
+                  }`}
+                >
+                  За нас
+                </Link>
+                <Link
+                  href="/gallery"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block px-4 py-2 font-medium ${
+                    isActive("/gallery")
+                      ? "bg-amber-600 text-white"
+                      : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
+                  }`}
+                >
+                  Галерия
+                </Link>
+                <Link
+                  href="/blog"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block px-4 py-2 font-medium ${
+                    isActive("/blog")
+                      ? "bg-amber-600 text-white"
+                      : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
+                  }`}
+                >
+                  Блог
+                </Link>
+                <Link
+                  href="/contact"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block px-4 py-2 font-medium ${
+                    isActive("/contact")
+                      ? "bg-amber-600 text-white"
+                      : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
+                  }`}
+                >
+                  Контакти
+                </Link>
+                {navbarPages.map((page) => (
+                  <Link
+                    key={page.slug}
+                    href={`/${page.slug}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`block px-4 py-2 font-medium ${
+                      isActive(`/${page.slug}`)
+                        ? "bg-amber-600 text-white"
+                        : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
+                    }`}
+                  >
+                    {page.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* НАВИГАЦИОННИ МЕНЮТА - само на desktop */}
         <nav className="hidden md:flex items-center justify-end space-x-4 ml-16 flex-1">
           <Link
             href="/"
