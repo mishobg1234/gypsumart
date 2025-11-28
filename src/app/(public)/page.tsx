@@ -20,24 +20,17 @@ export default async function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/products/decorative"
+                href="/products"
                 className="inline-flex items-center justify-center px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition font-semibold"
               >
-                Декоративни изделия
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-              <Link
-                href="/products/construction"
-                className="inline-flex items-center justify-center px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition font-semibold"
-              >
-                Строителни изделия
+                Поръчай сега
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-900 text-gray-900 rounded-lg hover:bg-gray-900 hover:text-white transition font-semibold"
               >
-                Поръчай сега
+                Контакти
               </Link>
             </div>
           </div>
