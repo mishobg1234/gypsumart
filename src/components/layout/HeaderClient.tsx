@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 
 interface HeaderClientProps {
   navbarPages: Array<{ slug: string; title: string }>;
@@ -10,6 +11,8 @@ interface HeaderClientProps {
 
 export function HeaderClient({ navbarPages }: HeaderClientProps) {
   const pathname = usePathname();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -18,40 +21,62 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
     return pathname.startsWith(href);
   };
 
+  // Затваря dropdown при клик извън него
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+
   return (
     <div className="py-3">
       <div className="flex items-center gap-8">
         {/* ПРОДУКТИ бутон - винаги в ляво */}
-        <div className="relative group">
-          <Link
-            href="/products"
+        <div className="relative" ref={dropdownRef}>
+          <button
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             className="bg-amber-600 text-white px-6 py-2 rounded hover:bg-amber-700 transition inline-flex items-center gap-2 font-medium"
           >
             <Menu className="h-5 w-5" />
             ПРОДУКТИ
-          </Link>
-          <div className="absolute left-0 mt-2 w-64 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
-            <div className="py-2">
-              <Link
-                href="/products"
-                className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-amber-600 font-medium"
-              >
-                Всички продукти
-              </Link>
-              <Link
-                href="/products/decorative"
-                className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-amber-600"
-              >
-                Декоративни изделия
-              </Link>
-              <Link
-                href="/products/construction"
-                className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-amber-600"
-              >
-                Строителни изделия
-              </Link>
+          </button>
+          {isDropdownOpen && (
+            <div className="absolute left-0 mt-2 w-64 bg-white shadow-lg rounded-lg z-10">
+              <div className="py-2">
+                <Link
+                  href="/products"
+                  onClick={() => setIsDropdownOpen(false)}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-amber-600 font-medium"
+                >
+                  Всички продукти
+                </Link>
+                <Link
+                  href="/products/decorative"
+                  onClick={() => setIsDropdownOpen(false)}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-amber-600"
+                >
+                  Декоративни изделия
+                </Link>
+                <Link
+                  href="/products/construction"
+                  onClick={() => setIsDropdownOpen(false)}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-amber-600"
+                >
+                  Строителни изделия
+                </Link>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* НАВИГАЦИОННИ МЕНЮТА */}
