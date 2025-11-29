@@ -56,7 +56,7 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
             ПРОДУКТИ
           </button>
           {isDropdownOpen && (
-            <div className="absolute left-0 mt-2 w-64 bg-white shadow-lg rounded-lg z-10 animate-in fade-in slide-in-from-top-2 duration-200">
+            <div className="absolute left-0 mt-2 w-64 bg-white shadow-lg rounded-lg z-10 opacity-0 scale-95 animate-dropdown">
               <div className="py-2">
                 <Link
                   href="/products"
@@ -94,7 +94,7 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
             <Menu className="h-4 w-4" />
           </button>
           {isMobileMenuOpen && (
-            <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg z-10 animate-in fade-in slide-in-from-top-2 duration-200">
+            <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg z-10 opacity-0 scale-95 animate-dropdown">
               <div className="py-2">
                 <Link
                   href="/"
