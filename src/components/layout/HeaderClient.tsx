@@ -94,12 +94,12 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
             <Menu className="h-4 w-4" />
           </button>
           {isMobileMenuOpen && (
-            <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg z-10 opacity-0 scale-95 animate-dropdown">
-              <div className="py-2">
+            <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg z-10 opacity-0 scale-95 animate-dropdown">
+              <div className="py-1">
                 <Link
                   href="/"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block px-4 py-2 font-medium ${
+                  className={`block px-3 py-1.5 text-sm ${
                     isActive("/") && pathname === "/"
                       ? "bg-amber-600 text-white"
                       : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
@@ -110,7 +110,7 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
                 <Link
                   href="/about"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block px-4 py-2 font-medium ${
+                  className={`block px-3 py-1.5 text-sm ${
                     isActive("/about")
                       ? "bg-amber-600 text-white"
                       : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
@@ -121,7 +121,7 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
                 <Link
                   href="/gallery"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block px-4 py-2 font-medium ${
+                  className={`block px-3 py-1.5 text-sm ${
                     isActive("/gallery")
                       ? "bg-amber-600 text-white"
                       : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
@@ -132,7 +132,7 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
                 <Link
                   href="/blog"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block px-4 py-2 font-medium ${
+                  className={`block px-3 py-1.5 text-sm ${
                     isActive("/blog")
                       ? "bg-amber-600 text-white"
                       : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
@@ -143,7 +143,7 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
                 <Link
                   href="/contact"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block px-4 py-2 font-medium ${
+                  className={`block px-3 py-1.5 text-sm ${
                     isActive("/contact")
                       ? "bg-amber-600 text-white"
                       : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
@@ -156,7 +156,7 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
                     key={page.slug}
                     href={`/${page.slug}`}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`block px-4 py-2 font-medium ${
+                    className={`block px-3 py-1.5 text-sm ${
                       isActive(`/${page.slug}`)
                         ? "bg-amber-600 text-white"
                         : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
