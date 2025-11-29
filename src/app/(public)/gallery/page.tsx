@@ -1,4 +1,3 @@
-<script src="https://t.contentsquare.net/uxa/039a40ead9180.js"></script>
 import { getGalleryImages } from "@/actions/misc";
 
 export default async function GalleryPage() {

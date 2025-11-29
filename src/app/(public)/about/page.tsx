@@ -1,4 +1,3 @@
-<script src="https://t.contentsquare.net/uxa/039a40ead9180.js"></script>
 import { CheckCircle, Award, Users, Sparkles } from "lucide-react";
 
 export default function AboutPage() {

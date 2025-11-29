@@ -1,4 +1,3 @@
-<script src="https://t.contentsquare.net/uxa/039a40ead9180.js"></script>
 import Link from "next/link";
 import { ArrowRight, Package, Building2, Star, Grid3x3 } from "lucide-react";
 import { getFeaturedProducts } from "@/actions/products";

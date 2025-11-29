@@ -1,4 +1,3 @@
-<script src="https://t.contentsquare.net/uxa/039a40ead9180.js"></script>
 "use client";
 
 import { useCart } from "@/contexts/CartContext";

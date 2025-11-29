@@ -1,4 +1,3 @@
-<script src="https://t.contentsquare.net/uxa/039a40ead9180.js"></script>
 import Link from "next/link";
 import Image from "next/image";
 import { getBlogPosts } from "@/actions/blog";

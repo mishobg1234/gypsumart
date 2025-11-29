@@ -1,4 +1,3 @@
-<script src="https://t.contentsquare.net/uxa/039a40ead9180.js"></script>
 import { notFound } from "next/navigation";
 import { prisma } from "@/db/prisma";
 import Link from "next/link";
