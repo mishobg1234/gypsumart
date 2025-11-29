@@ -1,3 +1,4 @@
+<script src="https://t.contentsquare.net/uxa/039a40ead9180.js"></script>
 import { prisma } from "@/db/prisma";
 import Link from "next/link";
 import { ProductCard } from "@/components/product";

@@ -9,7 +9,7 @@ export const ourFileRouter = {
   // Product images uploader - supports multiple images
   productImages: f({
     image: {
-      maxFileSize: "4MB",
+      maxFileSize: "8MB",
       maxFileCount: 5,
     },
   })

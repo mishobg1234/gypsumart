@@ -116,7 +116,7 @@ export function ProductImageUploader({
             Добавете снимки на продукта
           </h3>
           <p className="text-sm text-gray-500 mb-4 text-center">
-            Макс. {5 - images.length} {5 - images.length === 1 ? 'снимка' : 'снимки'} до 4MB всяка
+            Макс. {5 - images.length} {5 - images.length === 1 ? 'снимка' : 'снимки'} до 8MB всяка
           </p>
           
           <UploadButton
