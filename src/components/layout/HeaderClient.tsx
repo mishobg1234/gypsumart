@@ -56,26 +56,26 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
             ПРОДУКТИ
           </button>
           {isDropdownOpen && (
-            <div className="absolute left-0 mt-2 w-64 bg-white shadow-lg rounded-lg z-10">
+            <div className="absolute left-0 mt-2 w-64 bg-white shadow-lg rounded-lg z-10 animate-in fade-in slide-in-from-top-2 duration-200">
               <div className="py-2">
                 <Link
                   href="/products"
                   onClick={() => setIsDropdownOpen(false)}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-amber-600 font-medium"
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-amber-600 font-medium transition-colors"
                 >
                   Всички продукти
                 </Link>
                 <Link
                   href="/products/decorative"
                   onClick={() => setIsDropdownOpen(false)}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-amber-600"
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-amber-600 transition-colors"
                 >
                   Декоративни изделия
                 </Link>
                 <Link
                   href="/products/construction"
                   onClick={() => setIsDropdownOpen(false)}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-amber-600"
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-amber-600 transition-colors"
                 >
                   Строителни изделия
                 </Link>
@@ -94,7 +94,7 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
             <Menu className="h-4 w-4" />
           </button>
           {isMobileMenuOpen && (
-            <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg z-10">
+            <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg z-10 animate-in fade-in slide-in-from-top-2 duration-200">
               <div className="py-2">
                 <Link
                   href="/"
