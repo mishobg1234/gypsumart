@@ -22,6 +22,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
   const [images, setImages] = useState<string[]>(
     product ? JSON.parse(product.images) : []
   );
+  const [shortDescription, setShortDescription] = useState(product?.shortDescription || "");
   const [description, setDescription] = useState(product?.description || "");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -34,6 +35,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
     const data = {
       name: formData.get("name") as string,
       slug: formData.get("slug") as string,
+      shortDescription: shortDescription,
       description: description,
       price: parseFloat(formData.get("price") as string),
       compareAtPrice: formData.get("compareAtPrice")
@@ -108,12 +110,26 @@ export function ProductForm({ product, categories }: ProductFormProps) {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Описание
+              Кратко описание
+            </label>
+            <textarea
+              name="shortDescription"
+              value={shortDescription}
+              onChange={(e) => setShortDescription(e.target.value)}
+              rows={3}
+              placeholder="Кратко описание което ще се показва под бутона 'Добави в кошницата'"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Пълно описание
             </label>
             <RichTextEditor
               content={description}
               onChange={setDescription}
-              placeholder="Напишете описание на продукта..."
+              placeholder="Напишете пълно описание на продукта..."
             />
           </div>
 

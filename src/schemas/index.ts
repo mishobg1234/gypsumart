@@ -16,6 +16,7 @@ export const RegisterSchema = z.object({
 export const ProductSchema = z.object({
   name: z.string().min(2, { message: "Името е задължително" }),
   slug: z.string().min(2, { message: "Slug е задължителен" }),
+  shortDescription: z.string().optional(),
   description: z.string().optional(),
   price: z.number().min(0, { message: "Цената трябва да е положителна" }),
   compareAtPrice: z.number().optional(),

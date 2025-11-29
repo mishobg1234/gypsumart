@@ -9,7 +9,7 @@ export async function Header() {
   const navbarPages = await getNavbarPages();
 
   return (
-    <header className="border-b bg-white sticky top-0 z-50">
+    <header className="border-b bg-white md:sticky md:top-0 z-50">
       <div className="container mx-auto px-4">
         {/* Logo Section */}
         <div className="flex items-center justify-between py-4 border-b">

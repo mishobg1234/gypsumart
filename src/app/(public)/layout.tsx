@@ -1,4 +1,3 @@
-<script src="https://t.contentsquare.net/uxa/039a40ead9180.js"></script>
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";

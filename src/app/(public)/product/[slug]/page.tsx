@@ -155,12 +155,22 @@ export default async function ProductPage({
                 image: images[0],
               }}
             />
+            
             <p className="text-sm text-gray-600 text-center mt-4">
               Или се свържете с нас за поръчка на{" "}
               <Link href="/contact" className="text-amber-600 hover:text-amber-700 font-medium">
                 страницата за контакти
               </Link>
             </p>
+            
+            {/* Short Description */}
+            {product.shortDescription && (
+              <div className="mt-6">
+                <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                  {product.shortDescription}
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
