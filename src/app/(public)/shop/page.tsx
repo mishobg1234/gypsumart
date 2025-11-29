@@ -19,7 +19,7 @@ export default async function ShopPage() {
               Онлайн магазин
             </h1>
             <p className="text-xl text-gray-600">
-              Разгледайте нашата богата колекция от гипсови изделияаа
+              Разгледайте нашата богата колекция от гипсови изделия
             </p>
           </div>
         </div>
