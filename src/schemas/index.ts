@@ -26,6 +26,7 @@ export const ProductSchema = z.object({
   sku: z.string().optional(),
   metaTitle: z.string().optional(),
   metaDescription: z.string().optional(),
+  metaKeywords: z.string().optional(),
   categoryId: z.string(),
 });
 

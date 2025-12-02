@@ -20,6 +20,7 @@ export async function generateMetadata({
       name: true,
       metaTitle: true,
       metaDescription: true,
+      metaKeywords: true,
       shortDescription: true,
       price: true,
       images: true,
@@ -38,6 +39,7 @@ export async function generateMetadata({
   return {
     title: product.metaTitle || `${product.name} - ArtBuildShop`,
     description: product.metaDescription || product.shortDescription || `Купете ${product.name} на отлична цена - ${priceInBgn.toFixed(2)} лв.`,
+    keywords: product.metaKeywords || undefined,
     openGraph: {
       title: product.metaTitle || product.name,
       description: product.metaDescription || product.shortDescription || `Купете ${product.name} на отлична цена`,

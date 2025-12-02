@@ -27,6 +27,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
   const [description, setDescription] = useState(product?.description || "");
   const [metaTitle, setMetaTitle] = useState(product?.metaTitle || "");
   const [metaDescription, setMetaDescription] = useState(product?.metaDescription || "");
+  const [metaKeywords, setMetaKeywords] = useState(product?.metaKeywords || "");
   const [price, setPrice] = useState(product?.price?.toString() || "");
   const [compareAtPrice, setCompareAtPrice] = useState(product?.compareAtPrice?.toString() || "");
 
@@ -52,6 +53,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
       sku: formData.get("sku") as string,
       metaTitle: metaTitle || undefined,
       metaDescription: metaDescription || undefined,
+      metaKeywords: metaKeywords || undefined,
       categoryId: formData.get("categoryId") as string,
     };
 
@@ -175,6 +177,22 @@ export function ProductForm({ product, categories }: ProductFormProps) {
                 />
                 <p className="mt-1 text-xs text-gray-500">
                   Препоръчителна дължина: 150-160 символа
+                </p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Meta Keywords
+                </label>
+                <input
+                  type="text"
+                  value={metaKeywords}
+                  onChange={(e) => setMetaKeywords(e.target.value)}
+                  placeholder="гипсови изделия, декорация, строителство (разделени със запетая)"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                />
+                <p className="mt-1 text-xs text-gray-500">
+                  Въведете ключови думи, разделени със запетая
                 </p>
               </div>
             </div>
