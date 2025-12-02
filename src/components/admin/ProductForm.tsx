@@ -9,6 +9,7 @@ import Link from "next/link";
 import { ProductImageUploader } from "./ProductImageUploader";
 import { RichTextEditor } from "./RichTextEditor";
 import { generateSlug } from "@/lib/slugify";
+import { euroToBgn } from "@/lib/currency";
 
 interface ProductFormProps {
   product?: Product & { category: Category };
@@ -26,6 +27,8 @@ export function ProductForm({ product, categories }: ProductFormProps) {
   const [description, setDescription] = useState(product?.description || "");
   const [metaTitle, setMetaTitle] = useState(product?.metaTitle || "");
   const [metaDescription, setMetaDescription] = useState(product?.metaDescription || "");
+  const [price, setPrice] = useState(product?.price?.toString() || "");
+  const [compareAtPrice, setCompareAtPrice] = useState(product?.compareAtPrice?.toString() || "");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -187,9 +190,15 @@ export function ProductForm({ product, categories }: ProductFormProps) {
                 name="price"
                 step="0.01"
                 required
-                defaultValue={product?.price}
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
+              {price && parseFloat(price) > 0 && (
+                <p className="mt-1 text-sm text-gray-600">
+                  = {euroToBgn(parseFloat(price)).toFixed(2)} лв.
+                </p>
+              )}
             </div>
 
             <div>
@@ -200,9 +209,15 @@ export function ProductForm({ product, categories }: ProductFormProps) {
                 type="number"
                 name="compareAtPrice"
                 step="0.01"
-                defaultValue={product?.compareAtPrice || ""}
+                value={compareAtPrice}
+                onChange={(e) => setCompareAtPrice(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
+              {compareAtPrice && parseFloat(compareAtPrice) > 0 && (
+                <p className="mt-1 text-sm text-gray-600">
+                  = {euroToBgn(parseFloat(compareAtPrice)).toFixed(2)} лв.
+                </p>
+              )}
             </div>
           </div>
 
