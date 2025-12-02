@@ -74,7 +74,7 @@ export async function POST(request: Request) {
       totalAmount: total,
       deliveryFee: deliveryFee || 0,
       items: order.items.map((item) => ({
-        product: { name: item.product.name },
+        product: { name: item.productName || item.product?.name || "Продукт" },
         quantity: item.quantity,
         price: item.price,
       })),
