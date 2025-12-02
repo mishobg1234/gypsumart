@@ -5,6 +5,46 @@ import { ArrowLeft } from "lucide-react";
 import { AddToCartButton, ProductImageGallery, ReviewsSection } from "@/components/product";
 import { RichTextViewer } from "@/components/RichTextViewer";
 import { formatPriceHTML, euroToBgn } from "@/lib/currency";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  
+  const product = await prisma.product.findUnique({
+    where: { slug },
+    select: {
+      name: true,
+      metaTitle: true,
+      metaDescription: true,
+      shortDescription: true,
+      price: true,
+      images: true,
+    },
+  });
+
+  if (!product) {
+    return {
+      title: "Продукт не е намерен",
+    };
+  }
+
+  const images = JSON.parse(product.images) as string[];
+  const priceInBgn = euroToBgn(product.price);
+
+  return {
+    title: product.metaTitle || `${product.name} - ArtBuildShop`,
+    description: product.metaDescription || product.shortDescription || `Купете ${product.name} на отлична цена - ${priceInBgn.toFixed(2)} лв.`,
+    openGraph: {
+      title: product.metaTitle || product.name,
+      description: product.metaDescription || product.shortDescription || `Купете ${product.name} на отлична цена`,
+      images: images.length > 0 ? [images[0]] : [],
+    },
+  };
+}
 
 export default async function ProductPage({
   params,

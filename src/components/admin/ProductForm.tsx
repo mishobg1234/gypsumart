@@ -24,6 +24,8 @@ export function ProductForm({ product, categories }: ProductFormProps) {
   );
   const [shortDescription, setShortDescription] = useState(product?.shortDescription || "");
   const [description, setDescription] = useState(product?.description || "");
+  const [metaTitle, setMetaTitle] = useState(product?.metaTitle || "");
+  const [metaDescription, setMetaDescription] = useState(product?.metaDescription || "");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,6 +47,8 @@ export function ProductForm({ product, categories }: ProductFormProps) {
       featured: formData.get("featured") === "on",
       inStock: formData.get("inStock") === "on",
       sku: formData.get("sku") as string,
+      metaTitle: metaTitle || undefined,
+      metaDescription: metaDescription || undefined,
       categoryId: formData.get("categoryId") as string,
     };
 
@@ -222,6 +226,46 @@ export function ProductForm({ product, categories }: ProductFormProps) {
       <div className="bg-white rounded-lg shadow p-6">
         <h2 className="text-xl font-bold text-gray-900 mb-6">Изображения</h2>
         <ProductImageUploader images={images} onImagesChange={setImages} />
+      </div>
+
+      <div className="bg-white rounded-lg shadow p-6">
+        <h2 className="text-xl font-bold text-gray-900 mb-6">
+          SEO оптимизация
+        </h2>
+
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Meta Title
+            </label>
+            <input
+              type="text"
+              value={metaTitle}
+              onChange={(e) => setMetaTitle(e.target.value)}
+              placeholder="Оставете празно за автоматично генериране от името на продукта"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+            />
+            <p className="mt-1 text-xs text-gray-500">
+              Препоръчителна дължина: 50-60 символа
+            </p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Meta Description
+            </label>
+            <textarea
+              value={metaDescription}
+              onChange={(e) => setMetaDescription(e.target.value)}
+              rows={3}
+              placeholder="Оставете празно за автоматично генериране от краткото описание"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+            />
+            <p className="mt-1 text-xs text-gray-500">
+              Препоръчителна дължина: 150-160 символа
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="flex items-center justify-between">

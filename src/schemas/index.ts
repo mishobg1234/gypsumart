@@ -24,6 +24,8 @@ export const ProductSchema = z.object({
   featured: z.boolean().default(false),
   inStock: z.boolean().default(true),
   sku: z.string().optional(),
+  metaTitle: z.string().optional(),
+  metaDescription: z.string().optional(),
   categoryId: z.string(),
 });
 
