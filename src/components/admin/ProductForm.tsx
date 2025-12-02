@@ -280,7 +280,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
                 defaultChecked={product?.featured}
                 className="w-4 h-4 text-amber-600 border-gray-300 rounded focus:ring-amber-500"
               />
-              <span className="ml-2 text-sm text-gray-700">Препоръчан продукт</span>
+              <span className="ml-2 text-sm text-gray-700">Изчерпан (показва се на началната страница)</span>
             </label>
 
             <label className="flex items-center">
