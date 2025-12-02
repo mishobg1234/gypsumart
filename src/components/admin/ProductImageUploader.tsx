@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { UploadButton } from "@/lib/uploadthing";
 import Image from "next/image";
-import { X, Upload, ImagePlus } from "lucide-react";
+import { X, Upload, ImagePlus, GripVertical } from "lucide-react";
 
 interface ProductImageUploaderProps {
   images: string[];
@@ -16,6 +16,28 @@ export function ProductImageUploader({
 }: ProductImageUploaderProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [deletingIndex, setDeletingIndex] = useState<number | null>(null);
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+
+  const handleDragStart = (index: number) => {
+    setDraggedIndex(index);
+  };
+
+  const handleDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === index) return;
+
+    const newImages = [...images];
+    const draggedItem = newImages[draggedIndex];
+    newImages.splice(draggedIndex, 1);
+    newImages.splice(index, 0, draggedItem);
+    
+    setDraggedIndex(index);
+    onImagesChange(newImages);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedIndex(null);
+  };
 
   const removeImage = async (index: number, url: string) => {
     // Check if this is an UploadThing URL
@@ -78,20 +100,32 @@ export function ProductImageUploader({
       {images.length > 0 && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {images.map((url, index) => (
-            <div key={index} className="relative group">
-              <div className="relative h-32 rounded-lg overflow-hidden border-2 border-gray-200">
+            <div
+              key={index}
+              draggable
+              onDragStart={() => handleDragStart(index)}
+              onDragOver={(e) => handleDragOver(e, index)}
+              onDragEnd={handleDragEnd}
+              className={`relative group cursor-move ${
+                draggedIndex === index ? 'opacity-50' : ''
+              }`}
+            >
+              <div className="relative h-32 rounded-lg overflow-hidden border-2 border-gray-200 hover:border-amber-500 transition">
                 <Image
                   src={url}
                   alt={`Product ${index + 1}`}
                   fill
                   className="object-cover"
                 />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition flex items-center justify-center">
+                  <GripVertical className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition" />
+                </div>
               </div>
               <button
                 type="button"
                 onClick={() => removeImage(index, url)}
                 disabled={deletingIndex === index}
-                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition disabled:opacity-50 disabled:cursor-not-allowed z-10"
               >
                 {deletingIndex === index ? (
                   <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full" />
@@ -100,7 +134,7 @@ export function ProductImageUploader({
                 )}
               </button>
               {index === 0 && (
-                <span className="absolute top-2 left-2 bg-amber-500 text-white text-xs px-2 py-1 rounded">
+                <span className="absolute top-2 left-2 bg-amber-500 text-white text-xs px-2 py-1 rounded z-10">
                   Главно
                 </span>
               )}
@@ -161,6 +195,12 @@ export function ProductImageUploader({
       {images.length === 0 && (
         <p className="text-sm text-gray-600 text-center">
           Първата снимка ще бъде главната снимка на продукта
+        </p>
+      )}
+
+      {images.length > 1 && (
+        <p className="text-sm text-gray-500 text-center">
+          💡 Влачете и пускайте снимките за да промените реда
         </p>
       )}
     </div>
