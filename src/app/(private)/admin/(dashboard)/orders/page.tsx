@@ -6,8 +6,13 @@ import { format } from "date-fns";
 import { bg } from "date-fns/locale";
 import { formatPriceHTML } from "@/lib/currency";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function OrdersPage() {
   const orders = await getOrders();
+
+  console.log("📦 Orders page rendered:", { ordersCount: orders.length });
 
   const getStatusColor = (status: string) => {
     switch (status) {

@@ -83,7 +83,8 @@ export default async function OrderDetailsPage({
             <h2 className="text-xl font-bold text-gray-900 mb-4">Продукти</h2>
             <div className="space-y-4">
               {order.items.map((item) => {
-                const images = JSON.parse(item.product.images) as string[];
+                const images = item.product ? JSON.parse(item.product.images) as string[] : [];
+                const productName = item.productName || item.product?.name || "Изтрит продукт";
                 return (
                   <div
                     key={item.id}
@@ -93,7 +94,7 @@ export default async function OrderDetailsPage({
                       {images[0] ? (
                         <Image
                           src={images[0]}
-                          alt={item.product.name}
+                          alt={productName}
                           fill
                           className="rounded object-cover"
                         />
@@ -105,8 +106,11 @@ export default async function OrderDetailsPage({
                     </div>
                     <div className="flex-1">
                       <h3 className="font-medium text-gray-900">
-                        {item.product.name}
+                        {productName}
                       </h3>
+                      {!item.product && (
+                        <p className="text-xs text-red-600">Продуктът е изтрит</p>
+                      )}
                       <p className="text-sm text-gray-600">
                         Количество: {item.quantity}
                       </p>

@@ -41,8 +41,9 @@ export async function POST(request: Request) {
         paymentMethod: "cod", // наложен платеж
         status: "PENDING",
         items: {
-          create: items.map((item: { productId: string; quantity: number; price: number }) => ({
+          create: items.map((item: { productId: string; name: string; quantity: number; price: number }) => ({
             productId: item.productId,
+            productName: item.name,
             quantity: item.quantity,
             price: item.price,
           })),

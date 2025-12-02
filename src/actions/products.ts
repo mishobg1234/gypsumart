@@ -74,6 +74,21 @@ export async function deleteProduct(id: string) {
   }
 
   try {
+    // Проверка дали продуктът има поръчки
+    const orderItems = await prisma.orderItem.findFirst({
+      where: { productId: id },
+    });
+
+    if (orderItems) {
+      return { error: "Продуктът не може да бъде изтрит, защото има свързани поръчки!" };
+    }
+
+    // Първо изтриваме рецензиите
+    await prisma.review.deleteMany({
+      where: { productId: id },
+    });
+
+    // След това изтриваме продукта
     await prisma.product.delete({
       where: { id },
     });

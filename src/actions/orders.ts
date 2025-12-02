@@ -142,6 +142,7 @@ export async function getOrders() {
   const session = await auth();
 
   if (!session || session.user.role !== "ADMIN") {
+    console.log("⚠️ getOrders: No admin session", { session: session?.user });
     return [];
   }
 
@@ -160,8 +161,10 @@ export async function getOrders() {
       },
     });
 
+    console.log("✅ getOrders: Found orders", { count: orders.length });
     return orders;
-  } catch (_error) {
+  } catch (error) {
+    console.error("❌ getOrders: Error", error);
     return [];
   }
 }
