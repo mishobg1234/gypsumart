@@ -71,12 +71,12 @@ export function ProductCard({ product }: ProductCardProps) {
       
       <div className="p-4">
         <div className="mb-2">
-          <span className="text-xs text-amber-600 font-medium">
+          <span className="text-xs text-green-600 font-medium">
             {product.category.name}
           </span>
         </div>
         
-        <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-amber-600 transition">
+        <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-green-600 transition">
           {product.name}
         </h3>
         
@@ -107,7 +107,7 @@ export function ProductCard({ product }: ProductCardProps) {
         
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-2xl font-bold text-amber-600">
+            <p className="text-2xl font-bold text-green-600">
               {formatPriceHTML(product.price).full}
             </p>
             {product.compareAtPrice && (
@@ -116,7 +116,7 @@ export function ProductCard({ product }: ProductCardProps) {
               </p>
             )}
           </div>
-          <span className="bg-amber-600 text-white px-4 py-2 rounded-lg group-hover:bg-amber-700 transition text-sm font-medium">
+          <span className="bg-green-600 text-white px-4 py-2 rounded-lg group-hover:bg-green-700 transition text-sm font-medium">
             Поръчай
           </span>
         </div>

@@ -73,7 +73,7 @@ export function ReviewsSection({ productId, productName, reviews }: ReviewsSecti
             <div className="text-center">
               <button
                 onClick={() => setShowForm(true)}
-                className="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-lg font-medium transition"
+                className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition"
               >
                 ⭐ Оставете отзив
               </button>
@@ -94,7 +94,7 @@ export function ReviewsSection({ productId, productName, reviews }: ReviewsSecti
               </p>
               <button
                 onClick={() => setShowForm(true)}
-                className="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-lg font-medium transition"
+                className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition"
               >
                 ⭐ Оставете отзив
               </button>

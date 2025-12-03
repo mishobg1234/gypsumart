@@ -22,7 +22,7 @@ export function TopNavLinks() {
         href="/about"
         className={`px-4 py-2 text-sm rounded transition font-medium whitespace-nowrap ${
           isActive("/about")
-            ? "bg-amber-600 text-white hover:bg-amber-700"
+            ? "bg-green-600 text-white hover:bg-green-700"
             : "bg-gray-100 text-gray-700 hover:bg-gray-200"
         }`}
       >
@@ -32,7 +32,7 @@ export function TopNavLinks() {
         href="/contact"
         className={`px-4 py-2 text-sm rounded transition font-medium whitespace-nowrap ${
           isActive("/contact")
-            ? "bg-amber-600 text-white hover:bg-amber-700"
+            ? "bg-green-600 text-white hover:bg-green-700"
             : "bg-gray-100 text-gray-700 hover:bg-gray-200"
         }`}
       >

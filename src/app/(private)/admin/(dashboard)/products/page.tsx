@@ -17,7 +17,7 @@ export default async function ProductsPage() {
         actions={
           <Link
             href="/admin/products/new"
-            className="flex items-center space-x-2 bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition"
+            className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
           >
             <Plus className="h-5 w-5" />
             <span>Добави продукт</span>
@@ -36,7 +36,7 @@ export default async function ProductsPage() {
           </p>
           <Link
             href="/admin/products/new"
-            className="inline-flex items-center space-x-2 bg-amber-600 text-white px-6 py-3 rounded-lg hover:bg-amber-700 transition"
+            className="inline-flex items-center space-x-2 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
           >
             <Plus className="h-5 w-5" />
             <span>Добави продукт</span>
@@ -121,7 +121,7 @@ export default async function ProductsPage() {
                         {product.inStock ? "В наличност" : "Изчерпан"}
                       </span>
                       {product.featured && (
-                        <span className="ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-amber-100 text-amber-800">
+                        <span className="ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                           Препоръчан
                         </span>
                       )}

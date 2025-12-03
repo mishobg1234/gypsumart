@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --brand-green: #0F6A43;
+    --brand-green-light: #3ED27A;
+    --brand-orange: #FF8A00;
+    --neutral-dark: #1A1A1A;
+  }
+  
+  body {
+    font-family: var(--font-montserrat), system-ui, -apple-system, sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-extrabold;
+  }
+}
+
 @layer utilities {
   .line-clamp-2 {
     overflow: hidden;

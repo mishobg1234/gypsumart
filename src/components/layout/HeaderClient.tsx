@@ -50,7 +50,7 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="bg-amber-600 text-white px-4 md:px-6 py-2 rounded hover:bg-amber-700 transition inline-flex items-center gap-2 font-medium text-sm md:text-base"
+            className="bg-green-600 text-white px-4 md:px-6 py-2 rounded hover:bg-green-700 transition inline-flex items-center gap-2 font-medium text-sm md:text-base"
           >
             <Menu className="h-4 w-4 md:h-5 md:w-5" />
             ПРОДУКТИ
@@ -61,21 +61,21 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
                 <Link
                   href="/products"
                   onClick={() => setIsDropdownOpen(false)}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-amber-600 font-medium transition-colors"
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-green-600 font-medium transition-colors"
                 >
                   Всички продукти
                 </Link>
                 <Link
                   href="/products/decorative"
                   onClick={() => setIsDropdownOpen(false)}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-amber-600 transition-colors"
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-green-600 transition-colors"
                 >
                   Декоративни изделия
                 </Link>
                 <Link
                   href="/products/construction"
                   onClick={() => setIsDropdownOpen(false)}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-amber-600 transition-colors"
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-green-600 transition-colors"
                 >
                   Строителни изделия
                 </Link>
@@ -88,7 +88,7 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
         <div className="relative md:hidden ml-auto" ref={mobileMenuRef}>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="bg-amber-600 text-white px-4 py-2 rounded hover:bg-amber-700 transition inline-flex items-center gap-2 font-medium text-sm"
+            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition inline-flex items-center gap-2 font-medium text-sm"
           >
             МЕНЮ
             <Menu className="h-4 w-4" />
@@ -101,8 +101,8 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`block px-3 py-1.5 text-sm ${
                     isActive("/") && pathname === "/"
-                      ? "bg-amber-600 text-white"
-                      : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
+                      ? "bg-green-600 text-white"
+                      : "text-gray-700 hover:bg-gray-50 hover:text-green-600"
                   }`}
                 >
                   Начало
@@ -112,8 +112,8 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`block px-3 py-1.5 text-sm ${
                     isActive("/about")
-                      ? "bg-amber-600 text-white"
-                      : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
+                      ? "bg-green-600 text-white"
+                      : "text-gray-700 hover:bg-gray-50 hover:text-green-600"
                   }`}
                 >
                   За нас
@@ -123,8 +123,8 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`block px-3 py-1.5 text-sm ${
                     isActive("/gallery")
-                      ? "bg-amber-600 text-white"
-                      : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
+                      ? "bg-green-600 text-white"
+                      : "text-gray-700 hover:bg-gray-50 hover:text-green-600"
                   }`}
                 >
                   Галерия
@@ -134,8 +134,8 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`block px-3 py-1.5 text-sm ${
                     isActive("/blog")
-                      ? "bg-amber-600 text-white"
-                      : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
+                      ? "bg-green-600 text-white"
+                      : "text-gray-700 hover:bg-gray-50 hover:text-green-600"
                   }`}
                 >
                   Блог
@@ -145,8 +145,8 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`block px-3 py-1.5 text-sm ${
                     isActive("/contact")
-                      ? "bg-amber-600 text-white"
-                      : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
+                      ? "bg-green-600 text-white"
+                      : "text-gray-700 hover:bg-gray-50 hover:text-green-600"
                   }`}
                 >
                   Контакти
@@ -158,8 +158,8 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`block px-3 py-1.5 text-sm ${
                       isActive(`/${page.slug}`)
-                        ? "bg-amber-600 text-white"
-                        : "text-gray-700 hover:bg-gray-50 hover:text-amber-600"
+                        ? "bg-green-600 text-white"
+                        : "text-gray-700 hover:bg-gray-50 hover:text-green-600"
                     }`}
                   >
                     {page.title}
@@ -176,7 +176,7 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
             href="/"
             className={`px-6 py-2 rounded transition font-medium whitespace-nowrap ${
               isActive("/") && pathname === "/"
-                ? "bg-amber-600 text-white hover:bg-amber-700"
+                ? "bg-green-600 text-white hover:bg-green-700"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
@@ -186,7 +186,7 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
             href="/gallery"
             className={`px-6 py-2 rounded transition font-medium whitespace-nowrap ${
               isActive("/gallery")
-                ? "bg-amber-600 text-white hover:bg-amber-700"
+                ? "bg-green-600 text-white hover:bg-green-700"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
@@ -196,7 +196,7 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
             href="/blog"
             className={`px-6 py-2 rounded transition font-medium whitespace-nowrap ${
               isActive("/blog")
-                ? "bg-amber-600 text-white hover:bg-amber-700"
+                ? "bg-green-600 text-white hover:bg-green-700"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
@@ -208,7 +208,7 @@ export function HeaderClient({ navbarPages }: HeaderClientProps) {
               href={`/${page.slug}`}
               className={`px-6 py-2 rounded transition font-medium whitespace-nowrap ${
                 isActive(`/${page.slug}`)
-                  ? "bg-amber-600 text-white hover:bg-amber-700"
+                  ? "bg-green-600 text-white hover:bg-green-700"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >

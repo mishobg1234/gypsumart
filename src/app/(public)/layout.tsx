@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "@/app/globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CartProvider } from "@/contexts/CartContext";
 
-const inter = Inter({ subsets: ["latin", "cyrillic"] });
+const montserrat = Montserrat({ 
+  subsets: ["latin", "cyrillic"],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-montserrat',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: "ArtBuildShop - Гипсови изделия за дом и индустрия",
@@ -19,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="bg" suppressHydrationWarning={true}>
-      <body className={inter.className}>
+      <body className={`${montserrat.variable} font-montserrat bg-white text-neutral-dark`}>
         <CartProvider>
           <div className="flex flex-col min-h-screen">
             <Header />

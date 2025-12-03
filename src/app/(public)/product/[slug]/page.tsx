@@ -84,7 +84,7 @@ export default async function ProductPage({
         <div className="mb-6">
           <Link
             href={`/products/${product.category.slug}`}
-            className="inline-flex items-center text-gray-600 hover:text-amber-600 transition"
+            className="inline-flex items-center text-gray-600 hover:text-green-600 transition"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Назад към {product.category.name}
@@ -109,7 +109,7 @@ export default async function ProductPage({
             <div className="mb-6">
               <Link
                 href={`/products/${product.category.slug}`}
-                className="text-sm text-amber-600 hover:text-amber-700 mb-2 inline-block"
+                className="text-sm text-green-600 hover:text-green-700 mb-2 inline-block"
               >
                 {product.category.name}
               </Link>
@@ -146,7 +146,7 @@ export default async function ProductPage({
             {/* Price */}
             <div className="mb-6">
               <div className="flex items-baseline space-x-4">
-                <p className="text-4xl font-bold text-amber-600">
+                <p className="text-4xl font-bold text-green-600">
                   {formatPriceHTML(product.price).full}
                 </p>
                 {product.compareAtPrice && (
@@ -200,7 +200,7 @@ export default async function ProductPage({
             
             <p className="text-sm text-gray-600 text-center mt-4">
               Или се свържете с нас за поръчка на{" "}
-              <Link href="/contact" className="text-amber-600 hover:text-amber-700 font-medium">
+              <Link href="/contact" className="text-green-600 hover:text-green-700 font-medium">
                 страницата за контакти
               </Link>
             </p>

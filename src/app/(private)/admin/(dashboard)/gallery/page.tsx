@@ -16,7 +16,7 @@ export default async function GalleryPage() {
         actions={
           <Link
             href="/admin/gallery/new"
-            className="flex items-center space-x-2 bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition"
+            className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
           >
             <Plus className="h-5 w-5" />
             <span>Добави изображение</span>
@@ -35,7 +35,7 @@ export default async function GalleryPage() {
           </p>
           <Link
             href="/admin/gallery/new"
-            className="inline-flex items-center space-x-2 bg-amber-600 text-white px-6 py-3 rounded-lg hover:bg-amber-700 transition"
+            className="inline-flex items-center space-x-2 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
           >
             <Plus className="h-5 w-5" />
             <span>Добави изображение</span>
@@ -56,7 +56,7 @@ export default async function GalleryPage() {
                   className="object-cover"
                 />
                 {image.featured && (
-                  <span className="absolute top-2 right-2 px-2 py-1 text-xs bg-amber-500 text-white rounded">
+                  <span className="absolute top-2 right-2 px-2 py-1 text-xs bg-green-500 text-white rounded">
                     Препоръчано
                   </span>
                 )}

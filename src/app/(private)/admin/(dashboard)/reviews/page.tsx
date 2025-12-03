@@ -15,7 +15,7 @@ export default async function ReviewsPage() {
             key={star}
             className={`h-4 w-4 ${
               star <= rating
-                ? "fill-amber-400 text-amber-400"
+                ? "fill-yellow-400 text-yellow-400"
                 : "text-gray-300"
             }`}
           />

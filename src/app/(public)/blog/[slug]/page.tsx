@@ -24,7 +24,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="container mx-auto px-4 py-4">
           <Link
             href="/blog"
-            className="inline-flex items-center text-gray-600 hover:text-amber-600 transition"
+            className="inline-flex items-center text-gray-600 hover:text-green-600 transition"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Назад към блога

@@ -49,7 +49,7 @@ export default async function AllProductsPage() {
                 href={`/products/${category.slug}`}
                 className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition group"
               >
-                <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-amber-600 transition">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-green-600 transition">
                   {category.name}
                 </h3>
                 {category.description && (
@@ -68,7 +68,7 @@ export default async function AllProductsPage() {
                           key={child.id}
                           className="text-sm text-gray-600 flex items-center"
                         >
-                          <span className="w-1.5 h-1.5 bg-amber-600 rounded-full mr-2"></span>
+                          <span className="w-1.5 h-1.5 bg-green-600 rounded-full mr-2"></span>
                           {child.name}
                         </li>
                       ))}

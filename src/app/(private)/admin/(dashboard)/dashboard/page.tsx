@@ -79,7 +79,7 @@ export default async function AdminDashboard() {
             <h2 className="text-xl font-bold text-gray-900">Последни поръчки</h2>
             <Link
               href="/admin/orders"
-              className="text-amber-600 hover:text-amber-700 text-sm font-medium"
+              className="text-green-600 hover:text-green-700 text-sm font-medium"
             >
               Виж всички
             </Link>
@@ -117,7 +117,7 @@ export default async function AdminDashboard() {
             <h2 className="text-xl font-bold text-gray-900">Последни съобщения</h2>
             <Link
               href="/admin/messages"
-              className="text-amber-600 hover:text-amber-700 text-sm font-medium"
+              className="text-green-600 hover:text-green-700 text-sm font-medium"
             >
               Виж всички
             </Link>
@@ -135,7 +135,7 @@ export default async function AdminDashboard() {
                     </div>
                     <div className="flex items-center gap-2">
                       {!message.read && (
-                        <span className="px-2 py-1 text-xs bg-amber-100 text-amber-800 rounded">
+                        <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded">
                           Ново
                         </span>
                       )}

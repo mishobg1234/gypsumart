@@ -9,12 +9,13 @@ export async function Header() {
   const navbarPages = await getNavbarPages();
 
   return (
-    <header className="border-b bg-white z-50">
+    <header className="border-b bg-white shadow-sm z-50">
       <div className="container mx-auto px-4">
         {/* Logo Section */}
-        <div className="flex items-center justify-between py-4 border-b">
-          <Link href="/" className="text-2xl font-bold text-gray-900">
-            <span className="text-amber-600">Art</span>BuildShop
+        <div className="flex items-center justify-between py-4 border-b border-gray-200">
+          <Link href="/" className="flex items-center gap-2">
+            <span className="text-2xl font-extrabold text-gray-900 tracking-tight">ARTBUILD</span>
+            <span className="text-xl font-medium text-gray-700">SHOP</span>
           </Link>
           
           {/* 
@@ -43,7 +44,7 @@ export async function Header() {
               <input
                 type="text"
                 placeholder="Търсене на продукти..."
-                className="w-full px-4 py-2 pl-10 pr-20 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                className="w-full px-4 py-2 pl-10 pr-20 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-900 placeholder:text-gray-500"
               />
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
             </div>
@@ -59,12 +60,12 @@ export async function Header() {
         </div>
 
         {/* Mobile Search Bar */}
-        <div className="md:hidden py-3 border-b">
+        <div className="md:hidden py-3 border-b border-gray-200">
           <div className="relative">
             <input
               type="text"
               placeholder="Търсене на продукти..."
-              className="w-full px-4 py-2 pl-10 pr-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+              className="w-full px-4 py-2 pl-10 pr-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-900 placeholder:text-gray-500"
             />
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
           </div>

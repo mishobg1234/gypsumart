@@ -70,11 +70,11 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
         onClick={handleAddToCart}
         disabled={isAnimating}
         className="relative w-full px-8 py-4 rounded-lg text-center font-semibold text-lg overflow-hidden text-white"
-        style={{ backgroundColor: "#d97706" }}
+        style={{ backgroundColor: "#16a34a" }}
         whileHover={!isAnimating && !added ? { scale: 1.02 } : {}}
         whileTap={!isAnimating && !added ? { scale: 0.98 } : {}}
         animate={{
-          backgroundColor: added ? "#16a34a" : "#d97706"
+          backgroundColor: added ? "#15803d" : "#16a34a"
         }}
         transition={{ duration: 0.4, ease: "easeInOut" }}
       >

@@ -21,7 +21,7 @@ export default async function Home() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/products"
-                className="inline-flex items-center justify-center px-6 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition font-semibold"
+                className="inline-flex items-center justify-center px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold"
               >
                 Поръчай сега
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -61,7 +61,7 @@ export default async function Home() {
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <Link
               href="/products"
-              className="bg-gradient-to-br animate-gradient transition-all from-amber-300 via-amber-500 to-amber-700 rounded-xl p-8 shadow-lg hover:shadow-xl text-white"
+              className="bg-gradient-to-br animate-gradient transition-all from-green-300 via-green-500 to-green-700 rounded-xl p-8 shadow-lg hover:shadow-xl text-white"
             >
               <div className="flex items-center justify-center w-16 h-16 bg-white/20 rounded-lg mb-6">
                 <Grid3x3 className="h-8 w-8 text-white" />
@@ -81,16 +81,16 @@ export default async function Home() {
               href="/products/decorative"
               className="group bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition"
             >
-              <div className="flex items-center justify-center w-16 h-16 bg-amber-100 rounded-lg mb-6">
-                <Package className="h-8 w-8 text-amber-600" />
+              <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-lg mb-6">
+                <Package className="h-8 w-8 text-green-600" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-amber-600 transition">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-green-600 transition">
                 Декоративни изделия
               </h3>
               <p className="text-gray-600 mb-4">
                 Гипсови орнаменти, розетки, корнизи, колони, капители, рамки и 3D панели
               </p>
-              <div className="flex items-center text-amber-600 font-semibold">
+              <div className="flex items-center text-green-600 font-semibold">
                 Разгледай <ArrowRight className="ml-2 h-5 w-5" />
               </div>
             </Link>
@@ -102,13 +102,13 @@ export default async function Home() {
               <div className="flex items-center justify-center w-16 h-16 bg-gray-100 rounded-lg mb-6">
                 <Building2 className="h-8 w-8 text-gray-900" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-amber-600 transition">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-green-600 transition">
                 Строителни изделия
               </h3>
               <p className="text-gray-600 mb-4">
                 Гипсови елементи за стени и тавани, профили, плочи и компоненти за реставрация
               </p>
-              <div className="flex items-center text-amber-600 font-semibold">
+              <div className="flex items-center text-green-600 font-semibold">
                 Разгледай <ArrowRight className="ml-2 h-5 w-5" />
               </div>
             </Link>
@@ -131,7 +131,7 @@ export default async function Home() {
             <div className="text-center mt-12">
               <Link
                 href="/shop"
-                className="inline-flex items-center px-8 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition font-semibold"
+                className="inline-flex items-center px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold"
               >
                 Виж всички продукти
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -168,7 +168,7 @@ export default async function Home() {
               <div key={index} className="bg-white p-6 rounded-xl shadow">
                 <div className="flex mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-amber-500 fill-amber-500" />
+                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-yellow-400" />
                   ))}
                 </div>
                 <p className="text-gray-600 mb-4">{testimonial.text}</p>
@@ -180,7 +180,7 @@ export default async function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-amber-600 text-white">
+      <section className="py-16 bg-green-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Готови за вашия проект?
@@ -190,7 +190,7 @@ export default async function Home() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center px-8 py-3 bg-white text-amber-600 rounded-lg hover:bg-gray-100 transition font-semibold"
+            className="inline-flex items-center px-8 py-3 bg-white text-green-600 rounded-lg hover:bg-gray-100 transition font-semibold"
           >
             Свържи се с нас
             <ArrowRight className="ml-2 h-5 w-5" />

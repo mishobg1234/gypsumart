@@ -68,7 +68,7 @@ export function AdminSidebar() {
       <div className="mb-8">
         <Link href="/" className="block">
           <h2 className="text-2xl font-bold">
-            <span className="text-amber-600">Art</span>BuildShop
+            <span className="text-green-500">Art</span>BuildShop
           </h2>
           <p className="text-gray-400 text-sm">Админ панел</p>
         </Link>
@@ -86,7 +86,7 @@ export function AdminSidebar() {
               href={item.href}
               className={`flex items-center justify-between px-4 py-3 rounded-lg transition ${
                 isActive
-                  ? "bg-amber-600 text-white"
+                  ? "bg-green-600 text-white"
                   : "text-gray-300 hover:bg-gray-800"
               }`}
             >

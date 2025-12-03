@@ -16,7 +16,7 @@ export default async function PagesListPage() {
         actions={
           <Link
             href="/admin/pages/new"
-            className="flex items-center space-x-2 bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition"
+            className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
           >
             <Plus className="h-5 w-5" />
             <span>Добави страница</span>
@@ -35,7 +35,7 @@ export default async function PagesListPage() {
           </p>
           <Link
             href="/admin/pages/new"
-            className="inline-flex items-center space-x-2 bg-amber-600 text-white px-6 py-3 rounded-lg hover:bg-amber-700 transition"
+            className="inline-flex items-center space-x-2 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
           >
             <Plus className="h-5 w-5" />
             <span>Добави страница</span>

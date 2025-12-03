@@ -88,7 +88,7 @@ export function BlogImageUploader({
           </button>
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-12 hover:border-amber-500 transition">
+        <div className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-12 hover:border-green-500 transition">
           <ImagePlus className="h-16 w-16 text-gray-400 mb-4" />
           <h3 className="text-lg font-medium text-gray-700 mb-2">
             Добавете изображение
@@ -114,7 +114,7 @@ export function BlogImageUploader({
             }}
             appearance={{
               button:
-                "whitespace-nowrap bg-amber-600 text-white px-6 py-2.5 rounded-lg hover:bg-amber-700 transition-colors font-medium ut-ready:bg-amber-600 ut-uploading:bg-amber-700 ut-uploading:cursor-not-allowed disabled:bg-gray-300",
+                "whitespace-nowrap bg-green-600 text-white px-6 py-2.5 rounded-lg hover:bg-green-700 transition-colors font-medium ut-ready:bg-green-600 ut-uploading:bg-green-700 ut-uploading:cursor-not-allowed disabled:bg-gray-300",
               allowedContent: "hidden",
             }}
             content={{
@@ -126,7 +126,7 @@ export function BlogImageUploader({
             <button
               type="button"
               onClick={addImageByUrl}
-              className="flex items-center space-x-2 text-amber-600 hover:text-amber-700 text-sm"
+              className="flex items-center space-x-2 text-green-600 hover:text-green-700 text-sm"
             >
               <Upload className="h-4 w-4" />
               <span>Или добавете изображение чрез URL</span>

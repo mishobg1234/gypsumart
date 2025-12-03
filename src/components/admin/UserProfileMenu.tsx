@@ -32,7 +32,7 @@ export function UserProfileMenu({ userId, userName, userEmail, userImage }: User
 
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-full"
+        className="focus:outline-none focus:ring-2 focus:ring-green-500 rounded-full"
       >
         {userImage ? (
           <img
@@ -41,7 +41,7 @@ export function UserProfileMenu({ userId, userName, userEmail, userImage }: User
             className="w-10 h-10 rounded-full"
           />
         ) : (
-          <div className="w-10 h-10 bg-amber-600 rounded-full flex items-center justify-center text-white font-semibold hover:bg-amber-700 transition">
+          <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-semibold hover:bg-green-700 transition">
             <User className="h-5 w-5" />
           </div>
         )}

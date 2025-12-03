@@ -97,7 +97,7 @@ export function RichTextEditor({
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {
-          class: "text-amber-600 underline hover:text-amber-700",
+          class: "text-green-600 underline hover:text-green-700",
         },
       }),
     ],

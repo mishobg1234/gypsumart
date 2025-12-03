@@ -93,7 +93,7 @@ export function OrderStatusForm({ orderId, currentStatus, currentTrackingNumber,
       <button
         type="submit"
         disabled={isPending}
-        className="w-full mt-3 bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition disabled:opacity-50"
+        className="w-full mt-3 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition disabled:opacity-50"
       >
         {isPending ? "Обновява се..." : "Обнови статус"}
       </button>

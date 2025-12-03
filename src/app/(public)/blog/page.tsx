@@ -58,7 +58,7 @@ export default async function BlogPage() {
                       <Calendar className="h-4 w-4 mr-2" />
                       {new Date(post.createdAt).toLocaleDateString("bg-BG")}
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition">
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition">
                       {post.title}
                     </h3>
                     <p className="text-gray-600 line-clamp-3">

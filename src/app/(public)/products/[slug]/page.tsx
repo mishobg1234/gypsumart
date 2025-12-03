@@ -89,7 +89,7 @@ export default async function CategoryProductsPage({
                       {subcategory.description}
                     </p>
                   )}
-                  <p className="text-amber-600 mt-4 text-sm font-medium">
+                  <p className="text-green-600 mt-4 text-sm font-medium">
                     {subcategory.products.length} продукта
                   </p>
                 </Link>

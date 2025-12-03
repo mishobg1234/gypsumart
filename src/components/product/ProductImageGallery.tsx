@@ -180,7 +180,7 @@ export function ProductImageGallery({
               onClick={() => setSelectedIndex(index)}
               className={`relative h-20 bg-gray-100 rounded-lg overflow-hidden transition-all ${
                 index === selectedIndex
-                  ? "ring-2 ring-amber-500 scale-105"
+                  ? "ring-2 ring-green-500 scale-105"
                   : "hover:opacity-75 opacity-60"
               }`}
             >

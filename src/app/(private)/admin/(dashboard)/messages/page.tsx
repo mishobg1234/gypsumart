@@ -30,7 +30,7 @@ export default async function MessagesPage() {
             <div
               key={message.id}
               className={`bg-white rounded-lg shadow p-6 ${
-                !message.read ? "border-l-4 border-amber-500" : ""
+                !message.read ? "border-l-4 border-green-500" : ""
               }`}
             >
               <div className="flex items-start justify-between">
@@ -40,7 +40,7 @@ export default async function MessagesPage() {
                       {message.name}
                     </h3>
                     {!message.read && (
-                      <span className="px-2 py-1 text-xs bg-amber-100 text-amber-800 rounded">
+                      <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded">
                         Ново
                       </span>
                     )}

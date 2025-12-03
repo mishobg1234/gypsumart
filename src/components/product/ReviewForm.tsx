@@ -173,7 +173,7 @@ export function ReviewForm({ productId, productName, onSuccess, onCancel }: Revi
             rows={4}
             value={formData.comment}
             onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             placeholder="Споделете вашето мнение за продукта..."
             disabled={loading}
             minLength={10}
@@ -202,7 +202,7 @@ export function ReviewForm({ productId, productName, onSuccess, onCancel }: Revi
           <button
             type="submit"
             disabled={loading}
-            className="flex-1 bg-amber-600 hover:bg-amber-700 disabled:bg-gray-400 text-white px-6 py-3 rounded-lg font-medium transition"
+            className="flex-1 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-6 py-3 rounded-lg font-medium transition"
           >
             {loading ? "Изпращане..." : "Изпрати отзив"}
           </button>
