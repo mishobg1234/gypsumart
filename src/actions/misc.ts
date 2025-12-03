@@ -35,6 +35,37 @@ export async function createGalleryImage(values: z.infer<typeof GalleryImageSche
   }
 }
 
+export async function updateGalleryImage(
+  id: string,
+  values: z.infer<typeof GalleryImageSchema>
+) {
+  const session = await auth();
+
+  if (!session || session.user.role !== "ADMIN") {
+    return { error: "Неоторизиран достъп!" };
+  }
+
+  const validatedFields = GalleryImageSchema.safeParse(values);
+
+  if (!validatedFields.success) {
+    return { error: "Невалидни данни!" };
+  }
+
+  try {
+    const image = await prisma.galleryImage.update({
+      where: { id },
+      data: validatedFields.data,
+    });
+
+    revalidatePath("/admin/gallery");
+    revalidatePath("/gallery");
+
+    return { success: "Изображението е обновено!", image };
+  } catch (_error) {
+    return { error: "Грешка при обновяване на изображение!" };
+  }
+}
+
 export async function deleteGalleryImage(id: string) {
   const session = await auth();
 
@@ -68,6 +99,18 @@ export async function getGalleryImages(category?: string) {
     return images;
   } catch (_error) {
     return [];
+  }
+}
+
+export async function getGalleryImageById(id: string) {
+  try {
+    const image = await prisma.galleryImage.findUnique({
+      where: { id },
+    });
+
+    return image;
+  } catch (_error) {
+    return null;
   }
 }
 

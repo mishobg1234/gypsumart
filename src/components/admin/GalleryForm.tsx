@@ -2,16 +2,27 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createGalleryImage } from "@/actions/misc";
+import { createGalleryImage, updateGalleryImage } from "@/actions/misc";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { GalleryImageUploader } from "./GalleryImageUploader";
 
-export function GalleryForm() {
+interface GalleryFormProps {
+  initialData?: {
+    id: string;
+    title: string;
+    description: string | null;
+    image: string;
+    category: string | null;
+    featured: boolean;
+  };
+}
+
+export function GalleryForm({ initialData }: GalleryFormProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(initialData?.image || null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,7 +45,9 @@ export function GalleryForm() {
       featured: formData.get("featured") === "on",
     };
 
-    const result = await createGalleryImage(data);
+    const result = initialData 
+      ? await updateGalleryImage(initialData.id, data)
+      : await createGalleryImage(data);
 
     if (result.error) {
       setError(result.error);
@@ -68,6 +81,7 @@ export function GalleryForm() {
               type="text"
               name="title"
               required
+              defaultValue={initialData?.title}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
           </div>
@@ -79,6 +93,7 @@ export function GalleryForm() {
             <textarea
               name="description"
               rows={3}
+              defaultValue={initialData?.description || ""}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
           </div>
@@ -100,6 +115,7 @@ export function GalleryForm() {
             <input
               type="text"
               name="category"
+              defaultValue={initialData?.category || ""}
               placeholder="напр. Таван, Стена, Декорация"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
@@ -110,6 +126,7 @@ export function GalleryForm() {
               <input
                 type="checkbox"
                 name="featured"
+                defaultChecked={initialData?.featured}
                 className="w-4 h-4 text-amber-600 border-gray-300 rounded focus:ring-amber-500"
               />
               <span className="ml-2 text-sm text-gray-700">Препоръчано изображение</span>
@@ -132,7 +149,7 @@ export function GalleryForm() {
           disabled={isLoading}
           className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition disabled:opacity-50"
         >
-          {isLoading ? "Запазване..." : "Добави изображение"}
+          {isLoading ? "Запазване..." : initialData ? "Обнови изображение" : "Добави изображение"}
         </button>
       </div>
     </form>

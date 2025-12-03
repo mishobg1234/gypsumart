@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Plus, Image as ImageIcon } from "lucide-react";
+import { Plus, Image as ImageIcon, Edit } from "lucide-react";
 import { getGalleryImages, deleteGalleryImage } from "@/actions/misc";
 import { PageHeader } from "@/components/admin/PageHeader";
 import { DeleteButton } from "@/components/admin/DeleteButton";
@@ -76,14 +76,21 @@ export default async function GalleryPage() {
                   </span>
                 )}
               </div>
-              <div className="px-4 pb-4">
+              <div className="px-4 pb-4 flex items-center space-x-2">
+                <Link
+                  href={`/admin/gallery/${image.id}`}
+                  className="flex-1 flex items-center justify-center space-x-2 text-blue-600 hover:text-blue-900 border border-blue-300 hover:border-blue-500 px-3 py-2 rounded transition"
+                >
+                  <Edit className="h-4 w-4" />
+                  <span>Редактирай</span>
+                </Link>
                 <DeleteButton
                   id={image.id}
                   action={deleteGalleryImage}
                   confirmTitle="Изтриване на изображение"
                   confirmMessage="Сигурни ли сте, че искате да изтриете това изображение?"
-                  iconOnly={false}
-                  className="w-full flex items-center justify-center space-x-2 text-red-600 hover:text-red-900 border border-red-300 hover:border-red-500 px-3 py-2 rounded transition"
+                  iconOnly={true}
+                  className="text-red-600 hover:text-red-900 border border-red-300 hover:border-red-500 p-2 rounded transition"
                 />
               </div>
             </div>
