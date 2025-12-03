@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Package } from "lucide-react";
 import { formatPriceHTML } from "@/lib/currency";
+import { useCart } from "@/contexts/CartContext";
+import { useState } from "react";
 
 interface ProductCardProps {
   product: {
@@ -25,6 +29,8 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const images = JSON.parse(product.images) as string[];
+  const { addItem } = useCart();
+  const [isAdding, setIsAdding] = useState(false);
   
   // Calculate average rating
   const averageRating =
@@ -34,6 +40,26 @@ export function ProductCard({ product }: ProductCardProps) {
       : 0;
 
   const reviewCount = product._count?.reviews || product.reviews?.length || 0;
+
+  const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (!product.inStock || isAdding) return;
+    
+    setIsAdding(true);
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: images[0] || "",
+      slug: product.slug,
+    });
+    
+    setTimeout(() => {
+      setIsAdding(false);
+    }, 500);
+  };
 
   return (
     <Link
@@ -116,9 +142,19 @@ export function ProductCard({ product }: ProductCardProps) {
               </p>
             )}
           </div>
-          <span className="bg-green-600 text-white px-4 py-2 rounded-lg group-hover:bg-green-700 transition text-sm font-medium">
-            Поръчай
-          </span>
+          <button
+            onClick={handleAddToCart}
+            disabled={!product.inStock || isAdding}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
+              !product.inStock
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : isAdding
+                ? "bg-green-700 text-white"
+                : "bg-green-600 text-white hover:bg-green-700"
+            }`}
+          >
+            {isAdding ? "Добавен!" : "Поръчай"}
+          </button>
         </div>
       </div>
     </Link>
