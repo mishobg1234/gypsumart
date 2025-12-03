@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Plus, Edit, FileText } from "lucide-react";
+import { Plus, Edit, FileText, Eye } from "lucide-react";
 import { getBlogPosts, deleteBlogPost } from "@/actions/blog";
 import { PageHeader } from "@/components/admin/PageHeader";
 import { DeleteButton } from "@/components/admin/DeleteButton";
@@ -103,9 +103,21 @@ export default async function BlogPage() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex items-center space-x-2">
+                      {post.published && (
+                        <Link
+                          href={`/blog/${post.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-green-600 hover:text-green-900"
+                          title="Виж публикацията"
+                        >
+                          <Eye className="h-4 w-4" />
+                        </Link>
+                      )}
                       <Link
                         href={`/admin/blog/${post.id}`}
                         className="text-blue-600 hover:text-blue-900"
+                        title="Редактирай"
                       >
                         <Edit className="h-4 w-4" />
                       </Link>
