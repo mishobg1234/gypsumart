@@ -1,4 +1,5 @@
 import { getGalleryImages } from "@/actions/misc";
+import Image from "next/image";
 
 export default async function GalleryPage() {
   const images = await getGalleryImages();
@@ -35,6 +36,12 @@ export default async function GalleryPage() {
                   key={image.id}
                   className="group relative aspect-square bg-gray-100 rounded-lg overflow-hidden hover:shadow-lg transition"
                 >
+                  <Image
+                    src={image.image}
+                    alt={image.title}
+                    fill
+                    className="object-cover"
+                  />
                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition flex items-end p-4">
                     <div className="text-white opacity-0 group-hover:opacity-100 transition">
                       <h3 className="font-semibold">{image.title}</h3>
