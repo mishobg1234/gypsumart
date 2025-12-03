@@ -23,12 +23,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="bg" suppressHydrationWarning={true}>
-      <body className={`${montserrat.variable} font-montserrat bg-white text-neutral-dark`}>
+    <html lang="bg" suppressHydrationWarning={true} className="overflow-x-hidden">
+      <body className={`${montserrat.variable} font-montserrat bg-white text-neutral-dark overflow-x-hidden`}>
         <CartProvider>
-          <div className="flex flex-col min-h-screen">
+          <div className="flex flex-col min-h-screen overflow-x-hidden">
             <Header />
-            <main className="flex-grow">{children}</main>
+            <main className="flex-grow overflow-x-hidden">{children}</main>
             <Footer />
           </div>
         </CartProvider>

@@ -125,7 +125,7 @@ export default function CheckoutPage() {
         <div className="mb-8">
           <Link
             href="/cart"
-            className="inline-flex items-center text-gray-600 hover:text-amber-600 transition"
+            className="inline-flex items-center text-gray-600 hover:text-green-600 transition"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Назад към кошницата
@@ -154,7 +154,7 @@ export default function CheckoutPage() {
                       required
                       value={formData.fullName}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                       placeholder="Иван Иванов"
                     />
                   </div>
@@ -169,7 +169,7 @@ export default function CheckoutPage() {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                       placeholder="ivan@example.com"
                     />
                   </div>
@@ -184,7 +184,7 @@ export default function CheckoutPage() {
                       required
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                       placeholder="+359 888 123 456"
                     />
                   </div>
@@ -203,25 +203,25 @@ export default function CheckoutPage() {
                       Куриер *
                     </label>
                     <div className="grid grid-cols-2 gap-4">
-                      <label className="flex items-center p-4 border-2 rounded-lg cursor-pointer hover:border-amber-500 transition">
+                      <label className="flex items-center p-4 border-2 rounded-lg cursor-pointer hover:border-green-500 transition">
                         <input
                           type="radio"
                           name="courier"
                           value="speedy"
                           checked={formData.courier === "speedy"}
                           onChange={handleChange}
-                          className="w-4 h-4 text-amber-600 focus:ring-amber-500"
+                          className="w-4 h-4 text-green-600 focus:ring-green-500"
                         />
                         <span className="ml-3 font-medium">Спиди</span>
                       </label>
-                      <label className="flex items-center p-4 border-2 rounded-lg cursor-pointer hover:border-amber-500 transition">
+                      <label className="flex items-center p-4 border-2 rounded-lg cursor-pointer hover:border-green-500 transition">
                         <input
                           type="radio"
                           name="courier"
                           value="econt"
                           checked={formData.courier === "econt"}
                           onChange={handleChange}
-                          className="w-4 h-4 text-amber-600 focus:ring-amber-500"
+                          className="w-4 h-4 text-green-600 focus:ring-green-500"
                         />
                         <span className="ml-3 font-medium">Еконт</span>
                       </label>
@@ -234,25 +234,25 @@ export default function CheckoutPage() {
                       Метод на доставка *
                     </label>
                     <div className="grid grid-cols-2 gap-4">
-                      <label className="flex items-center p-4 border-2 rounded-lg cursor-pointer hover:border-amber-500 transition">
+                      <label className="flex items-center p-4 border-2 rounded-lg cursor-pointer hover:border-green-500 transition">
                         <input
                           type="radio"
                           name="deliveryMethod"
                           value="office"
                           checked={formData.deliveryMethod === "office"}
                           onChange={handleChange}
-                          className="w-4 h-4 text-amber-600 focus:ring-amber-500"
+                          className="w-4 h-4 text-green-600 focus:ring-green-500"
                         />
                         <span className="ml-3 font-medium">До офис</span>
                       </label>
-                      <label className="flex items-center p-4 border-2 rounded-lg cursor-pointer hover:border-amber-500 transition">
+                      <label className="flex items-center p-4 border-2 rounded-lg cursor-pointer hover:border-green-500 transition">
                         <input
                           type="radio"
                           name="deliveryMethod"
                           value="address"
                           checked={formData.deliveryMethod === "address"}
                           onChange={handleChange}
-                          className="w-4 h-4 text-amber-600 focus:ring-amber-500"
+                          className="w-4 h-4 text-green-600 focus:ring-green-500"
                         />
                         <span className="ml-3 font-medium">До адрес</span>
                       </label>
@@ -271,7 +271,7 @@ export default function CheckoutPage() {
                         required={formData.deliveryMethod === "office"}
                         value={formData.office}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                         placeholder="Например: София, бул. Витоша 1"
                       />
                     </div>
@@ -290,7 +290,7 @@ export default function CheckoutPage() {
                           required={formData.deliveryMethod === "address"}
                           value={formData.city}
                           onChange={handleChange}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                           placeholder="София"
                         />
                       </div>
@@ -305,7 +305,7 @@ export default function CheckoutPage() {
                           required={formData.deliveryMethod === "address"}
                           value={formData.address}
                           onChange={handleChange}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                           placeholder="ул. Примерна 123, ап. 45"
                         />
                       </div>
@@ -319,7 +319,7 @@ export default function CheckoutPage() {
                           name="postalCode"
                           value={formData.postalCode}
                           onChange={handleChange}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                           placeholder="1000"
                         />
                       </div>
@@ -336,7 +336,7 @@ export default function CheckoutPage() {
                       rows={4}
                       value={formData.notes}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                       placeholder="Допълнителна информация..."
                     />
                   </div>
@@ -348,14 +348,14 @@ export default function CheckoutPage() {
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">
                   Начин на плащане
                 </h2>
-                <div className="flex items-center p-4 bg-amber-50 border-2 border-amber-600 rounded-lg">
+                <div className="flex items-center p-4 bg-green-50 border-2 border-green-600 rounded-lg">
                   <input
                     type="radio"
                     name="payment"
                     value="cod"
                     checked
                     readOnly
-                    className="w-4 h-4 text-amber-600"
+                    className="w-4 h-4 text-green-600"
                   />
                   <div className="ml-3">
                     <p className="font-semibold text-gray-900">
@@ -377,7 +377,7 @@ export default function CheckoutPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-amber-600 text-white px-8 py-4 rounded-lg hover:bg-amber-700 transition font-semibold text-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                className="w-full bg-green-600 text-white px-8 py-4 rounded-lg hover:bg-green-700 transition font-semibold text-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
               >
                 {loading ? (
                   <>
@@ -425,7 +425,7 @@ export default function CheckoutPage() {
                 </div>
                 <div className="flex justify-between text-xl font-bold pt-2 border-t">
                   <span>Обща сума</span>
-                  <span className="text-amber-600">{formatPriceHTML(finalTotal).full}</span>
+                  <span className="text-green-600">{formatPriceHTML(finalTotal).full}</span>
                 </div>
               </div>
 
@@ -435,11 +435,11 @@ export default function CheckoutPage() {
                     ✓ Безплатна доставка
                   </p>
                   <p className="text-sm text-green-700">
-                    Поръчката ви е над {formatPriceHTML(FREE_DELIVERY_THRESHOLD).bgn} и получавате безплатна доставка!
+                    Поръчката ви е над {formatPriceHTML(FREE_DELIVERY_THRESHOLD).full} и получавате безплатна доставка!
                   </p>
                 </div>
               ) : (
-                <div className="mt-6 p-4 bg-amber-50 rounded-lg border border-amber-200">
+                <div className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
                   <p className="text-sm text-gray-700 mb-2">
                     <span className="font-semibold">ℹ️ Информация за доставка:</span>
                   </p>
