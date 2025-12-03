@@ -103,12 +103,12 @@ export function NotificationDropdown({
           <div className="flex items-center justify-between p-4 border-b">
             <h3 className="font-semibold text-gray-900">Известия</h3>
             <div className="flex items-center gap-2">
-              {unreadCount > 0 && (
+              {notifications.length > 0 && (
                 <button
                   onClick={handleMarkAllAsRead}
-                  className="text-xs text-amber-600 hover:text-amber-700 font-medium"
+                  className="text-xs text-amber-600 hover:text-amber-700 font-medium px-3 py-1.5 border border-amber-300 rounded-md hover:bg-amber-50 transition"
                 >
-                  Маркирай всички
+                  {unreadCount > 0 ? "Прочети всички" : "Всички прочетени"}
                 </button>
               )}
               <button
