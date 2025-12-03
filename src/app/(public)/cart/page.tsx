@@ -76,12 +76,12 @@ export default function CartPage() {
             {items.map((item) => (
               <div
                 key={item.id}
-                className="bg-white rounded-lg shadow-md p-6 flex items-center gap-6"
+                className="bg-white rounded-lg shadow-md p-4 md:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4"
               >
                 {/* Image */}
-                <Link href={`/product/${item.slug}`} className="flex-shrink-0">
+                <Link href={`/product/${item.slug}`} className="flex-shrink-0 w-full sm:w-auto">
                   {item.image ? (
-                    <div className="relative w-24 h-24 bg-gray-100 rounded-lg overflow-hidden">
+                    <div className="relative w-full sm:w-24 h-48 sm:h-24 bg-gray-100 rounded-lg overflow-hidden">
                       <Image
                         src={item.image}
                         alt={item.name}
@@ -90,17 +90,17 @@ export default function CartPage() {
                       />
                     </div>
                   ) : (
-                    <div className="w-24 h-24 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <div className="w-full sm:w-24 h-48 sm:h-24 bg-gray-100 rounded-lg flex items-center justify-center">
                       <ShoppingBag className="h-12 w-12 text-gray-400" />
                     </div>
                   )}
                 </Link>
 
                 {/* Info */}
-                <div className="flex-1">
+                <div className="flex-1 min-w-0 w-full">
                   <Link
                     href={`/product/${item.slug}`}
-                    className="text-lg font-semibold text-gray-900 hover:text-green-600 transition"
+                    className="text-base md:text-lg font-semibold text-gray-900 hover:text-green-600 transition block truncate"
                   >
                     {item.name}
                   </Link>
@@ -109,39 +109,42 @@ export default function CartPage() {
                   </p>
                 </div>
 
-                {/* Quantity */}
-                <div className="flex items-center gap-3">
+                {/* Quantity and Actions */}
+                <div className="flex items-center justify-between w-full sm:w-auto gap-4">
+                  {/* Quantity */}
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-300 hover:bg-gray-100 transition"
+                    >
+                      <Minus className="h-4 w-4" />
+                    </button>
+                    <span className="w-12 text-center font-semibold">
+                      {item.quantity}
+                    </span>
+                    <button
+                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-300 hover:bg-gray-100 transition"
+                    >
+                      <Plus className="h-4 w-4" />
+                    </button>
+                  </div>
+
+                  {/* Subtotal */}
+                  <div className="text-right">
+                    <p className="text-base md:text-lg font-bold text-gray-900 whitespace-nowrap">
+                      {formatPriceHTML(item.price * item.quantity).full}
+                    </p>
+                  </div>
+
+                  {/* Remove */}
                   <button
-                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-300 hover:bg-gray-100 transition"
+                    onClick={() => removeItem(item.id)}
+                    className="text-red-600 hover:text-red-700 transition"
                   >
-                    <Minus className="h-4 w-4" />
-                  </button>
-                  <span className="w-12 text-center font-semibold">
-                    {item.quantity}
-                  </span>
-                  <button
-                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-300 hover:bg-gray-100 transition"
-                  >
-                    <Plus className="h-4 w-4" />
+                    <Trash2 className="h-5 w-5" />
                   </button>
                 </div>
-
-                {/* Subtotal */}
-                <div className="text-right min-w-[120px]">
-                  <p className="text-lg font-bold text-gray-900">
-                    {formatPriceHTML(item.price * item.quantity).full}
-                  </p>
-                </div>
-
-                {/* Remove */}
-                <button
-                  onClick={() => removeItem(item.id)}
-                  className="text-red-600 hover:text-red-700 transition"
-                >
-                  <Trash2 className="h-5 w-5" />
-                </button>
               </div>
             ))}
           </div>
