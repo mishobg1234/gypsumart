@@ -8,7 +8,7 @@ import { PageHeader } from "@/components/admin/PageHeader";
 
 interface Banner {
   id: string;
-  title: string;
+  title: string | null;
   description: string | null;
   images: string;
   buttonText: string | null;
@@ -62,7 +62,7 @@ export default async function BannersPage() {
                 <div className="relative h-48 bg-gray-100">
                   <Image
                     src={firstImage}
-                    alt={banner.title}
+                    alt={banner.title || "Banner"}
                     fill
                     className="object-cover"
                   />
