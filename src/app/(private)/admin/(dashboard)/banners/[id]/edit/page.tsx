@@ -17,17 +17,11 @@ export default async function EditBannerPage({ params }: EditBannerPageProps) {
 
   return (
     <div className="space-y-6">
-      <Breadcrumb
-        items={[
-          { label: "Начало", href: "/admin" },
-          { label: "Банери", href: "/admin/banners" },
-          { label: banner.title },
-        ]}
-      />
+      <Breadcrumb customLabel={banner.title || "Редактирай банер"} />
 
       <h1 className="text-3xl font-bold text-gray-900">Редактирай банер</h1>
 
-      <BannerForm banner={banner} />
+      <BannerForm banner={banner as any} />
     </div>
   );
 }
