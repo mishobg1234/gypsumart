@@ -1,13 +1,21 @@
 import Link from "next/link";
 import { ArrowRight, Package, Building2, Star, Grid3x3 } from "lucide-react";
 import { getFeaturedProducts } from "@/actions/products";
+import { getActiveBanners } from "@/actions/banners";
 import { ProductCard } from "@/components/product";
+import { BannerSlider } from "@/components/home/BannerSlider";
 
 export default async function Home() {
-  const featuredProducts = await getFeaturedProducts();
+  const [featuredProducts, banners] = await Promise.all([
+    getFeaturedProducts(),
+    getActiveBanners(),
+  ]);
 
   return (
     <div className="bg-white">
+      {/* Banner Slider */}
+      {banners.length > 0 && <BannerSlider banners={banners} />}
+
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-gray-50 to-gray-100 py-20 md:py-32">
         <div className="container mx-auto px-4">

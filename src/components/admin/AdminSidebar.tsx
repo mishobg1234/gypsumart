@@ -16,7 +16,8 @@ import {
   Star,
   Users,
   LogOut,
-  File
+  File,
+  Monitor
 } from "lucide-react";
 
 interface UnreadCounts {
@@ -48,6 +49,7 @@ export function AdminSidebar() {
 
   const menuItems = [
     { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard, badge: null },
+    { href: "/admin/banners", label: "Банери", icon: Monitor, badge: null },
     { href: "/admin/products", label: "Продукти", icon: Package, badge: null },
     { href: "/admin/categories", label: "Категории", icon: FolderTree, badge: null },
     { href: "/admin/orders", label: "Поръчки", icon: ShoppingCart, badge: "orders" as const },
