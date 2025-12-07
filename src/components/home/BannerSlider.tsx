@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Banner {
   id: string;
-  title: string;
+  title: string | null;
   description: string | null;
   images: string; // JSON string
   buttonText: string | null;
@@ -22,7 +22,7 @@ interface BannerSliderProps {
 
 interface BannerSlide {
   bannerId: string;
-  title: string;
+  title: string | null;
   description: string | null;
   image: string;
   buttonText: string | null;
@@ -101,7 +101,7 @@ export function BannerSlider({ banners }: BannerSliderProps) {
           <div className="absolute inset-0">
             <Image
               src={slide.image}
-              alt={slide.title}
+              alt={slide.title || "Banner"}
               fill
               className="object-cover"
               priority={index === 0}
@@ -114,7 +114,7 @@ export function BannerSlider({ banners }: BannerSliderProps) {
             <div className="container mx-auto px-4">
               <div className="max-w-2xl text-white">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">
-                  {slide.title}
+                  {slide.title || ""}
                 </h1>
                 {slide.description && (
                   <p className="text-lg md:text-xl mb-6 md:mb-8 text-gray-100">
