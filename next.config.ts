@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
     },
   },
   transpilePackages: ['@uploadthing/react', '@uploadthing/shared', '@uploadthing/mime-types'],
-  serverExternalPackages: ['@uploadthing/react', '@uploadthing/shared', '@uploadthing/mime-types'],
+  serverExternalPackages: ['uploadthing'],
 };
 
 export default nextConfig;
