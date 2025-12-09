@@ -14,8 +14,8 @@ const nextConfig: NextConfig = {
       bodySizeLimit: '2mb',
     },
   },
-  transpilePackages: ['@uploadthing/react', '@uploadthing/shared', '@uploadthing/mime-types'],
-  serverExternalPackages: ['uploadthing'],
+  // transpilePackages: ['@uploadthing/react', '@uploadthing/shared', '@uploadthing/mime-types'],
+  // serverExternalPackages: ['uploadthing'],
 };
 
 export default nextConfig;
