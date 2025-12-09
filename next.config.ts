@@ -13,16 +13,9 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: '2mb',
     },
+    turbo: {},
   },
   transpilePackages: ['@uploadthing/react', '@uploadthing/shared', '@uploadthing/mime-types'],
-  webpack: (config) => {
-    config.resolve.extensionAlias = {
-      '.js': ['.ts', '.tsx', '.js', '.jsx'],
-      '.mjs': ['.mts', '.mjs'],
-      '.cjs': ['.cts', '.cjs'],
-    };
-    return config;
-  },
 };
 
 export default nextConfig;
