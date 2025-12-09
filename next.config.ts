@@ -13,7 +13,6 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: '2mb',
     },
-    turbo: {},
   },
   transpilePackages: ['@uploadthing/react', '@uploadthing/shared', '@uploadthing/mime-types'],
 };
