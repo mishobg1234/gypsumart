@@ -8,11 +8,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="bg">
-      <body>
-        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-        {children}
-      </body>
-    </html>
+    <>
+      <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+      {children}
+    </>
   );
 }
