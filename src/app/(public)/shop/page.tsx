@@ -3,11 +3,28 @@ import { getProducts } from "@/actions/products";
 import { getCategories } from "@/actions/categories";
 import { ProductCard } from "@/components/product";
 
-export default async function ShopPage() {
-  const [products, categories] = await Promise.all([
-    getProducts(),
+interface ShopPageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function ShopPage({ searchParams }: ShopPageProps) {
+  const params = await searchParams;
+  const searchQuery = typeof params.search === "string" ? params.search : undefined;
+  const categorySlug = typeof params.category === "string" ? params.category : undefined;
+
+  const [allProducts, categories] = await Promise.all([
+    getProducts(undefined, searchQuery),
     getCategories(),
   ]);
+
+  // Филтриране по категория ако има
+  let products = allProducts;
+  if (categorySlug && !searchQuery) {
+    const category = categories.find((cat) => cat.slug === categorySlug);
+    if (category) {
+      products = allProducts.filter((product) => product.categoryId === category.id);
+    }
+  }
 
   return (
     <div className="bg-white">
@@ -16,10 +33,12 @@ export default async function ShopPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Онлайн магазин
+              {searchQuery ? `Резултати за "${searchQuery}"` : "Онлайн магазин"}
             </h1>
             <p className="text-xl text-gray-600">
-              Разгледайте нашата богата колекция от гипсови изделия
+              {searchQuery
+                ? `Намерени ${products.length} ${products.length === 1 ? "продукт" : "продукта"}`
+                : "Разгледайте нашата богата колекция от гипсови изделия"}
             </p>
           </div>
         </div>
@@ -28,24 +47,46 @@ export default async function ShopPage() {
       {/* Products */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          {/* Categories Filter */}
-          <div className="mb-8 flex flex-wrap gap-2">
-            <Link
-              href="/shop"
-              className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition"
-            >
-              Всички
-            </Link>
-            {categories.map((category) => (
+          {/* Categories Filter - скриваме го при търсене */}
+          {!searchQuery && (
+            <div className="mb-8 flex flex-wrap gap-2">
               <Link
-                key={category.id}
-                href={`/shop?category=${category.slug}`}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition"
+                href="/shop"
+                className={`px-4 py-2 rounded-lg transition ${
+                  !categorySlug
+                    ? "bg-green-600 text-white hover:bg-green-700"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
               >
-                {category.name}
+                Всички
               </Link>
-            ))}
-          </div>
+              {categories.map((category) => (
+                <Link
+                  key={category.id}
+                  href={`/shop?category=${category.slug}`}
+                  className={`px-4 py-2 rounded-lg transition ${
+                    categorySlug === category.slug
+                      ? "bg-green-600 text-white hover:bg-green-700"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  {category.name}
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {/* Бутон за изчистване на търсенето */}
+          {searchQuery && (
+            <div className="mb-8">
+              <Link
+                href="/shop"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition"
+              >
+                ← Назад към всички продукти
+              </Link>
+            </div>
+          )}
 
           {/* Products Grid */}
           {products.length === 0 ? (

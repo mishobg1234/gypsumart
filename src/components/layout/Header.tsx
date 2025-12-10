@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { Search } from "lucide-react";
 import { getNavbarPages } from "@/actions/pages";
 import { CartIcon } from "./CartIcon";
 import { HeaderClient } from "./HeaderClient";
 import { TopNavLinks } from "./TopNavLinks";
+import { SearchBar } from "./SearchBar";
 
 export async function Header() {
   const navbarPages = await getNavbarPages();
@@ -40,14 +40,7 @@ export async function Header() {
                - px-X = padding horizontal (px-0, px-4, px-8, px-12)
           */}
           <div className="absolute left-1/2 transform -translate-x-1/2 max-w-lg hidden md:block">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Търсене на продукти..."
-                className="w-full px-4 py-2 pl-10 pr-20 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-900 placeholder:text-gray-500"
-              />
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-            </div>
+            <SearchBar />
           </div>
           
           {/* Top Navigation Links - За нас и Контакти */}
@@ -61,14 +54,7 @@ export async function Header() {
 
         {/* Mobile Search Bar */}
         <div className="md:hidden py-3 border-b border-gray-200">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Търсене на продукти..."
-              className="w-full px-4 py-2 pl-10 pr-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-900 placeholder:text-gray-500"
-            />
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-          </div>
+          <SearchBar isMobile />
         </div>
 
         {/* Navigation Bar - Client Component */}

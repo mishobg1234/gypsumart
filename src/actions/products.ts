@@ -103,10 +103,39 @@ export async function deleteProduct(id: string) {
   }
 }
 
-export async function getProducts(categoryId?: string) {
+export async function getProducts(categoryId?: string, searchQuery?: string) {
   try {
+    const where: any = {};
+
+    if (categoryId) {
+      where.categoryId = categoryId;
+    }
+
+    if (searchQuery && searchQuery.trim().length > 0) {
+      where.OR = [
+        {
+          name: {
+            contains: searchQuery.trim(),
+            mode: "insensitive",
+          },
+        },
+        {
+          description: {
+            contains: searchQuery.trim(),
+            mode: "insensitive",
+          },
+        },
+        {
+          shortDescription: {
+            contains: searchQuery.trim(),
+            mode: "insensitive",
+          },
+        },
+      ];
+    }
+
     const products = await prisma.product.findMany({
-      where: categoryId ? { categoryId } : {},
+      where,
       include: {
         category: true,
         reviews: {
