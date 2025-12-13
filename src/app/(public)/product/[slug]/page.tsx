@@ -117,6 +117,13 @@ export default async function ProductPage({
                 {product.name}
               </h1>
               
+              {/* SKU */}
+              {product.sku && (
+                <p className="text-sm text-gray-600 mb-4">
+                  Артикул: <span className="font-medium">{product.sku}</span>
+                </p>
+              )}
+              
               {/* Rating */}
               {product.reviews.length > 0 && (
                 <div className="flex items-center mb-4">
@@ -143,6 +150,28 @@ export default async function ProductPage({
               )}
             </div>
 
+            {/* Stock */}
+            <div className="mb-6">
+              {product.inStock ? (
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                  В наличност
+                </span>
+              ) : (
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                  Изчерпан
+                </span>
+              )}
+            </div>
+
+            {/* Short Description */}
+            {product.shortDescription && (
+              <div className="mb-6">
+                <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                  {product.shortDescription}
+                </p>
+              </div>
+            )}
+
             {/* Price */}
             <div className="mb-6">
               <div className="flex items-baseline space-x-4">
@@ -165,28 +194,6 @@ export default async function ProductPage({
               )}
             </div>
 
-            {/* Stock */}
-            <div className="mb-6">
-              {product.inStock ? (
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                  В наличност
-                </span>
-              ) : (
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                  Изчерпан
-                </span>
-              )}
-            </div>
-
-            {/* SKU */}
-            {product.sku && (
-              <div className="mb-6">
-                <p className="text-sm text-gray-600">
-                  Артикул: <span className="font-medium">{product.sku}</span>
-                </p>
-              </div>
-            )}
-
             {/* Actions */}
             <AddToCartButton
               product={{
@@ -204,15 +211,6 @@ export default async function ProductPage({
                 страницата за контакти
               </Link>
             </p>
-            
-            {/* Short Description */}
-            {product.shortDescription && (
-              <div className="mt-6">
-                <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-                  {product.shortDescription}
-                </p>
-              </div>
-            )}
           </div>
         </div>
 
