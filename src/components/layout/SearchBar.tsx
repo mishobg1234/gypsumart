@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, X } from "lucide-react";
+import { Search, SearchIcon, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -94,13 +94,17 @@ export function SearchBar({ isMobile = false }: SearchBarProps) {
     setResults([]);
   };
 
+  const handleSearch = () => {
+    query.trim().length >= 2 && router.push(`/shop?search=${encodeURIComponent(query.trim())}`);
+    setIsOpen(false);
+  }
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Escape") {
       setIsOpen(false);
     } else if (e.key === "Enter" && query.trim().length >= 2) {
       // Препраща към страница с резултати от търсенето
-      router.push(`/shop?search=${encodeURIComponent(query.trim())}`);
-      setIsOpen(false);
+      handleSearch();
     }
   };
 

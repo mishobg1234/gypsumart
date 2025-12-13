@@ -60,11 +60,6 @@ export async function Footer() {
             <h4 className="text-white font-semibold mb-4">Информация</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/about" className="hover:text-green-600 transition">
-                  За нас
-                </Link>
-              </li>
-              <li>
                 <Link href="/contact" className="hover:text-green-600 transition">
                   Контакти
                 </Link>
