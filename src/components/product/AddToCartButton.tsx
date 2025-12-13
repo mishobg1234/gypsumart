@@ -17,7 +17,7 @@ interface AddToCartButtonProps {
 
 export function AddToCartButton({ product }: AddToCartButtonProps) {
   const { addItem } = useCart();
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState<number>(1);
   const [added, setAdded] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -50,7 +50,6 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
             -
           </button>
           <input
-            type="number"
             min="1"
             value={quantity}
             onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}

@@ -5,6 +5,7 @@ import { Users, UserCheck, UserPlus } from "lucide-react";
 import { PageHeader } from "@/components/admin/PageHeader";
 import { UserActionsMenu } from "@/components/admin/UserActionsMenu";
 import { CreateUserForm } from "@/components/admin/CreateUserForm";
+import Image from "next/image";
 
 interface User {
   id: string;
@@ -109,10 +110,12 @@ export function UsersPageClient({ users, currentUserId }: UsersPageClientProps) 
                     <div className="flex items-center">
                       <div className="flex-shrink-0 h-10 w-10">
                         {user.image ? (
-                          <img
+                          <Image
                             className="h-10 w-10 rounded-full"
                             src={user.image}
-                            alt=""
+                            alt={user.name || user.username || "Потребител"}
+                            width={256}
+                            height={256}
                           />
                         ) : (
                           <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">

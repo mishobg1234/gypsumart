@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { formatPrice } from "@/lib/currency";
+import Image from "next/image";
 
 interface SearchResult {
   id: string;
@@ -149,9 +150,11 @@ export function SearchBar({ isMobile = false }: SearchBarProps) {
             >
               {product.image ? (
                 <div className="relative w-16 h-16 flex-shrink-0 bg-gray-100 rounded">
-                  <img
+                  <Image
                     src={product.image}
                     alt={product.name}
+                    width={256}
+                    height={256}
                     className="w-full h-full object-cover rounded"
                   />
                 </div>

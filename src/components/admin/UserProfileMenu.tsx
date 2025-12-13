@@ -4,6 +4,7 @@ import { useState } from "react";
 import { User, Key, LogOut } from "lucide-react";
 import Link from "next/link";
 import { logout } from "@/actions/auth";
+import Image from "next/image";
 
 interface UserProfileMenuProps {
   userId: string;
@@ -35,9 +36,11 @@ export function UserProfileMenu({ userId, userName, userEmail, userImage }: User
         className="focus:outline-none focus:ring-2 focus:ring-green-500 rounded-full"
       >
         {userImage ? (
-          <img
+          <Image
             src={userImage}
             alt={userName}
+            width={256}
+            height={256}
             className="w-10 h-10 rounded-full"
           />
         ) : (
