@@ -96,9 +96,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
               defaultValue={product?.name}
               onChange={(e) => {
                 const slugInput = document.getElementsByName("slug")[0] as HTMLInputElement;
-                if (!product) {
-                  slugInput.value = generateSlug(e.target.value);
-                }
+                slugInput.value = generateSlug(e.target.value);
               }}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
