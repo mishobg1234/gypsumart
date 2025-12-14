@@ -51,14 +51,36 @@ export async function updateProduct(
   }
 
   try {
+    // Вземаме стария slug преди да обновим продукта
+    const oldProduct = await prisma.product.findUnique({
+      where: { id },
+      select: { slug: true, categoryId: true, category: { select: { slug: true } } },
+    });
+
     const product = await prisma.product.update({
       where: { id },
       data: validatedFields.data,
+      include: { category: true },
     });
 
+    // Изчистваме кеша на всички релевантни страници
     revalidatePath("/admin/products");
     revalidatePath("/shop");
     revalidatePath("/");
+    revalidatePath(`/product/${product.slug}`);
+    
+    // Ако slug-ът е променен, изчистваме и стария
+    if (oldProduct && oldProduct.slug !== product.slug) {
+      revalidatePath(`/product/${oldProduct.slug}`);
+    }
+    
+    // Изчистваме кеша на категориите
+    if (oldProduct?.category.slug) {
+      revalidatePath(`/products/${oldProduct.category.slug}`);
+    }
+    if (product.category.slug) {
+      revalidatePath(`/products/${product.category.slug}`);
+    }
 
     return { success: "Продуктът е обновен!", product };
   } catch (_error) {
@@ -74,6 +96,16 @@ export async function deleteProduct(id: string) {
   }
 
   try {
+    // Вземаме продукта преди да го изтрием, за да имаме slug-а и categoryId
+    const product = await prisma.product.findUnique({
+      where: { id },
+      select: { slug: true, categoryId: true, category: { select: { slug: true } } },
+    });
+
+    if (!product) {
+      return { error: "Продуктът не съществува!" };
+    }
+
     // Проверка дали продуктът има поръчки
     const orderItems = await prisma.orderItem.findFirst({
       where: { productId: id },
@@ -93,9 +125,12 @@ export async function deleteProduct(id: string) {
       where: { id },
     });
 
+    // Изчистваме кеша на всички релевантни страници
     revalidatePath("/admin/products");
     revalidatePath("/shop");
     revalidatePath("/");
+    revalidatePath(`/product/${product.slug}`);
+    revalidatePath(`/products/${product.category.slug}`);
 
     return { success: "Продуктът е изтрит!" };
   } catch (_error) {
