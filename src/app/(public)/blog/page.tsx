@@ -40,12 +40,11 @@ export default async function BlogPage() {
                   className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition"
                 >
                   {post.image ? (
-                    <div className="relative aspect-video bg-gray-100">
-                      <Image
+                    <div className="relative aspect-video bg-gray-100 overflow-hidden">
+                      <img
                         src={post.image}
                         alt={post.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                   ) : (

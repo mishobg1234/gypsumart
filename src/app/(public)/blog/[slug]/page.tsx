@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { getBlogPostBySlug } from "@/actions/blog";
 import { Calendar, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { RichTextViewer } from "@/components/RichTextViewer";
 
 interface PageProps {
@@ -59,12 +58,10 @@ export default async function BlogPostPage({ params }: PageProps) {
             {/* Featured Image */}
             {post.image && (
               <div className="relative aspect-video rounded-xl overflow-hidden mb-8">
-                <Image
+                <img
                   src={post.image}
                   alt={post.title}
-                  fill
-                  className="object-cover"
-                  priority
+                  className="w-full h-full object-cover"
                 />
               </div>
             )}
