@@ -22,11 +22,15 @@ export async function createProduct(values: z.infer<typeof ProductSchema>) {
   try {
     const product = await prisma.product.create({
       data: validatedFields.data,
+      include: { category: true },
     });
 
+    // Изчистваме кеша на всички релевантни страници
     revalidatePath("/admin/products");
     revalidatePath("/shop");
     revalidatePath("/");
+    revalidatePath(`/product/${product.slug}`);
+    revalidatePath(`/products/${product.category.slug}`);
 
     return { success: "Продуктът е създаден!", product };
   } catch (_error) {
