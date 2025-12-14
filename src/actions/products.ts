@@ -26,11 +26,14 @@ export async function createProduct(values: z.infer<typeof ProductSchema>) {
     });
 
     // Изчистваме кеша на всички релевантни страници
-    revalidatePath("/admin/products");
-    revalidatePath("/shop");
-    revalidatePath("/");
-    revalidatePath(`/product/${product.slug}`);
-    revalidatePath(`/products/${product.category.slug}`);
+    revalidatePath("/admin/products", "page");
+    revalidatePath("/shop", "page");
+    revalidatePath("/", "page");
+    revalidatePath(`/product/${product.slug}`, "page");
+    revalidatePath(`/products/${product.category.slug}`, "page");
+    
+    // Изчистваме целия layout кеш
+    revalidatePath("/", "layout");
 
     return { success: "Продуктът е създаден!", product };
   } catch (_error) {
@@ -68,23 +71,26 @@ export async function updateProduct(
     });
 
     // Изчистваме кеша на всички релевантни страници
-    revalidatePath("/admin/products");
-    revalidatePath("/shop");
-    revalidatePath("/");
-    revalidatePath(`/product/${product.slug}`);
+    revalidatePath("/admin/products", "page");
+    revalidatePath("/shop", "page");
+    revalidatePath("/", "page");
+    revalidatePath(`/product/${product.slug}`, "page");
     
     // Ако slug-ът е променен, изчистваме и стария
     if (oldProduct && oldProduct.slug !== product.slug) {
-      revalidatePath(`/product/${oldProduct.slug}`);
+      revalidatePath(`/product/${oldProduct.slug}`, "page");
     }
     
     // Изчистваме кеша на категориите
     if (oldProduct?.category.slug) {
-      revalidatePath(`/products/${oldProduct.category.slug}`);
+      revalidatePath(`/products/${oldProduct.category.slug}`, "page");
     }
     if (product.category.slug) {
-      revalidatePath(`/products/${product.category.slug}`);
+      revalidatePath(`/products/${product.category.slug}`, "page");
     }
+    
+    // Изчистваме целия layout кеш за да се обновят всички продуктови карти
+    revalidatePath("/", "layout");
 
     return { success: "Продуктът е обновен!", product };
   } catch (_error) {
@@ -130,11 +136,14 @@ export async function deleteProduct(id: string) {
     });
 
     // Изчистваме кеша на всички релевантни страници
-    revalidatePath("/admin/products");
-    revalidatePath("/shop");
-    revalidatePath("/");
-    revalidatePath(`/product/${product.slug}`);
-    revalidatePath(`/products/${product.category.slug}`);
+    revalidatePath("/admin/products", "page");
+    revalidatePath("/shop", "page");
+    revalidatePath("/", "page");
+    revalidatePath(`/product/${product.slug}`, "page");
+    revalidatePath(`/products/${product.category.slug}`, "page");
+    
+    // Изчистваме целия layout кеш
+    revalidatePath("/", "layout");
 
     return { success: "Продуктът е изтрит!" };
   } catch (_error) {
