@@ -20,6 +20,9 @@ export const ProductSchema = z.object({
   description: z.string().optional(),
   price: z.number().min(0, { message: "Цената трябва да е положителна" }),
   compareAtPrice: z.number().optional(),
+  pricePerCustom: z.number().optional(),
+  customPriceLabel: z.string().optional(),
+  whichPriceShouldBeInCart: z.boolean().default(false),
   images: z.string(), // JSON string
   featured: z.boolean().default(false),
   inStock: z.boolean().default(true),

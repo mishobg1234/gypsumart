@@ -30,6 +30,8 @@ export function ProductForm({ product, categories }: ProductFormProps) {
   const [metaKeywords, setMetaKeywords] = useState(product?.metaKeywords || "");
   const [price, setPrice] = useState(product?.price?.toString() || "");
   const [compareAtPrice, setCompareAtPrice] = useState(product?.compareAtPrice?.toString() || "");
+  const [pricePerCustom, setPricePerCustom] = useState(product?.pricePerCustom?.toString() || "");
+  const [customPriceLabel, setCustomPriceLabel] = useState(product?.customPriceLabel || "");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,6 +49,11 @@ export function ProductForm({ product, categories }: ProductFormProps) {
       compareAtPrice: formData.get("compareAtPrice")
         ? parseFloat(formData.get("compareAtPrice") as string)
         : undefined,
+      pricePerCustom: formData.get("pricePerCustom")
+        ? parseFloat(formData.get("pricePerCustom") as string)
+        : undefined,
+      customPriceLabel: formData.get("customPriceLabel") as string || undefined,
+      whichPriceShouldBeInCart: formData.get("whichPriceShouldBeInCart") === "on",
       images: JSON.stringify(images),
       featured: formData.get("featured") === "on",
       inStock: formData.get("inStock") === "on",
@@ -234,6 +241,65 @@ export function ProductForm({ product, categories }: ProductFormProps) {
                   = {euroToBgn(parseFloat(compareAtPrice)).toFixed(2)} лв.
                 </p>
               )}
+            </div>
+          </div>
+
+          <div className="border-t pt-6 mt-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              Допълнителна цена (по избор)
+            </h3>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Цена по поръчка (€)
+                </label>
+                <input
+                  type="number"
+                  name="pricePerCustom"
+                  step="0.01"
+                  value={pricePerCustom}
+                  onChange={(e) => setPricePerCustom(e.target.value)}
+                  placeholder="Например: цена за м2, за пакет..."
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                />
+                {pricePerCustom && parseFloat(pricePerCustom) > 0 && (
+                  <p className="mt-1 text-sm text-gray-600">
+                    = {euroToBgn(parseFloat(pricePerCustom)).toFixed(2)} лв.
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Етикет за допълнителна цена
+                </label>
+                <input
+                  type="text"
+                  name="customPriceLabel"
+                  value={customPriceLabel}
+                  onChange={(e) => setCustomPriceLabel(e.target.value)}
+                  placeholder='Например: "на м2", "за пакет (1 пакет - 1.25м2)"'
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                />
+                <p className="mt-1 text-xs text-gray-500">
+                  Ще се показва като: "Цена {customPriceLabel}"
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <label className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  name="whichPriceShouldBeInCart"
+                  defaultChecked={product?.whichPriceShouldBeInCart || false}
+                  className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                />
+                <span className="text-sm text-gray-700">
+                  Използвай допълнителната цена в кошницата (ако не е чекната, ще се използва редовната цена)
+                </span>
+              </label>
             </div>
           </div>
 

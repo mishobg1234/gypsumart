@@ -174,24 +174,42 @@ export default async function ProductPage({
 
             {/* Price */}
             <div className="mb-6">
-              <div className="flex items-baseline space-x-4">
-                <p className="text-4xl font-bold text-green-600">
-                  {formatPriceHTML(product.price).full}
-                </p>
-                {product.compareAtPrice && (
-                  <p className="text-2xl text-gray-500 line-through">
-                    {formatPriceHTML(product.compareAtPrice).full}
-                  </p>
+              <div className="grid gap-4">
+                {/* Редовна цена */}
+                <div>
+                  <p className="text-sm font-medium text-gray-600 mb-2">Цена на брой</p>
+                  <div className="flex items-baseline space-x-4">
+                    <p className="text-4xl font-bold text-green-600">
+                      {formatPriceHTML(product.price).full}
+                    </p>
+                    {product.compareAtPrice && (
+                      <p className="text-2xl text-gray-500 line-through">
+                        {formatPriceHTML(product.compareAtPrice).full}
+                      </p>
+                    )}
+                  </div>
+                  {product.compareAtPrice && (
+                    <div className="mt-2 inline-flex items-center gap-2 bg-green-50 text-green-700 px-3 py-1 rounded-lg">
+                      <span className="text-lg">💰</span>
+                      <span className="text-sm font-semibold">
+                        Спестявате {formatPriceHTML(product.compareAtPrice - product.price).full}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Допълнителна цена (ако има) */}
+                {product.pricePerCustom && product.customPriceLabel && (
+                  <div className="border-t pt-4">
+                    <p className="text-sm font-medium text-gray-600 mb-2">
+                      Цена {product.customPriceLabel}
+                    </p>
+                    <p className="text-4xl font-bold text-green-600">
+                      {formatPriceHTML(product.pricePerCustom).full}
+                    </p>
+                  </div>
                 )}
               </div>
-              {product.compareAtPrice && (
-                <div className="mt-2 inline-flex items-center gap-2 bg-green-50 text-green-700 px-3 py-1 rounded-lg">
-                  <span className="text-lg">💰</span>
-                  <span className="text-sm font-semibold">
-                    Спестявате {formatPriceHTML(product.compareAtPrice - product.price).full}
-                  </span>
-                </div>
-              )}
             </div>
 
             {/* Actions */}
@@ -200,7 +218,9 @@ export default async function ProductPage({
                 id: product.id,
                 name: product.name,
                 slug: product.slug,
-                price: product.price,
+                price: product.whichPriceShouldBeInCart && product.pricePerCustom 
+                  ? product.pricePerCustom 
+                  : product.price,
                 image: images[0],
               }}
             />
