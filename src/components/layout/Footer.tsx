@@ -84,7 +84,7 @@ export async function Footer() {
               </li>
               <li className="flex items-center space-x-2">
                 <Phone className="h-5 w-5 text-green-600" />
-                <span>+359 888 123 456</span>
+                <span>0877 098 540</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="h-5 w-5 text-green-600" />
