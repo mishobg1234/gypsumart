@@ -37,11 +37,7 @@ export async function Footer() {
                   За нас
                 </Link>
               </li>
-              <li>
-                <Link href="/shop" className="hover:text-green-600 transition">
-                  Магазин
-                </Link>
-              </li>
+              
               <li>
                 <Link href="/gallery" className="hover:text-green-600 transition">
                   Галерия
