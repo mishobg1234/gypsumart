@@ -13,13 +13,23 @@ interface AddToCartButtonProps {
     price: number;
     image?: string;
   };
+  customLabel?: string;
+  variant?: "primary" | "secondary";
 }
 
-export function AddToCartButton({ product }: AddToCartButtonProps) {
+export function AddToCartButton({ product, customLabel, variant = "primary" }: AddToCartButtonProps) {
   const { addItem } = useCart();
   const [quantity, setQuantity] = useState<number>(1);
   const [added, setAdded] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  const primaryColor = "#16a34a";
+  const primaryHoverColor = "#15803d";
+  const secondaryColor = "#9ca3af";
+  const secondaryHoverColor = "#6b7280";
+
+  const bgColor = variant === "secondary" ? secondaryColor : primaryColor;
+  const bgHoverColor = variant === "secondary" ? secondaryHoverColor : primaryHoverColor;
 
   const handleAddToCart = () => {
     setIsAnimating(true);
@@ -69,11 +79,11 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
         onClick={handleAddToCart}
         disabled={isAnimating}
         className="relative w-full px-8 py-4 rounded-lg text-center font-semibold text-lg overflow-hidden text-white"
-        style={{ backgroundColor: "#16a34a" }}
+        style={{ backgroundColor: bgColor }}
         whileHover={!isAnimating && !added ? { scale: 1.02 } : {}}
         whileTap={!isAnimating && !added ? { scale: 0.98 } : {}}
         animate={{
-          backgroundColor: added ? "#15803d" : "#16a34a"
+          backgroundColor: added ? bgHoverColor : bgColor
         }}
         transition={{ duration: 0.4, ease: "easeInOut" }}
       >
@@ -144,7 +154,7 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
                     ease: "easeOut",
                   }}
                 >
-                  Добави в кошницата
+                  {customLabel || "Добави в кошницата"}
                 </motion.span>
               </motion.div>
             ) : added ? (
@@ -179,7 +189,7 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
                 transition={{ duration: 0.3 }}
               >
                 <ShoppingCart className="h-6 w-6" />
-                <span>Добави в кошницата</span>
+                <span>{customLabel || "Добави в кошницата"}</span>
               </motion.div>
             )}
           </AnimatePresence>

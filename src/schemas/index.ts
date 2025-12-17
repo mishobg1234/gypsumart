@@ -23,6 +23,7 @@ export const ProductSchema = z.object({
   pricePerCustom: z.number().optional(),
   customPriceLabel: z.string().optional(),
   whichPriceShouldBeInCart: z.boolean().default(false),
+  showSecondaryCartButton: z.boolean().default(false),
   images: z.string(), // JSON string
   featured: z.boolean().default(false),
   inStock: z.boolean().default(true),

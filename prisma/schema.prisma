@@ -75,29 +75,30 @@ model Category {
 }
 
 model Product {
-  id                     String      @id @default(cuid())
-  name                   String
-  slug                   String      @unique
-  shortDescription       String?
-  description            String?
-  price                  Float
-  compareAtPrice         Float?
-  pricePerCustom         Float?
-  customPriceLabel       String?
-  whichPriceShouldBeInCart Boolean   @default(false)
-  images                 String
-  featured               Boolean     @default(false)
-  inStock                Boolean     @default(true)
-  sku                    String?     @unique
-  metaTitle              String?
-  metaDescription        String?
-  metaKeywords           String?
-  categoryId             String
-  createdAt              DateTime    @default(now())
-  updatedAt              DateTime    @updatedAt
-  orderItems             OrderItem[]
-  category               Category    @relation(fields: [categoryId], references: [id])
-  reviews                Review[]
+  id                       String      @id @default(cuid())
+  name                     String
+  slug                     String      @unique
+  shortDescription         String?
+  description              String?
+  price                    Float
+  compareAtPrice           Float?
+  pricePerCustom           Float?
+  customPriceLabel         String?
+  whichPriceShouldBeInCart Boolean     @default(false)
+  showSecondaryCartButton  Boolean     @default(false)
+  images                   String
+  featured                 Boolean     @default(false)
+  inStock                  Boolean     @default(true)
+  sku                      String?     @unique
+  metaTitle                String?
+  metaDescription          String?
+  metaKeywords             String?
+  categoryId               String
+  createdAt                DateTime    @default(now())
+  updatedAt                DateTime    @updatedAt
+  orderItems               OrderItem[]
+  category                 Category    @relation(fields: [categoryId], references: [id])
+  reviews                  Review[]
 
   @@index([categoryId])
   @@index([slug])

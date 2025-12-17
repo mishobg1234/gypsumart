@@ -172,58 +172,108 @@ export default async function ProductPage({
               </div>
             )}
 
-            {/* Price */}
+            {/* Price and Actions */}
             <div className="mb-6">
-              <div className="grid gap-4">
-                {/* Редовна цена */}
-                <div>
-                  <p className="text-sm font-medium text-gray-600 mb-2">Цена на брой</p>
-                  <div className="flex items-baseline space-x-4">
-                    <p className="text-4xl font-bold text-green-600">
-                      {formatPriceHTML(product.price).full}
-                    </p>
-                    {product.compareAtPrice && (
-                      <p className="text-2xl text-gray-500 line-through">
-                        {formatPriceHTML(product.compareAtPrice).full}
+              {product.showSecondaryCartButton && product.pricePerCustom && product.customPriceLabel ? (
+                // Две цени една до друга с разделител
+                <div className="grid grid-cols-[1fr_auto_1fr] gap-6 items-start">
+                  {/* Редовна цена и бутон */}
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-sm font-medium text-gray-600 mb-2">Цена на брой</p>
+                      <div className="flex items-baseline space-x-4">
+                        <p className="text-3xl font-bold text-green-600">
+                          {formatPriceHTML(product.price).full}
+                        </p>
+                        {product.compareAtPrice && (
+                          <p className="text-xl text-gray-500 line-through">
+                            {formatPriceHTML(product.compareAtPrice).full}
+                          </p>
+                        )}
+                      </div>
+                      {product.compareAtPrice && (
+                        <div className="mt-2 inline-flex items-center gap-2 bg-green-50 text-green-700 px-2 py-1 rounded-lg text-xs">
+                          <span>💰</span>
+                          <span className="font-semibold">
+                            Спестявате {formatPriceHTML(product.compareAtPrice - product.price).full}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <AddToCartButton
+                      key="primary-cart-button"
+                      product={{
+                        id: `${product.id}-standard`,
+                        name: `${product.name} (Цена на брой)`,
+                        slug: product.slug,
+                        price: product.price,
+                        image: images[0],
+                      }}
+                    />
+                  </div>
+
+                  {/* Разделителна линия */}
+                  <div className="h-full w-px bg-gray-300 self-stretch"></div>
+
+                  {/* Допълнителна цена и бутон */}
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-sm font-medium text-gray-600 mb-2">
+                        Цена {product.customPriceLabel}
                       </p>
+                      <p className="text-3xl font-bold text-green-600">
+                        {formatPriceHTML(product.pricePerCustom).full}
+                      </p>
+                    </div>
+                    <AddToCartButton
+                      key="secondary-cart-button"
+                      product={{
+                        id: `${product.id}-custom`,
+                        name: `${product.name} (${product.customPriceLabel})`,
+                        slug: product.slug,
+                        price: product.pricePerCustom,
+                        image: images[0],
+                      }}
+                      variant="secondary"
+                    />
+                  </div>
+                </div>
+              ) : (
+                // Само една цена (стандартно)
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600 mb-2">Цена на брой</p>
+                    <div className="flex items-baseline space-x-4">
+                      <p className="text-4xl font-bold text-green-600">
+                        {formatPriceHTML(product.price).full}
+                      </p>
+                      {product.compareAtPrice && (
+                        <p className="text-2xl text-gray-500 line-through">
+                          {formatPriceHTML(product.compareAtPrice).full}
+                        </p>
+                      )}
+                    </div>
+                    {product.compareAtPrice && (
+                      <div className="mt-2 inline-flex items-center gap-2 bg-green-50 text-green-700 px-3 py-1 rounded-lg">
+                        <span className="text-lg">💰</span>
+                        <span className="text-sm font-semibold">
+                          Спестявате {formatPriceHTML(product.compareAtPrice - product.price).full}
+                        </span>
+                      </div>
                     )}
                   </div>
-                  {product.compareAtPrice && (
-                    <div className="mt-2 inline-flex items-center gap-2 bg-green-50 text-green-700 px-3 py-1 rounded-lg">
-                      <span className="text-lg">💰</span>
-                      <span className="text-sm font-semibold">
-                        Спестявате {formatPriceHTML(product.compareAtPrice - product.price).full}
-                      </span>
-                    </div>
-                  )}
+                  <AddToCartButton
+                    product={{
+                      id: product.id,
+                      name: product.name,
+                      slug: product.slug,
+                      price: product.price,
+                      image: images[0],
+                    }}
+                  />
                 </div>
-
-                {/* Допълнителна цена (ако има) */}
-                {product.pricePerCustom && product.customPriceLabel && (
-                  <div className="border-t pt-4">
-                    <p className="text-sm font-medium text-gray-600 mb-2">
-                      Цена {product.customPriceLabel}
-                    </p>
-                    <p className="text-4xl font-bold text-green-600">
-                      {formatPriceHTML(product.pricePerCustom).full}
-                    </p>
-                  </div>
-                )}
-              </div>
+              )}
             </div>
-
-            {/* Actions */}
-            <AddToCartButton
-              product={{
-                id: product.id,
-                name: product.name,
-                slug: product.slug,
-                price: product.whichPriceShouldBeInCart && product.pricePerCustom 
-                  ? product.pricePerCustom 
-                  : product.price,
-                image: images[0],
-              }}
-            />
             
             <p className="text-sm text-gray-600 text-center mt-4">
               Или се свържете с нас за поръчка на{" "}

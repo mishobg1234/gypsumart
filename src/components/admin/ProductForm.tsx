@@ -54,6 +54,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
         : undefined,
       customPriceLabel: formData.get("customPriceLabel") as string || undefined,
       whichPriceShouldBeInCart: formData.get("whichPriceShouldBeInCart") === "on",
+      showSecondaryCartButton: formData.get("showSecondaryCartButton") === "on",
       images: JSON.stringify(images),
       featured: formData.get("featured") === "on",
       inStock: formData.get("inStock") === "on",
@@ -288,7 +289,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
               </div>
             </div>
 
-            <div className="mt-4">
+            <div className="mt-4 space-y-3">
               <label className="flex items-center space-x-3">
                 <input
                   type="checkbox"
@@ -298,6 +299,18 @@ export function ProductForm({ product, categories }: ProductFormProps) {
                 />
                 <span className="text-sm text-gray-700">
                   Използвай допълнителната цена в кошницата (ако не е чекната, ще се използва редовната цена)
+                </span>
+              </label>
+              
+              <label className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  name="showSecondaryCartButton"
+                  defaultChecked={product?.showSecondaryCartButton || false}
+                  className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                />
+                <span className="text-sm text-gray-700">
+                  Показвай втори бутон за добавяне в кошницата с допълнителната цена
                 </span>
               </label>
             </div>
