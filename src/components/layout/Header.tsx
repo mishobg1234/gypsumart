@@ -4,6 +4,7 @@ import { CartIcon } from "./CartIcon";
 import { HeaderClient } from "./HeaderClient";
 import { TopNavLinks } from "./TopNavLinks";
 import { SearchBar } from "./SearchBar";
+import { AreaCalculator } from "./AreaCalculator";
 
 export async function Header() {
   const navbarPages = await getNavbarPages();
@@ -48,6 +49,7 @@ export async function Header() {
           
           {/* Icons */}
           <div className="flex items-center space-x-4 ml-4">
+            <AreaCalculator />
             <CartIcon />
           </div>
         </div>
