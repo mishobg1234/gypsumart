@@ -49,7 +49,10 @@ export async function Header() {
           
           {/* Icons */}
           <div className="flex items-center space-x-4 ml-4">
-            <AreaCalculator />
+            {/* Area Calculator - Mobile only */}
+            <div className="md:hidden">
+              <AreaCalculator />
+            </div>
             <CartIcon />
           </div>
         </div>

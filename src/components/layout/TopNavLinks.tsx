@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { AreaCalculator } from "./AreaCalculator";
 
 export function TopNavLinks() {
   const pathname = usePathname();
@@ -12,6 +13,9 @@ export function TopNavLinks() {
 
   return (
     <div className="hidden md:flex items-center space-x-4 ml-auto">
+      {/* Area Calculator - Desktop only */}
+      <AreaCalculator />
+      
       {/* 
         РАЗМЕР НА БУТОНИТЕ - Промени тук:
         - px-X (padding horizontal) - ширина: px-2, px-3, px-4, px-5, px-6 (текущо px-4)
