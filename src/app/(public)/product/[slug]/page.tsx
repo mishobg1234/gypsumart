@@ -176,9 +176,9 @@ export default async function ProductPage({
             <div className="mb-6">
               {product.showSecondaryCartButton && product.pricePerCustom && product.customPriceLabel ? (
                 // Две цени една до друга с разделител
-                <div className="grid grid-cols-[1fr_auto_1fr] gap-6 items-start">
+                <div className="flex flex-col md:grid md:grid-cols-[1fr_auto_1fr] gap-6 items-start">
                   {/* Редовна цена и бутон */}
-                  <div className="space-y-4">
+                  <div className="space-y-4 w-full">
                     <div>
                       <p className="text-sm font-medium text-gray-600 mb-2">Цена на брой</p>
                       <div className="flex items-baseline space-x-4">
@@ -213,10 +213,11 @@ export default async function ProductPage({
                   </div>
 
                   {/* Разделителна линия */}
-                  <div className="h-full w-px bg-gray-300 self-stretch"></div>
+                  <div className="hidden md:block h-full w-px bg-gray-300 self-stretch"></div>
+                  <div className="md:hidden w-full h-px bg-gray-300"></div>
 
                   {/* Допълнителна цена и бутон */}
-                  <div className="space-y-4">
+                  <div className="space-y-4 w-full">
                     <div>
                       <p className="text-sm font-medium text-gray-600 mb-2">
                         Цена {product.customPriceLabel}

@@ -289,19 +289,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
               </div>
             </div>
 
-            <div className="mt-4 space-y-3">
-              <label className="flex items-center space-x-3">
-                <input
-                  type="checkbox"
-                  name="whichPriceShouldBeInCart"
-                  defaultChecked={product?.whichPriceShouldBeInCart || false}
-                  className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
-                />
-                <span className="text-sm text-gray-700">
-                  Използвай допълнителната цена в кошницата (ако не е чекната, ще се използва редовната цена)
-                </span>
-              </label>
-              
+            <div className="mt-4">
               <label className="flex items-center space-x-3">
                 <input
                   type="checkbox"

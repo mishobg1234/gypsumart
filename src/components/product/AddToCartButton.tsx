@@ -25,8 +25,8 @@ export function AddToCartButton({ product, customLabel, variant = "primary" }: A
 
   const primaryColor = "#16a34a";
   const primaryHoverColor = "#15803d";
-  const secondaryColor = "#9ca3af";
-  const secondaryHoverColor = "#6b7280";
+  const secondaryColor = "#16a34a";
+  const secondaryHoverColor = "#15803d";
 
   const bgColor = variant === "secondary" ? secondaryColor : primaryColor;
   const bgHoverColor = variant === "secondary" ? secondaryHoverColor : primaryHoverColor;
