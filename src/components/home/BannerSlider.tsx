@@ -29,6 +29,19 @@ interface BannerSlide {
   buttonLink: string | null;
 }
 
+function getBannerHref(link: string) {
+  try {
+    const url = new URL(link);
+    if (url.hostname === "artbuildshop.com" || url.hostname === "www.artbuildshop.com") {
+      return `${url.pathname}${url.search}${url.hash}`;
+    }
+  } catch {
+    // Relative links already stay on the current site.
+  }
+
+  return link;
+}
+
 export function BannerSlider({ banners }: BannerSliderProps) {
   // Flatten banners into individual slides (one per image)
   const slides = useMemo(() => {
@@ -124,7 +137,7 @@ export function BannerSlider({ banners }: BannerSliderProps) {
                 )}
                 {slide.buttonText && slide.buttonLink && (
                   <Link
-                    href={slide.buttonLink}
+                    href={getBannerHref(slide.buttonLink)}
                     className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold text-lg"
                   >
                     {slide.buttonText}
