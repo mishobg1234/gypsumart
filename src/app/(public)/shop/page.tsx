@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { getProducts } from "@/actions/products";
 import { getCategories } from "@/actions/categories";
 import { ProductCard } from "@/components/product";
+import { CatalogPagination } from "@/components/product/CatalogPagination";
+import { getCatalogPage, parseCatalogPage } from "@/lib/catalog";
+import { Prisma } from "@prisma/client";
 
 interface ShopPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -11,20 +13,27 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   const params = await searchParams;
   const searchQuery = typeof params.search === "string" ? params.search : undefined;
   const categorySlug = typeof params.category === "string" ? params.category : undefined;
+  const page = parseCatalogPage(params.page);
 
-  const [allProducts, categories] = await Promise.all([
-    getProducts(undefined, searchQuery),
-    getCategories(),
-  ]);
-
-  // Филтриране по категория ако има
-  let products = allProducts;
-  if (categorySlug && !searchQuery) {
-    const category = categories.find((cat) => cat.slug === categorySlug);
-    if (category) {
-      products = allProducts.filter((product) => product.categoryId === category.id);
-    }
-  }
+  const categories = await getCategories();
+  const category = categories.find((cat) => cat.slug === categorySlug);
+  const where: Prisma.ProductWhereInput = {
+    inStock: true,
+    ...(!searchQuery && category ? { categoryId: category.id } : {}),
+    ...(searchQuery ? { OR: [
+      { name: { contains: searchQuery, mode: "insensitive" } },
+      { description: { contains: searchQuery, mode: "insensitive" } },
+      { shortDescription: { contains: searchQuery, mode: "insensitive" } },
+    ] } : {}),
+  };
+  const { products, count, totalPages } = await getCatalogPage(where, page);
+  const pageHref = (nextPage: number) => {
+    const query = new URLSearchParams();
+    if (searchQuery) query.set("search", searchQuery);
+    else if (categorySlug) query.set("category", categorySlug);
+    query.set("page", String(nextPage));
+    return `/shop?${query.toString()}`;
+  };
 
   return (
     <div className="bg-white">
@@ -37,7 +46,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             </h1>
             <p className="text-xl text-gray-600">
               {searchQuery
-                ? `Намерени ${products.length} ${products.length === 1 ? "продукт" : "продукта"}`
+                ? `Намерени ${count} ${count === 1 ? "продукт" : "продукта"}`
                 : "Разгледайте нашата богата колекция от гипсови изделия"}
             </p>
           </div>
@@ -102,6 +111,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
               ))}
             </div>
           )}
+          <CatalogPagination page={page} totalPages={totalPages} href={pageHref} />
         </div>
       </section>
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, SearchIcon, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -50,6 +50,7 @@ export function SearchBar({ isMobile = false }: SearchBarProps) {
 
   // Търсене с debounce
   useEffect(() => {
+    const controller = new AbortController();
     const delayDebounceFn = setTimeout(async () => {
       if (query.trim().length === 0) {
         setResults([]);
@@ -63,7 +64,8 @@ export function SearchBar({ isMobile = false }: SearchBarProps) {
 
       setIsLoading(true);
       try {
-        const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+        const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`, { signal: controller.signal });
+        if (!response.ok) throw new Error("Search request failed");
         const data = await response.json();
         
         if (data.products) {
@@ -71,14 +73,19 @@ export function SearchBar({ isMobile = false }: SearchBarProps) {
           setIsOpen(true);
         }
       } catch (error) {
-        console.error("Search error:", error);
-        setResults([]);
+        if (!controller.signal.aborted) {
+          console.error("Search error:", error);
+          setResults([]);
+        }
       } finally {
-        setIsLoading(false);
+        if (!controller.signal.aborted) setIsLoading(false);
       }
     }, 300);
 
-    return () => clearTimeout(delayDebounceFn);
+    return () => {
+      clearTimeout(delayDebounceFn);
+      controller.abort();
+    };
   }, [query]);
 
   const handleClear = () => {
@@ -95,7 +102,7 @@ export function SearchBar({ isMobile = false }: SearchBarProps) {
   };
 
   const handleSearch = () => {
-    query.trim().length >= 2 && router.push(`/shop?search=${encodeURIComponent(query.trim())}`);
+    if (query.trim().length >= 2) router.push(`/shop?search=${encodeURIComponent(query.trim())}`);
     setIsOpen(false);
   }
 
@@ -190,7 +197,7 @@ export function SearchBar({ isMobile = false }: SearchBarProps) {
             onClick={handleResultClick}
             className="block p-3 text-center text-sm font-medium text-green-600 hover:bg-gray-50 transition-colors"
           >
-            Виж всички резултати ({results.length})
+            Виж всички резултати
           </Link>
         </div>
       )}

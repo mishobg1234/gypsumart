@@ -103,6 +103,7 @@ export function BannerSlider({ banners }: BannerSliderProps) {
               src={slide.image}
               alt={slide.title || "Banner"}
               fill
+              sizes="100vw"
               className="object-cover"
               priority={index === 0}
             />

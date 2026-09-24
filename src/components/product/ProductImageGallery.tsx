@@ -123,6 +123,7 @@ export function ProductImageGallery({
                 src={images[selectedIndex]}
                 alt={`${productName} - изображение ${selectedIndex + 1}`}
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
                 priority
               />
@@ -188,6 +189,7 @@ export function ProductImageGallery({
                 src={image}
                 alt={`${productName} - миниатюра ${index + 1}`}
                 fill
+                sizes="(max-width: 640px) 20vw, 100px"
                 className="object-cover"
               />
             </button>

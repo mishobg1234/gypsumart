@@ -1,17 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useHydrated } from "@/lib/useHydrated";
 import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 
 export function CartIcon() {
   const { totalItems } = useCart();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useHydrated();
 
   return (
     <Link

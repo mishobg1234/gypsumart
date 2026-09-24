@@ -5,6 +5,8 @@ import { getActiveBanners } from "@/actions/banners";
 import { ProductCard } from "@/components/product";
 import { BannerSlider } from "@/components/home/BannerSlider";
 
+export const revalidate = 60;
+
 export default async function Home() {
   const [featuredProducts, banners] = await Promise.all([
     getFeaturedProducts(),

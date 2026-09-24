@@ -8,6 +8,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Link from "@tiptap/extension-link";
+import { NodeSelection } from "@tiptap/pm/state";
 import { useCallback, useEffect, useRef } from "react";
 import {
   Bold,
@@ -412,8 +413,7 @@ export function RichTextEditor({
             }
             
             // Check if the selection is a NodeSelection with an image
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            return (state.selection as any).node?.type.name === "image";
+            return state.selection instanceof NodeSelection && state.selection.node.type.name === "image";
           }}
           className="bg-white border border-gray-300 shadow-lg rounded-lg p-2 flex items-center gap-1"
         >
@@ -421,7 +421,7 @@ export function RichTextEditor({
             type="button"
             onClick={() => {
               const { selection } = editor.state;
-              const node = (selection as any).node;
+              const node = selection instanceof NodeSelection ? selection.node : null;
               
               if (node && node.type.name === "image") {
                 const newSize = window.prompt(

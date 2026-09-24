@@ -94,7 +94,8 @@ export default function CheckoutPage() {
       });
 
       if (!response.ok) {
-        throw new Error("Грешка при създаване на поръчка");
+        const errorResult = await response.json().catch(() => null);
+        throw new Error(errorResult?.message || "Грешка при създаване на поръчка");
       }
 
       const result = await response.json();

@@ -284,7 +284,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
                 />
                 <p className="mt-1 text-xs text-gray-500">
-                  Ще се показва като: "Цена {customPriceLabel}"
+                  Ще се показва като: &quot;Цена {customPriceLabel}&quot;
                 </p>
               </div>
             </div>

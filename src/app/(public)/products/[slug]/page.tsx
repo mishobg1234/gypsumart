@@ -2,45 +2,28 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/db/prisma";
 import Link from "next/link";
 import { ProductCard } from "@/components/product";
+import { CatalogPagination } from "@/components/product/CatalogPagination";
+import { getCatalogPage, parseCatalogPage } from "@/lib/catalog";
 
 export default async function CategoryProductsPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ page?: string | string[] }>;
 }) {
   const { slug } = await params;
+  const page = parseCatalogPage((await searchParams).page);
   
   const category = await prisma.category.findUnique({
     where: { slug },
-    include: {
-      products: {
-        where: { inStock: true },
-        include: {
-          category: true,
-          reviews: {
-            where: { approved: true },
-          },
-          _count: {
-            select: { reviews: { where: { approved: true } } },
-          },
-        },
-        orderBy: { createdAt: "desc" },
-      },
+    select: {
+      id: true,
+      name: true,
+      description: true,
       children: {
-        include: {
-          products: {
-            where: { inStock: true },
-            include: {
-              category: true,
-              reviews: {
-                where: { approved: true },
-              },
-              _count: {
-                select: { reviews: { where: { approved: true } } },
-              },
-            },
-          },
-        },
+        select: { id: true, slug: true, name: true, description: true,
+          _count: { select: { products: { where: { inStock: true } } } } },
       },
     },
   });
@@ -49,11 +32,10 @@ export default async function CategoryProductsPage({
     notFound();
   }
 
-  // Събиране на всички продукти от категорията и подкатегориите
-  const allProducts = [
-    ...category.products,
-    ...category.children.flatMap((child) => child.products),
-  ];
+  const { products, totalPages } = await getCatalogPage({
+    inStock: true,
+    categoryId: { in: [category.id, ...category.children.map((child) => child.id)] },
+  }, page);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -90,7 +72,7 @@ export default async function CategoryProductsPage({
                     </p>
                   )}
                   <p className="text-green-600 mt-4 text-sm font-medium">
-                    {subcategory.products.length} продукта
+                    {subcategory._count.products} продукта
                   </p>
                 </Link>
               ))}
@@ -99,14 +81,15 @@ export default async function CategoryProductsPage({
         )}
 
         {/* Products */}
-        {allProducts.length > 0 ? (
+        {products.length > 0 ? (
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Продукти</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {allProducts.map((product) => (
+              {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
+            <CatalogPagination page={page} totalPages={totalPages} href={(nextPage) => `/products/${slug}?page=${nextPage}`} />
           </div>
         ) : (
           <div className="bg-white rounded-lg shadow-md p-12 text-center">
