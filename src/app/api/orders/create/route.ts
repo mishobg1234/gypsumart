@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/db/prisma";
 import { createNotification } from "@/actions/notifications";
 import { sendOrderConfirmationEmail } from "@/lib/emails";
+import { getBaseProductId, resolveCartItem } from "@/lib/orderItems";
 import { z } from "zod";
 
 const orderInput = z.object({
@@ -16,7 +17,7 @@ const orderInput = z.object({
   postalCode: z.string().trim().max(20).optional(),
   notes: z.string().trim().max(2000).optional(),
   items: z.array(z.object({
-    productId: z.string().min(1),
+    productId: z.string().min(1).max(120),
     quantity: z.number().int().min(1).max(100),
   })).min(1).max(100),
   total: z.number().finite().nonnegative(),
@@ -32,22 +33,26 @@ export async function POST(request: Request) {
     if ((deliveryMethod === "office" && !office) || (deliveryMethod === "address" && (!address || !city))) {
       return NextResponse.json({ success: false, message: "Липсват данни за доставка" }, { status: 400 });
     }
-    const productIds = items.map((item) => item.productId);
-    if (new Set(productIds).size !== productIds.length) {
+    const cartIds = items.map((item) => item.productId);
+    if (new Set(cartIds).size !== cartIds.length) {
       return NextResponse.json({ success: false, message: "Дублирани продукти" }, { status: 400 });
     }
+    const productIds = [...new Set(items.map((item) => getBaseProductId(item.productId)))];
     const products = await prisma.product.findMany({
       where: { id: { in: productIds }, inStock: true },
-      select: { id: true, name: true, price: true },
+      select: { id: true, name: true, price: true, pricePerCustom: true, customPriceLabel: true, showSecondaryCartButton: true },
     });
-    if (products.length !== items.length) {
+    if (products.length !== productIds.length) {
       return NextResponse.json({ success: false, message: "Някои продукти вече не са налични" }, { status: 400 });
     }
     const productById = new Map(products.map((product) => [product.id, product]));
-    const orderItems = items.map((item) => {
-      const product = productById.get(item.productId)!;
-      return { productId: product.id, productName: product.name, quantity: item.quantity, price: product.price };
-    });
+    const resolvedOrderItems = items.map((item) =>
+      resolveCartItem(item, productById.get(getBaseProductId(item.productId))!)
+    );
+    if (resolvedOrderItems.some((item) => item === null)) {
+      return NextResponse.json({ success: false, message: "Вариантът на продукт вече не е наличен" }, { status: 409 });
+    }
+    const orderItems = resolvedOrderItems.filter((item) => item !== null);
     const subtotal = orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const deliveryFee = subtotal >= 40 ? 0 : 3;
     const total = Math.round((subtotal + deliveryFee) * 100) / 100;

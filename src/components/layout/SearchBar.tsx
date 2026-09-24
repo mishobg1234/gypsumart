@@ -55,10 +55,14 @@ export function SearchBar({ isMobile = false }: SearchBarProps) {
       if (query.trim().length === 0) {
         setResults([]);
         setIsOpen(false);
+        setIsLoading(false);
         return;
       }
 
       if (query.trim().length < 2) {
+        setResults([]);
+        setIsOpen(false);
+        setIsLoading(false);
         return;
       }
 
@@ -92,6 +96,7 @@ export function SearchBar({ isMobile = false }: SearchBarProps) {
     setQuery("");
     setResults([]);
     setIsOpen(false);
+    setIsLoading(false);
     inputRef.current?.focus();
   };
 

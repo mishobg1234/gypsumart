@@ -15,18 +15,19 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   const categorySlug = typeof params.category === "string" ? params.category : undefined;
   const page = parseCatalogPage(params.page);
 
-  const categories = await getCategories();
-  const category = categories.find((cat) => cat.slug === categorySlug);
   const where: Prisma.ProductWhereInput = {
     inStock: true,
-    ...(!searchQuery && category ? { categoryId: category.id } : {}),
+    ...(!searchQuery && categorySlug ? { category: { slug: categorySlug } } : {}),
     ...(searchQuery ? { OR: [
       { name: { contains: searchQuery, mode: "insensitive" } },
       { description: { contains: searchQuery, mode: "insensitive" } },
       { shortDescription: { contains: searchQuery, mode: "insensitive" } },
     ] } : {}),
   };
-  const { products, count, totalPages } = await getCatalogPage(where, page);
+  const [categories, { products, count, totalPages }] = await Promise.all([
+    getCategories(),
+    getCatalogPage(where, page),
+  ]);
   const pageHref = (nextPage: number) => {
     const query = new URLSearchParams();
     if (searchQuery) query.set("search", searchQuery);
