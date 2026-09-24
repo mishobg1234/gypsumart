@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { useHydrated } from "@/lib/useHydrated";
 
 interface CartItem {
   id: string;
@@ -24,7 +25,7 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const isLoaded = useHydrated();
   const [items, setItems] = useState<CartItem[]>(() => {
     // Initialize from localStorage on first render
     if (typeof window !== "undefined") {
@@ -39,11 +40,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
     return [];
   });
-
-  // Mark as loaded after mount
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {

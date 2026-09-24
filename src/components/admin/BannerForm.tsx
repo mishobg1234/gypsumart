@@ -9,7 +9,7 @@ import { BannerImageUploader } from "./BannerImageUploader";
 
 interface Banner {
   id: string;
-  title: string;
+  title: string | null;
   description: string | null;
   images: string; // JSON string
   buttonText: string | null;

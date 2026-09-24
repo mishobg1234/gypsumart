@@ -5,6 +5,8 @@ import { ProductSchema } from "@/schemas";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { Prisma } from "@prisma/client";
+import { productCardSelect } from "@/lib/catalog";
 
 export async function createProduct(values: z.infer<typeof ProductSchema>) {
   const session = await auth();
@@ -153,7 +155,7 @@ export async function deleteProduct(id: string) {
 
 export async function getProducts(categoryId?: string, searchQuery?: string) {
   try {
-    const where: any = {};
+    const where: Prisma.ProductWhereInput = {};
 
     if (categoryId) {
       where.categoryId = categoryId;
@@ -227,15 +229,7 @@ export async function getFeaturedProducts() {
   try {
     const products = await prisma.product.findMany({
       where: { featured: true, inStock: true },
-      include: {
-        category: true,
-        reviews: {
-          where: { approved: true },
-        },
-        _count: {
-          select: { reviews: { where: { approved: true } } },
-        },
-      },
+      select: productCardSelect,
       take: 6,
       orderBy: {
         createdAt: "desc",

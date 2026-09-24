@@ -1,5 +1,8 @@
 import { resend, FROM_EMAIL } from "@/lib/resend";
-import { formatPriceHTML, euroToBgn } from "@/lib/currency";
+import { formatPriceHTML } from "@/lib/currency";
+
+const siteUrl = (process.env.NEXT_PUBLIC_APP_URL || process.env.AUTH_URL || "https://artbuildshop.com").replace(/\/$/, "");
+const appDescription = process.env.APP_DESCRIPTION || process.env.APP_DESCRPTION || "Гипсови изделия за дом и индустрия";
 
 interface OrderItem {
   product: {
@@ -272,7 +275,7 @@ export async function sendOrderConfirmationEmail(orderData: OrderEmailData) {
             </div>
 
             <div style="text-align: center;">
-              <a href="${process.env.NEXT_PUBLIC_APP_URL}/order-confirmation/${orderId}" class="button">
+              <a href="${siteUrl}/order-confirmation/${orderId}" class="button">
                 Виж детайли на поръчката
               </a>
             </div>
@@ -284,9 +287,9 @@ export async function sendOrderConfirmationEmail(orderData: OrderEmailData) {
             <p><strong>ArtBuildShop</strong></p>
             <p>Изделия от гипс за вашия дом</p>
             <p style="margin-top: 15px;">
-              <a href="${process.env.NEXT_PUBLIC_APP_URL}/contact">Контакти</a> • 
-              <a href="${process.env.NEXT_PUBLIC_APP_URL}">Начало</a> • 
-              <a href="${process.env.NEXT_PUBLIC_APP_URL}/products">Продукти</a>
+              <a href="${siteUrl}/contact">Контакти</a> •
+              <a href="${siteUrl}">Начало</a> •
+              <a href="${siteUrl}/products">Продукти</a>
             </p>
           </div>
         </div>
@@ -517,7 +520,7 @@ export async function sendOrderStatusUpdateEmail(
             ` : ''}
 
             <div style="text-align: center;">
-              <a href="${process.env.NEXT_PUBLIC_APP_URL}/order-confirmation/${orderId}" class="button">
+              <a href="${siteUrl}/order-confirmation/${orderId}" class="button">
                 Виж детайли на поръчката
               </a>
             </div>
@@ -527,11 +530,11 @@ export async function sendOrderStatusUpdateEmail(
 
           <div class="footer">
             <p><strong>${process.env.APP_NAME}</strong></p>
-            <p>${process.env.APP_DESCRIPTION}</p>
+            <p>${appDescription}</p>
             <p style="margin-top: 15px;">
-              <a href="${process.env.NEXT_PUBLIC_APP_URL}/contact">Контакти</a> • 
-              <a href="${process.env.NEXT_PUBLIC_APP_URL}">Начало</a> • 
-              <a href="${process.env.NEXT_PUBLIC_APP_URL}/products">Продукти</a>
+              <a href="${siteUrl}/contact">Контакти</a> •
+              <a href="${siteUrl}">Начало</a> •
+              <a href="${siteUrl}/products">Продукти</a>
             </p>
           </div>
         </div>

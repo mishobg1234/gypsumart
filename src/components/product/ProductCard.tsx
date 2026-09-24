@@ -12,7 +12,6 @@ interface ProductCardProps {
     id: string;
     name: string;
     slug: string;
-    description: string | null;
     price: number;
     compareAtPrice: number | null;
     images: string;
@@ -41,10 +40,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
   const reviewCount = product._count?.reviews || product.reviews?.length || 0;
 
-  const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
+  const handleAddToCart = () => {
     if (!product.inStock || isAdding) return;
     
     setIsAdding(true);
@@ -62,16 +58,14 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Link
-      href={`/product/${product.slug}`}
-      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition group block"
-    >
-      <div className="relative h-64 bg-gray-100">
+    <article className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition group">
+      <Link href={`/product/${product.slug}`} className="block relative h-64 bg-gray-100" aria-label={`Виж ${product.name}`}>
         {images[0] ? (
           <Image
             src={images[0]}
             alt={product.name}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
             className="object-cover group-hover:scale-105 transition-transform duration-300"
           />
         ) : (
@@ -93,7 +87,7 @@ export function ProductCard({ product }: ProductCardProps) {
             Изчерпан
           </div>
         )}
-      </div>
+      </Link>
       
       <div className="p-4">
         <div className="mb-2">
@@ -103,7 +97,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
         
         <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-green-600 transition">
-          {product.name}
+          <Link href={`/product/${product.slug}`}>{product.name}</Link>
         </h3>
         
         {/* Rating */}
@@ -143,6 +137,7 @@ export function ProductCard({ product }: ProductCardProps) {
             )}
           </div>
           <button
+            type="button"
             onClick={handleAddToCart}
             disabled={!product.inStock || isAdding}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
@@ -157,6 +152,6 @@ export function ProductCard({ product }: ProductCardProps) {
           </button>
         </div>
       </div>
-    </Link>
+    </article>
   );
 }

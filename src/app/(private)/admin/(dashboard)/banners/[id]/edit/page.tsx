@@ -21,7 +21,7 @@ export default async function EditBannerPage({ params }: EditBannerPageProps) {
 
       <h1 className="text-3xl font-bold text-gray-900">Редактирай банер</h1>
 
-      <BannerForm banner={banner as any} />
+      <BannerForm banner={banner} />
     </div>
   );
 }

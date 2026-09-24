@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useHydrated } from "@/lib/useHydrated";
 import { useCart } from "@/contexts/CartContext";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,11 +9,7 @@ import { formatPriceHTML } from "@/lib/currency";
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, clearCart, totalPrice } = useCart();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useHydrated();
 
   if (!mounted) {
     return (

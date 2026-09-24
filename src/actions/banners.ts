@@ -2,6 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/db/prisma";
+import { auth } from "@/auth";
+
+async function isAdmin() {
+  const session = await auth();
+  return session?.user?.role === "ADMIN";
+}
 
 export async function getBanners() {
   try {
@@ -49,6 +55,7 @@ export async function createBanner(data: {
   order?: number;
   active?: boolean;
 }) {
+  if (!(await isAdmin())) return { success: false, error: "Неоторизиран достъп!" };
   try {
     const banner = await prisma.banner.create({
       data: {
@@ -84,6 +91,7 @@ export async function updateBanner(
     active?: boolean;
   }
 ) {
+  if (!(await isAdmin())) return { success: false, error: "Неоторизиран достъп!" };
   try {
     const banner = await prisma.banner.update({
       where: { id },
@@ -101,6 +109,7 @@ export async function updateBanner(
 }
 
 export async function deleteBanner(id: string) {
+  if (!(await isAdmin())) return { error: "Неоторизиран достъп!" };
   try {
     await prisma.banner.delete({
       where: { id },
@@ -117,6 +126,7 @@ export async function deleteBanner(id: string) {
 }
 
 export async function reorderBanners(bannerIds: string[]) {
+  if (!(await isAdmin())) return { success: false, error: "Неоторизиран достъп!" };
   try {
     await prisma.$transaction(
       bannerIds.map((id, index) =>

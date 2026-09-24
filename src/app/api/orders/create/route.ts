@@ -2,26 +2,66 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/db/prisma";
 import { createNotification } from "@/actions/notifications";
 import { sendOrderConfirmationEmail } from "@/lib/emails";
+import { getBaseProductId, resolveCartItem } from "@/lib/orderItems";
+import { z } from "zod";
+
+const orderInput = z.object({
+  fullName: z.string().trim().min(2).max(120),
+  email: z.email().max(254),
+  phone: z.string().trim().min(6).max(30),
+  deliveryMethod: z.enum(["office", "address"]),
+  courier: z.enum(["speedy", "econt"]),
+  office: z.string().trim().max(200).optional(),
+  address: z.string().trim().max(300).optional(),
+  city: z.string().trim().max(120).optional(),
+  postalCode: z.string().trim().max(20).optional(),
+  notes: z.string().trim().max(2000).optional(),
+  items: z.array(z.object({
+    productId: z.string().min(1).max(120),
+    quantity: z.number().int().min(1).max(100),
+  })).min(1).max(100),
+  total: z.number().finite().nonnegative(),
+});
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
-
-    const {
-      fullName,
-      email,
-      phone,
-      deliveryMethod,
-      courier,
-      office,
-      address,
-      city,
-      postalCode,
-      notes,
-      items,
-      total,
-      deliveryFee,
-    } = data;
+    const parsed = orderInput.safeParse(await request.json());
+    if (!parsed.success) {
+      return NextResponse.json({ success: false, message: "Невалидни данни за поръчка" }, { status: 400 });
+    }
+    const { fullName, email, phone, deliveryMethod, courier, office, address, city, postalCode, notes, items } = parsed.data;
+    if ((deliveryMethod === "office" && !office) || (deliveryMethod === "address" && (!address || !city))) {
+      return NextResponse.json({ success: false, message: "Липсват данни за доставка" }, { status: 400 });
+    }
+    const cartIds = items.map((item) => item.productId);
+    if (new Set(cartIds).size !== cartIds.length) {
+      return NextResponse.json({ success: false, message: "Дублирани продукти" }, { status: 400 });
+    }
+    const productIds = [...new Set(items.map((item) => getBaseProductId(item.productId)))];
+    const products = await prisma.product.findMany({
+      where: { id: { in: productIds }, inStock: true },
+      select: { id: true, name: true, price: true, pricePerCustom: true, customPriceLabel: true, showSecondaryCartButton: true },
+    });
+    if (products.length !== productIds.length) {
+      return NextResponse.json({ success: false, message: "Някои продукти вече не са налични" }, { status: 400 });
+    }
+    const productById = new Map(products.map((product) => [product.id, product]));
+    const resolvedOrderItems = items.map((item) =>
+      resolveCartItem(item, productById.get(getBaseProductId(item.productId))!)
+    );
+    if (resolvedOrderItems.some((item) => item === null)) {
+      return NextResponse.json({ success: false, message: "Вариантът на продукт вече не е наличен" }, { status: 409 });
+    }
+    const orderItems = resolvedOrderItems.filter((item) => item !== null);
+    const subtotal = orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const deliveryFee = subtotal >= 40 ? 0 : 3;
+    const total = Math.round((subtotal + deliveryFee) * 100) / 100;
+    if (Math.abs(parsed.data.total - total) > 0.011) {
+      return NextResponse.json({
+        success: false,
+        message: "Цената на продукт е променена. Обновете кошницата и опитайте отново.",
+      }, { status: 409 });
+    }
 
     // Създаване на поръчката в базата данни
     const order = await prisma.order.create({
@@ -41,12 +81,7 @@ export async function POST(request: Request) {
         paymentMethod: "cod", // наложен платеж
         status: "PENDING",
         items: {
-          create: items.map((item: { productId: string; name: string; quantity: number; price: number }) => ({
-            productId: item.productId,
-            productName: item.name,
-            quantity: item.quantity,
-            price: item.price,
-          })),
+          create: orderItems,
         },
       },
       include: {

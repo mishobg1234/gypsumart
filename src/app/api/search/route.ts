@@ -6,11 +6,11 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const query = searchParams.get("q");
 
-    if (!query || query.trim().length === 0) {
+    if (!query || query.trim().length < 2) {
       return NextResponse.json({ products: [] });
     }
 
-    const searchTerm = query.trim();
+    const searchTerm = query.trim().slice(0, 100);
 
     // Търси продукти по име, описание и категория
     const products = await prisma.product.findMany({
@@ -45,7 +45,13 @@ export async function GET(request: NextRequest) {
           },
         ],
       },
-      include: {
+      select: {
+        id: true,
+        name: true,
+        slug: true,
+        price: true,
+        images: true,
+        shortDescription: true,
         category: {
           select: {
             name: true,
@@ -53,7 +59,7 @@ export async function GET(request: NextRequest) {
           },
         },
       },
-      take: 10, // Ограничаваме до 10 резултата
+      take: 3,
       orderBy: {
         createdAt: "desc",
       },

@@ -1,22 +1,15 @@
 import { prisma } from "@/db/prisma";
 import Link from "next/link";
 import { ProductCard } from "@/components/product";
+import { CatalogPagination } from "@/components/product/CatalogPagination";
+import { getCatalogPage, parseCatalogPage } from "@/lib/catalog";
 
-export default async function AllProductsPage() {
-  const [products, categories] = await Promise.all([
-    prisma.product.findMany({
-      where: { inStock: true },
-      include: {
-        category: true,
-        reviews: {
-          where: { approved: true },
-        },
-        _count: {
-          select: { reviews: { where: { approved: true } } },
-        },
-      },
-      orderBy: { createdAt: "desc" },
-    }),
+export default async function AllProductsPage({ searchParams }: {
+  searchParams: Promise<{ page?: string | string[] }>;
+}) {
+  const page = parseCatalogPage((await searchParams).page);
+  const [{ products, count, totalPages }, categories] = await Promise.all([
+    getCatalogPage({ inStock: true }, page),
     prisma.category.findMany({
       where: { parentId: null },
       include: {
@@ -89,13 +82,14 @@ export default async function AllProductsPage() {
         {products.length > 0 ? (
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-6">
-              Всички продукти ({products.length})
+              Всички продукти ({count})
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
+            <CatalogPagination page={page} totalPages={totalPages} href={(nextPage) => `/products?page=${nextPage}`} />
           </div>
         ) : (
           <div className="bg-white rounded-lg shadow-md p-12 text-center">
